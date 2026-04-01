@@ -2,70 +2,201 @@
 
 โปรเจกต์ Django Framework สำหรับสร้าง Landing Page และ Dashboard แบบ Full Stack พร้อม UI สไตล์ Smart Farm โทนสีเขียว
 
+> 📘 **สำหรับผู้ที่ Clone โปรเจกต์มาใหม่:** อ่านคู่มือฉบับเต็มได้ที่ [SETUP-GUIDE.md](SETUP-GUIDE.md)
+
+---
+
+## � เริ่มต้นอย่างรวดเร็ว (Quick Start)
+
+### สำหรับผู้ที่ Clone โปรเจกต์มาใช้งาน
+
+```cmd
+REM 1. Clone repository
+git clone https://github.com/thaitechzone/myAPP-Django-AIOTs.git
+cd myAPP-Django-AIOTs
+
+REM 2. สร้างและเปิดใช้งาน virtual environment
+python -m venv venv
+venv\Scripts\activate.bat
+
+REM 3. ติดตั้ง dependencies
+pip install -r requirements.txt
+
+REM 4. รัน migration
+python manage.py migrate
+
+REM 5. รัน development server
+python manage.py runserver
+
+REM 6. เปิดเบราว์เซอร์ไปที่ http://127.0.0.1:8000/
+```
+
+### ✅ ตรวจสอบว่า Setup สำเร็จ
+
+- เห็น `(venv)` หน้า command line
+- ไม่มี error จากการติดตั้ง packages
+- Server รันได้ที่ http://127.0.0.1:8000/
+- เห็นหน้า Landing Page สไตล์ Smart Farm
+
+---
+
+## ⚙️ คำสั่งสำหรับใช้งานประจำวัน
+
+หลังจาก clone และ setup เรียบร้อยแล้ว เมื่อเปิด terminal ใหม่ทุกครั้ง ให้ใช้คำสั่งเหล่านี้:
+
+```cmd
+REM 1. เข้าไปยังโฟลเดอร์โปรเจกต์
+cd myAPP-Django-AIOTs
+
+REM 2. เปิดใช้งาน virtual environment
+venv\Scripts\activate.bat
+
+REM 3. รัน development server
+python manage.py runserver
+```
+
+> 💡 **หมายเหตุ:** ต้อง activate virtual environment ทุกครั้งที่เปิด terminal ใหม่
+
+---
+
+## 🔧 แก้ไขปัญหาที่พบบ่อยหลัง Clone
+
+---
+
+### ❌ ปัญหา: Python ไม่อยู่ใน PATH
+
+```
+'python' is not recognized as an internal or external command
+```
+
+**วิธีแก้:**
+- ติดตั้ง Python ใหม่และเลือก "Add Python to PATH"
+- หรือใช้ `py` แทน `python`:
+```cmd
+py -m venv venv
+py manage.py runserver
+```
+
+---
+
+### ❌ ปัญหา: ModuleNotFoundError หลังติดตั้ง
+
+```
+ModuleNotFoundError: No module named 'django'
+```
+
+**วิธีแก้:**
+```cmd
+REM 1. ตรวจสอบว่า activate venv แล้ว (ต้องมี (venv) หน้า command line)
+REM 2. ติดตั้ง dependencies อีกครั้ง
+pip install -r requirements.txt
+
+REM 3. ตรวจสอบว่าติดตั้งสำเร็จ
+pip list
+```
+
+---
+
+### ❌ ปัญหา: requirements.txt ไม่มีหรือเสียหาย
+
+**วิธีแก้:**
+```cmd
+REM ติดตั้ง Django แบบ manual
+pip install django
+
+REM สร้าง requirements.txt ใหม่
+pip freeze > requirements.txt
+```
+
+---
+
+### ❌ ปัญหา: Port 8000 ถูกใช้งานอยู่
+
+```
+Error: That port is already in use.
+```
+
+**วิธีแก้:**
+```cmd
+REM ใช้ port อื่นแทน เช่น 8080
+python manage.py runserver 8080
+
+REM เปิดเบราว์เซอร์ที่ http://127.0.0.1:8080/
+```
+
+---
+
+### ❌ ปัญหา: Database เสียหายหรือขัดข้อง
+
+**วิธีแก้:**
+```cmd
+REM ลบ database เก่าและสร้างใหม่
+REM ⚠️ ระวัง: จะลบข้อมูลทั้งหมด
+del db.sqlite3
+
+REM รัน migration ใหม่
+python manage.py migrate
+```
+
 ---
 
 ## 📋 สารบัญ
 
-1. [ติดตั้งและเตรียมสภาพแวดล้อม](#1-ติดตั้งและเตรียมสภาพแวดล้อม)
-2. [สร้าง Django Project](#2-สร้าง-django-project)
-3. [สร้าง Landing Page](#3-สร้าง-landing-page)
-4. [รัน Development Server](#4-รัน-development-server)
-5. [แนะนำ Prompt สำหรับใช้ AI](#5-แนะนำ-prompt-สำหรับใช้-ai)
+1. [เริ่มต้นอย่างรวดเร็ว (Quick Start)](#-เริ่มต้นอย่างรวดเร็ว-quick-start)
+2. [ติดตั้งและเตรียมสภาพแวดล้อม](#2-ติดตั้งและเตรียมสภาพแวดล้อม)
+3. [สร้าง Django Project](#3-สร้าง-django-project)
+4. [สร้าง Landing Page](#4-สร้าง-landing-page)
+5. [รัน Development Server](#5-รัน-development-server)
+6. [แนะนำ Prompt สำหรับใช้ AI](#6-แนะนำ-prompt-สำหรับใช้-ai)
 
 ---
 
-## 1. ติดตั้งและเตรียมสภาพแวดล้อม
+## 2. ติดตั้งและเตรียมสภาพแวดล้อม
 
 ### ✅ ขั้นตอนที่ 1: ตรวจสอบ Python
 
-```bash
-# ตรวจสอบเวอร์ชัน Python (ต้องการ Python 3.8+)
+```cmd
+REM ตรวจสอบเวอร์ชัน Python (ต้องการ Python 3.8+)
 python --version
 
-# ตรวจสอบ pip
+REM ตรวจสอบ pip
 pip --version
 ```
 
 ### ✅ ขั้นตอนที่ 2: สร้าง Virtual Environment
 
-```bash
-# สร้าง virtual environment
+```cmd
+REM สร้าง virtual environment
 python -m venv venv
 
-# เปิดใช้งาน (Windows - PowerShell)
-venv\Scripts\Activate.ps1
-
-# เปิดใช้งาน (Windows - CMD)
-venv\Scripts\activate
-
-# เปิดใช้งาน (Mac/Linux)
-source venv/bin/activate
+REM เปิดใช้งาน
+venv\Scripts\activate.bat
 ```
 
 > 💡 เมื่อ activate สำเร็จจะเห็น `(venv)` อยู่หน้า command line
 
 ### ✅ ขั้นตอนที่ 3: ติดตั้ง Django
 
-```bash
-# ติดตั้ง Django เวอร์ชันล่าสุด
+```cmd
+REM ติดตั้ง Django เวอร์ชันล่าสุด
 pip install django
 
-# ตรวจสอบเวอร์ชัน Django
+REM ตรวจสอบเวอร์ชัน Django
 python -m django --version
 ```
 
 ---
 
-## 2. สร้าง Django Project
+## 3. สร้าง Django Project
 
 ### ✅ สร้าง Project และ App
 
-```bash
-# สร้าง Django project
+```cmd
+REM สร้าง Django project
 django-admin startproject myproject
 cd myproject
 
-# สร้าง Django app
+REM สร้าง Django app
 python manage.py startapp myapp
 ```
 
@@ -87,18 +218,18 @@ INSTALLED_APPS = [
 
 ### ✅ ทำ Migration
 
-```bash
-# สร้างและรัน migration
+```cmd
+REM สร้างและรัน migration
 python manage.py makemigrations
 python manage.py migrate
 
-# สร้าง superuser สำหรับ admin (optional)
+REM สร้าง superuser สำหรับ admin (optional)
 python manage.py createsuperuser
 ```
 
 ---
 
-## 3. สร้าง Landing Page
+## 4. สร้าง Landing Page
 
 ### ✅ สร้าง View Function
 
@@ -128,9 +259,9 @@ urlpatterns = [
 
 ### ✅ สร้างโฟลเดอร์ templates
 
-```bash
-# สร้างโฟลเดอร์สำหรับเก็บ HTML template
-mkdir -p myapp/templates/myapp
+```cmd
+REM สร้างโฟลเดอร์สำหรับเก็บ HTML template
+mkdir myapp\templates\myapp
 ```
 
 ### ✅ สร้างไฟล์ landing.html
@@ -141,15 +272,15 @@ mkdir -p myapp/templates/myapp
 
 ---
 
-## 4. รัน Development Server
+## 5. รัน Development Server
 
 ### ✅ สตาร์ท Django Server
 
-```bash
-# รัน server
+```cmd
+REM รัน server
 python manage.py runserver
 
-# รัน server ที่ port อื่น (เช่น 8080)
+REM รัน server ที่ port อื่น (เช่น 8080)
 python manage.py runserver 8080
 ```
 
@@ -161,7 +292,7 @@ python manage.py runserver 8080
 
 ---
 
-## 5. แนะนำ Prompt สำหรับใช้ AI
+## 6. แนะนำ Prompt สำหรับใช้ AI
 
 ### 🤖 Prompt สำหรับสร้าง Landing Page UI
 
@@ -291,29 +422,29 @@ myAPP-Django-AIOTs/
 
 ## 🚀 คำสั่งที่ใช้บ่อย
 
-```bash
-# เปิด virtual environment
-venv\Scripts\activate
+```cmd
+REM เปิด virtual environment
+venv\Scripts\activate.bat
 
-# รัน development server
+REM รัน development server
 python manage.py runserver
 
-# สร้าง migration จาก model ใหม่
+REM สร้าง migration จาก model ใหม่
 python manage.py makemigrations
 
-# ใช้ migration กับ database
+REM ใช้ migration กับ database
 python manage.py migrate
 
-# สร้าง superuser
+REM สร้าง superuser
 python manage.py createsuperuser
 
-# สร้าง app ใหม่
+REM สร้าง app ใหม่
 python manage.py startapp [app_name]
 
-# บันทึก dependencies
+REM บันทึก dependencies
 pip freeze > requirements.txt
 
-# ติดตั้ง dependencies
+REM ติดตั้ง dependencies
 pip install -r requirements.txt
 ```
 
@@ -345,9 +476,9 @@ pip install -r requirements.txt
 ### ปัญหา: ModuleNotFoundError: No module named 'django'
 
 **วิธีแก้:**
-```bash
-# ตรวจสอบว่า activate virtual environment แล้ว
-# ติดตั้ง Django ใหม่
+```cmd
+REM ตรวจสอบว่า activate virtual environment แล้ว
+REM ติดตั้ง Django ใหม่
 pip install django
 ```
 
@@ -360,8 +491,8 @@ pip install django
 ### ปัญหา: Port 8000 already in use
 
 **วิธีแก้:**
-```bash
-# ใช้ port อื่นแทน
+```cmd
+REM ใช้ port อื่นแทน
 python manage.py runserver 8080
 ```
 
