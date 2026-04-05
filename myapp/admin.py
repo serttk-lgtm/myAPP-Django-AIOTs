@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.urls import path
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
-from .models import Device, TelemetryLog, RelayTestPanel
+from .models import Device, TelemetryLog, RelayTestPanel, MQTTSettings
 from .mqtt_handler import publish_control_command
 
 
@@ -206,3 +206,114 @@ class RelayTestPanelAdmin(admin.ModelAdmin):
     def changelist_view(self, request, extra_context=None):
         """Redirect to relay control panel"""
         return HttpResponseRedirect('/admin/myapp/device/relay-control/')
+
+
+@admin.register(MQTTSettings)
+class MQTTSettingsAdmin(admin.ModelAdmin):
+    """
+    Admin interface for MQTT Settings.
+    Allows configuration of broker, topics, and connection parameters.
+    """
+    fieldsets = (
+        ('🌐 ตั้งค่า Broker', {
+            'fields': ('broker', 'port', 'username', 'password'),
+            'description': (
+                'กำหนดค่าการเชื่อมต่อ MQTT Broker<br>'
+                '<strong>หมายเหตุ:</strong> หลังบันทึกค่า ต้องรีสตาร์ตเซิร์ฟเวอร์ Django เพื่อให้มีผล'
+            )
+        }),
+        ('📡 ตั้งค่า Topic', {
+            'fields': ('telemetry_topic', 'status_topic', 'control_topic_pattern'),
+            'description': (
+                'กำหนดรูปแบบ Topic สำหรับรับและส่งข้อมูล<br>'
+                '<strong>Wildcards:</strong> ใช้ <code>+</code> สำหรับ 1 ระดับ, ใช้ <code>#</code> สำหรับหลายระดับ<br>'
+                '<strong>Placeholder:</strong> ใช้ <code>{board_id}</code> ใน <code>control_topic_pattern</code><br>'
+                '<strong>ตัวอย่าง Topic แบบเต็ม:</strong><br>'
+                '<code>smartfarm/{board_id}/telemetry</code><br>'
+                '<code>smartfarm/{board_id}/status</code><br>'
+                '<code>smartfarm/{board_id}/control</code>'
+            )
+        }),
+        ('⚙️ ตั้งค่าขั้นสูง', {
+            'fields': ('keepalive', 'qos'),
+            'description': (
+                'ตั้งค่าการเชื่อมต่อและระดับคุณภาพการส่งข้อความ (QoS)<br>'
+                '<strong>QoS 0:</strong> ส่งอย่างมาก 1 ครั้ง - เร็วที่สุด แต่อาจมีข้อความหาย<br>'
+                '<strong>QoS 1:</strong> ส่งอย่างน้อย 1 ครั้ง - การันตีการส่ง แต่อาจซ้ำ<br>'
+                '<strong>QoS 2:</strong> ส่งแบบไม่ซ้ำ - ช้าที่สุดแต่แม่นยำที่สุด'
+            )
+        }),
+        ('📅 ข้อมูล', {
+            'fields': ('updated_at',),
+            'classes': ('collapse',)
+        }),
+    )
+    
+    readonly_fields = ('updated_at',)
+
+    def get_form(self, request, obj=None, change=False, **kwargs):
+        """Customize labels and help texts for Thai readability."""
+        form = super().get_form(request, obj, change=change, **kwargs)
+
+        form.base_fields['broker'].label = 'Broker'
+        form.base_fields['broker'].help_text = 'ชื่อโฮสต์หรือ IP ของ MQTT Broker เช่น broker.hivemq.com'
+
+        form.base_fields['port'].label = 'พอร์ต'
+        form.base_fields['port'].help_text = 'พอร์ตที่ใช้เชื่อมต่อ เช่น 1883 (TCP) หรือ 8883 (SSL/TLS)'
+
+        form.base_fields['username'].label = 'ชื่อผู้ใช้'
+        form.base_fields['username'].help_text = 'กรอกเมื่อ Broker ต้องการยืนยันตัวตน (ถ้าไม่ใช้ให้เว้นว่าง)'
+
+        form.base_fields['password'].label = 'รหัสผ่าน'
+        form.base_fields['password'].help_text = 'กรอกเมื่อ Broker ต้องการยืนยันตัวตน (ถ้าไม่ใช้ให้เว้นว่าง)'
+
+        form.base_fields['telemetry_topic'].label = 'Telemetry topic'
+        form.base_fields['telemetry_topic'].help_text = (
+            'Topic สำหรับรับข้อมูลเซ็นเซอร์ เช่น smartfarm/{board_id}/telemetry '
+            'หรือ smartfarm/+/telemetry'
+        )
+
+        form.base_fields['status_topic'].label = 'Status topic'
+        form.base_fields['status_topic'].help_text = (
+            'Topic สำหรับรับสถานะอุปกรณ์ เช่น smartfarm/{board_id}/status '
+            'หรือ smartfarm/+/status'
+        )
+
+        form.base_fields['control_topic_pattern'].label = 'Control topic pattern'
+        form.base_fields['control_topic_pattern'].help_text = (
+            'Topic สำหรับส่งคำสั่งควบคุม เช่น smartfarm/{board_id}/control '
+            '(ระบบจะแทน {board_id} อัตโนมัติ)'
+        )
+
+        form.base_fields['keepalive'].label = 'Keepalive (วินาที)'
+        form.base_fields['keepalive'].help_text = 'ช่วงเวลาที่ client ส่งสัญญาณคงการเชื่อมต่อ (วินาที)'
+
+        form.base_fields['qos'].label = 'ระดับ QoS'
+        form.base_fields['qos'].help_text = 'เลือกคุณภาพการส่งข้อความสำหรับการ subscribe topic'
+
+        return form
+    
+    def save_model(self, request, obj, form, change):
+        """Save settings and notify user to restart server"""
+        from django.contrib import messages
+        super().save_model(request, obj, form, change)
+        messages.warning(
+            request,
+            '⚠️ บันทึก MQTT Settings สำเร็จแล้ว กรุณารีสตาร์ต Django server เพื่อให้ค่ามีผล '
+            'โดยกด Ctrl+C แล้วรัน: python manage.py run_mqtt_worker'
+        )
+    
+    def has_add_permission(self, request):
+        """Only one settings record allowed"""
+        return not MQTTSettings.objects.exists()
+    
+    def has_delete_permission(self, request, obj=None):
+        """Prevent deletion of settings"""
+        return False
+    
+    def changelist_view(self, request, extra_context=None):
+        """Redirect to change form if settings exist"""
+        if MQTTSettings.objects.exists():
+            obj = MQTTSettings.objects.first()
+            return HttpResponseRedirect(f'/admin/myapp/mqttsettings/{obj.pk}/change/')
+        return super().changelist_view(request, extra_context=extra_context)

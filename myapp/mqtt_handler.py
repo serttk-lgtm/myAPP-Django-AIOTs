@@ -9,7 +9,7 @@ import requests
 import paho.mqtt.client as mqtt
 from django.conf import settings
 from django.utils import timezone
-from myapp.models import Device, TelemetryLog
+from myapp.models import Device, TelemetryLog, MQTTSettings
 
 logger = logging.getLogger(__name__)
 
@@ -20,6 +20,9 @@ class MQTTHandler:
     """
     
     def __init__(self):
+        # Get MQTT settings from database
+        self.mqtt_settings = MQTTSettings.get_settings()
+        
         # Use unique client_id and clean_session to prevent duplicate subscriptions
         import uuid
         client_id = f"django_smartfarm_{uuid.uuid4().hex[:8]}"
@@ -29,9 +32,8 @@ class MQTTHandler:
         self.client.on_disconnect = self.on_disconnect
         
         # Set username and password if provided
-        if hasattr(settings, 'MQTT_USER') and hasattr(settings, 'MQTT_PASSWORD'):
-            if settings.MQTT_USER and settings.MQTT_PASSWORD:
-                self.client.username_pw_set(settings.MQTT_USER, settings.MQTT_PASSWORD)
+        if self.mqtt_settings.username and self.mqtt_settings.password:
+            self.client.username_pw_set(self.mqtt_settings.username, self.mqtt_settings.password)
     
     def on_connect(self, client, userdata, flags, rc):
         """
@@ -39,10 +41,12 @@ class MQTTHandler:
         """
         if rc == 0:
             logger.info(f"Connected to MQTT broker successfully (Client ID: {client._client_id.decode() if hasattr(client._client_id, 'decode') else client._client_id})")
-            # Subscribe to all smartfarm topics with QoS 0 to prevent message duplication
-            client.subscribe("smartfarm/+/telemetry", qos=0)
-            client.subscribe("smartfarm/+/status", qos=0)
-            logger.info("Subscribed to smartfarm topics (QoS 0)")
+            
+            # Subscribe to topics from settings with configured QoS
+            client.subscribe(self.mqtt_settings.telemetry_topic, qos=self.mqtt_settings.qos)
+            client.subscribe(self.mqtt_settings.status_topic, qos=self.mqtt_settings.qos)
+            
+            logger.info(f"Subscribed to topics: {self.mqtt_settings.telemetry_topic}, {self.mqtt_settings.status_topic} (QoS {self.mqtt_settings.qos})")
         else:
             logger.error(f"Failed to connect to MQTT broker with code: {rc}")
     
@@ -197,11 +201,11 @@ class MQTTHandler:
         Connects to MQTT broker.
         """
         try:
-            broker = getattr(settings, 'MQTT_BROKER', 'localhost')
-            port = getattr(settings, 'MQTT_PORT', 1883)
+            # Get broker settings from database
+            mqtt_settings = MQTTSettings.get_settings()
             
-            logger.info(f"Connecting to MQTT broker at {broker}:{port}")
-            self.client.connect(broker, port, 60)
+            logger.info(f"Connecting to MQTT broker at {mqtt_settings.broker}:{mqtt_settings.port}")
+            self.client.connect(mqtt_settings.broker, mqtt_settings.port, mqtt_settings.keepalive)
         except Exception as e:
             logger.error(f"Failed to connect to MQTT broker: {e}", exc_info=True)
             raise
@@ -218,10 +222,11 @@ class MQTTHandler:
         Stops the MQTT client loop and disconnects.
         """
         logger.info("Stopping MQTT client")
-        # Unsubscribe before disconnecting to clean up
+        # Unsubscribe from topics using settings
         try:
-            self.client.unsubscribe("smartfarm/+/telemetry")
-            self.client.unsubscribe("smartfarm/+/status")
+            mqtt_settings = MQTTSettings.get_settings()
+            self.client.unsubscribe(mqtt_settings.telemetry_topic)
+            self.client.unsubscribe(mqtt_settings.status_topic)
         except Exception as e:
             logger.warning(f"Error unsubscribing: {e}")
         self.client.loop_stop()
@@ -243,17 +248,17 @@ def publish_control_command(board_id, relay_data):
     try:
         import time
         
+        # Get MQTT settings from database
+        mqtt_settings = MQTTSettings.get_settings()
+        
         client = mqtt.Client()
         
         # Set credentials if available
-        if hasattr(settings, 'MQTT_USER') and hasattr(settings, 'MQTT_PASSWORD'):
-            if settings.MQTT_USER and settings.MQTT_PASSWORD:
-                client.username_pw_set(settings.MQTT_USER, settings.MQTT_PASSWORD)
+        if mqtt_settings.username and mqtt_settings.password:
+            client.username_pw_set(mqtt_settings.username, mqtt_settings.password)
         
-        # Connect to broker
-        broker = getattr(settings, 'MQTT_BROKER', 'localhost')
-        port = getattr(settings, 'MQTT_PORT', 1883)
-        client.connect(broker, port, 60)
+        # Connect to broker using settings
+        client.connect(mqtt_settings.broker, mqtt_settings.port, mqtt_settings.keepalive)
         
         # Start network loop to handle message sending
         client.loop_start()
@@ -264,10 +269,11 @@ def publish_control_command(board_id, relay_data):
             'relays': relay_data
         }
         
-        # Publish to control topic with QoS 1 for guaranteed delivery
-        topic = f"smartfarm/{board_id}/control"
+        # Build topic from pattern (replace {board_id} with actual board_id)
+        topic = mqtt_settings.control_topic_pattern.replace('{board_id}', board_id)
         logger.info(f"Publishing to {topic}: {control_payload}")
         
+        # Publish with QoS 1 for guaranteed delivery
         msg_info = client.publish(topic, json.dumps(control_payload), qos=1)
         
         # Wait for message to be published (max 2 seconds)

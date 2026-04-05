@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.exceptions import ValidationError
 
 
 class Device(models.Model):
@@ -64,4 +65,92 @@ class RelayTestPanel(Device):
         proxy = True
         verbose_name = 'Relay Test Panel'
         verbose_name_plural = 'Relay Test Panel'
+
+
+class MQTTSettings(models.Model):
+    """
+    MQTT Broker and Topic configuration settings.
+    Only one settings record is allowed (Singleton pattern).
+    """
+    # Broker Settings
+    broker = models.CharField(
+        max_length=255,
+        default='broker.hivemq.com',
+        help_text='MQTT Broker hostname or IP address'
+    )
+    port = models.IntegerField(
+        default=1883,
+        help_text='MQTT Broker port (default: 1883 for TCP, 8883 for SSL)'
+    )
+    username = models.CharField(
+        max_length=100,
+        blank=True,
+        null=True,
+        help_text='MQTT username (leave empty if not required)'
+    )
+    password = models.CharField(
+        max_length=100,
+        blank=True,
+        null=True,
+        help_text='MQTT password (leave empty if not required)'
+    )
+    
+    # Topic Settings
+    telemetry_topic = models.CharField(
+        max_length=255,
+        default='smartfarm/+/telemetry',
+        help_text='Topic pattern for receiving telemetry data (use + as wildcard)'
+    )
+    status_topic = models.CharField(
+        max_length=255,
+        default='smartfarm/+/status',
+        help_text='Topic pattern for receiving device status (use + as wildcard)'
+    )
+    control_topic_pattern = models.CharField(
+        max_length=255,
+        default='smartfarm/{board_id}/control',
+        help_text='Topic pattern for sending control commands (use {board_id} as placeholder)'
+    )
+    
+    # Advanced Settings
+    keepalive = models.IntegerField(
+        default=60,
+        help_text='Keepalive interval in seconds'
+    )
+    qos = models.IntegerField(
+        default=0,
+        choices=[
+            (0, 'QoS 0 - At most once'),
+            (1, 'QoS 1 - At least once'),
+            (2, 'QoS 2 - Exactly once')
+        ],
+        help_text='Quality of Service level for subscriptions'
+    )
+    
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        verbose_name = 'MQTT Setting'
+        verbose_name_plural = 'MQTT Settings'
+    
+    def save(self, *args, **kwargs):
+        """
+        Singleton pattern - Allow only one settings record.
+        """
+        if not self.pk and MQTTSettings.objects.exists():
+            raise ValidationError('Only one MQTT Settings record is allowed. Please edit the existing settings.')
+        # Always use pk=1 for singleton
+        self.pk = 1
+        return super().save(*args, **kwargs)
+    
+    @classmethod
+    def get_settings(cls):
+        """
+        Get or create the singleton MQTT settings instance.
+        """
+        settings, created = cls.objects.get_or_create(pk=1)
+        return settings
+    
+    def __str__(self):
+        return f"MQTT Settings - {self.broker}:{self.port}"
  
