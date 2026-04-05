@@ -65,7 +65,7 @@ class MQTTHandler:
             payload_str = msg.payload.decode('utf-8')
             payload = json.loads(payload_str)
             
-            logger.info(f"Received message on topic: {topic}")
+            logger.debug(f"Received message on topic: {topic}")
             logger.debug(f"Payload: {payload}")
             
             # Extract board_id from payload or topic
@@ -112,7 +112,7 @@ class MQTTHandler:
             device.firmware_version = payload.get('firmware')
             device.save()
             
-            logger.info(f"Updated device: {board_id} with status {device.status}")
+            logger.debug(f"Updated device: {board_id} with status {device.status}")
         
         except Exception as e:
             logger.error(f"Error updating device status: {e}", exc_info=True)
@@ -147,7 +147,7 @@ class MQTTHandler:
                 relay_status=relays
             )
             
-            logger.info(f"Created telemetry log for {board_id}")
+            logger.debug(f"Created telemetry log for {board_id}")
             
             # Check for water overflow and trigger n8n webhook
             if sensors.get('water_overflow') is True:
