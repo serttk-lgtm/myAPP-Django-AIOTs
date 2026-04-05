@@ -10358,3 +10358,87 @@ WARNING 2026-04-05 15:49:42,585 mqtt_handler Received status from unregistered d
 WARNING 2026-04-05 15:49:42,586 mqtt_handler Received status from unregistered device: ESP32-FARM-001. Please add device via Admin first.
 WARNING 2026-04-05 15:49:42,587 mqtt_handler Received status from unregistered device: ESP32-FARM-WEERADEJ. Please add device via Admin first.
 INFO 2026-04-05 15:49:52,067 mqtt_handler Publishing to smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/control: {'command': 'relay_control', 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+INFO 2026-04-05 15:54:33,814 apps [MQTT] Starting MQTT Worker automatically...
+INFO 2026-04-05 15:54:33,814 apps [MQTT] Worker thread started successfully
+INFO 2026-04-05 15:54:33,815 mqtt_handler Connecting to MQTT broker at broker.hivemq.com:1883
+INFO 2026-04-05 15:54:34,068 mqtt_handler Starting MQTT client loop
+INFO 2026-04-05 15:54:38,483 mqtt_handler Connected to MQTT broker successfully (Client ID: django_smartfarm_f46abdab)
+INFO 2026-04-05 15:54:38,484 mqtt_handler Subscribed to smartfarm topics (QoS 0)
+WARNING 2026-04-05 15:54:38,883 mqtt_handler Received status from unregistered device: ESP32-FARM-001-WEERADEJ. Please add device via Admin first.
+WARNING 2026-04-05 15:54:38,885 mqtt_handler Received status from unregistered device: ESP32-FARM-Jan01. Please add device via Admin first.
+WARNING 2026-04-05 15:54:38,886 mqtt_handler Received status from unregistered device: KOTA-FARM-001. Please add device via Admin first.
+WARNING 2026-04-05 15:54:38,888 mqtt_handler Received status from unregistered device: ESP32-FARM-001-BENJA-BENZ. Please add device via Admin first.
+WARNING 2026-04-05 15:54:38,889 mqtt_handler Received status from unregistered device: ESP32-FARM-001-TK2468. Please add device via Admin first.
+WARNING 2026-04-05 15:54:38,890 mqtt_handler Received status from unregistered device: ESP32-FARM-000-Anekwong. Please add device via Admin first.
+WARNING 2026-04-05 15:54:38,892 mqtt_handler Received status from unregistered device: ESP32-FARM-001-HANAHARPER. Please add device via Admin first.
+WARNING 2026-04-05 15:54:38,894 mqtt_handler Received status from unregistered device: ESP32-FARM-001-ATTASIT. Please add device via Admin first.
+WARNING 2026-04-05 15:54:38,895 mqtt_handler Received status from unregistered device: ESP32-FARM-001-methee. Please add device via Admin first.
+WARNING 2026-04-05 15:54:38,897 mqtt_handler Received status from unregistered device: ESP32-FARM-001-chonmapat. Please add device via Admin first.
+WARNING 2026-04-05 15:54:38,898 mqtt_handler Received status from unregistered device: ESP32-FARM-001-SUWAN-LAR. Please add device via Admin first.
+WARNING 2026-04-05 15:54:38,899 mqtt_handler Received status from unregistered device: ESP32-FARM-001. Please add device via Admin first.
+WARNING 2026-04-05 15:54:38,900 mqtt_handler Received status from unregistered device: ESP32-FARM-WEERADEJ. Please add device via Admin first.
+INFO 2026-04-05 15:55:26,733 mqtt_handler Publishing to smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/control: {'command': 'relay_control', 'relays': {'relay1_pump': True, 'relay2_fan': True, 'relay3_heater': True}}
+INFO 2026-04-05 15:55:34,627 mqtt_handler Publishing to smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/control: {'command': 'relay_control', 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+INFO 2026-04-05 15:56:50,204 mqtt_handler Publishing to smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/control: {'command': 'relay_control', 'relays': {'relay1_pump': True, 'relay2_fan': True, 'relay3_heater': True}}
+INFO 2026-04-05 15:56:56,428 mqtt_handler Publishing to smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/control: {'command': 'relay_control', 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+INFO 2026-04-05 15:59:23,719 apps [MQTT] Starting MQTT Worker automatically...
+INFO 2026-04-05 15:59:23,719 apps [MQTT] Worker thread started successfully
+INFO 2026-04-05 15:59:23,720 mqtt_handler Connecting to MQTT broker at broker.hivemq.com:1883
+INFO 2026-04-05 15:59:23,973 mqtt_handler Starting MQTT client loop
+INFO 2026-04-05 15:59:24,175 mqtt_handler Connected to MQTT broker successfully (Client ID: django_smartfarm_76c2d0cc)
+INFO 2026-04-05 15:59:24,176 mqtt_handler Subscribed to smartfarm topics (QoS 0)
+WARNING 2026-04-05 15:59:24,582 mqtt_handler Received status from unregistered device: ESP32-FARM-001-WEERADEJ. Please add device via Admin first.
+WARNING 2026-04-05 15:59:24,583 mqtt_handler Received status from unregistered device: ESP32-FARM-Jan01. Please add device via Admin first.
+WARNING 2026-04-05 15:59:24,585 mqtt_handler Received status from unregistered device: KOTA-FARM-001. Please add device via Admin first.
+WARNING 2026-04-05 15:59:24,586 mqtt_handler Received status from unregistered device: ESP32-FARM-001-BENJA-BENZ. Please add device via Admin first.
+WARNING 2026-04-05 15:59:24,587 mqtt_handler Received status from unregistered device: ESP32-FARM-001-TK2468. Please add device via Admin first.
+WARNING 2026-04-05 15:59:24,588 mqtt_handler Received status from unregistered device: ESP32-FARM-000-Anekwong. Please add device via Admin first.
+WARNING 2026-04-05 15:59:24,589 mqtt_handler Received status from unregistered device: ESP32-FARM-001-HANAHARPER. Please add device via Admin first.
+WARNING 2026-04-05 15:59:24,590 mqtt_handler Received status from unregistered device: ESP32-FARM-001-ATTASIT. Please add device via Admin first.
+WARNING 2026-04-05 15:59:24,591 mqtt_handler Received status from unregistered device: ESP32-FARM-001-methee. Please add device via Admin first.
+WARNING 2026-04-05 15:59:24,592 mqtt_handler Received status from unregistered device: ESP32-FARM-001-chonmapat. Please add device via Admin first.
+WARNING 2026-04-05 15:59:24,593 mqtt_handler Received status from unregistered device: ESP32-FARM-001-SUWAN-LAR. Please add device via Admin first.
+WARNING 2026-04-05 15:59:24,594 mqtt_handler Received status from unregistered device: ESP32-FARM-001. Please add device via Admin first.
+WARNING 2026-04-05 15:59:24,596 mqtt_handler Received status from unregistered device: ESP32-FARM-WEERADEJ. Please add device via Admin first.
+INFO 2026-04-05 16:00:35,298 apps [MQTT] Starting MQTT Worker automatically...
+INFO 2026-04-05 16:00:35,298 apps [MQTT] Worker thread started successfully
+INFO 2026-04-05 16:00:35,298 mqtt_handler Connecting to MQTT broker at broker.hivemq.com:1883
+INFO 2026-04-05 16:00:35,526 mqtt_handler Starting MQTT client loop
+INFO 2026-04-05 16:00:35,731 mqtt_handler Connected to MQTT broker successfully (Client ID: django_smartfarm_a803bca6)
+INFO 2026-04-05 16:00:35,732 mqtt_handler Subscribed to smartfarm topics (QoS 0)
+WARNING 2026-04-05 16:00:36,151 mqtt_handler Received status from unregistered device: ESP32-FARM-001-WEERADEJ. Please add device via Admin first.
+WARNING 2026-04-05 16:00:36,152 mqtt_handler Received status from unregistered device: ESP32-FARM-Jan01. Please add device via Admin first.
+WARNING 2026-04-05 16:00:36,153 mqtt_handler Received status from unregistered device: KOTA-FARM-001. Please add device via Admin first.
+WARNING 2026-04-05 16:00:36,154 mqtt_handler Received status from unregistered device: ESP32-FARM-001-BENJA-BENZ. Please add device via Admin first.
+WARNING 2026-04-05 16:00:36,155 mqtt_handler Received status from unregistered device: ESP32-FARM-001-TK2468. Please add device via Admin first.
+WARNING 2026-04-05 16:00:36,156 mqtt_handler Received status from unregistered device: ESP32-FARM-000-Anekwong. Please add device via Admin first.
+WARNING 2026-04-05 16:00:36,157 mqtt_handler Received status from unregistered device: ESP32-FARM-001-HANAHARPER. Please add device via Admin first.
+WARNING 2026-04-05 16:00:36,159 mqtt_handler Received status from unregistered device: ESP32-FARM-001-ATTASIT. Please add device via Admin first.
+WARNING 2026-04-05 16:00:36,161 mqtt_handler Received status from unregistered device: ESP32-FARM-001-methee. Please add device via Admin first.
+WARNING 2026-04-05 16:00:36,165 mqtt_handler Received status from unregistered device: ESP32-FARM-001-chonmapat. Please add device via Admin first.
+WARNING 2026-04-05 16:00:36,166 mqtt_handler Received status from unregistered device: ESP32-FARM-001-SUWAN-LAR. Please add device via Admin first.
+WARNING 2026-04-05 16:00:36,167 mqtt_handler Received status from unregistered device: ESP32-FARM-001. Please add device via Admin first.
+WARNING 2026-04-05 16:00:36,169 mqtt_handler Received status from unregistered device: ESP32-FARM-WEERADEJ. Please add device via Admin first.
+INFO 2026-04-05 16:00:43,274 apps [MQTT] Starting MQTT Worker automatically...
+INFO 2026-04-05 16:00:43,274 apps [MQTT] Worker thread started successfully
+INFO 2026-04-05 16:00:43,274 mqtt_handler Connecting to MQTT broker at broker.hivemq.com:1883
+INFO 2026-04-05 16:00:43,502 mqtt_handler Starting MQTT client loop
+INFO 2026-04-05 16:00:43,702 mqtt_handler Connected to MQTT broker successfully (Client ID: django_smartfarm_d15b7bae)
+INFO 2026-04-05 16:00:43,703 mqtt_handler Subscribed to smartfarm topics (QoS 0)
+WARNING 2026-04-05 16:00:44,235 mqtt_handler Received status from unregistered device: ESP32-FARM-001-WEERADEJ. Please add device via Admin first.
+WARNING 2026-04-05 16:00:44,236 mqtt_handler Received status from unregistered device: ESP32-FARM-Jan01. Please add device via Admin first.
+WARNING 2026-04-05 16:00:44,237 mqtt_handler Received status from unregistered device: KOTA-FARM-001. Please add device via Admin first.
+WARNING 2026-04-05 16:00:44,238 mqtt_handler Received status from unregistered device: ESP32-FARM-001-BENJA-BENZ. Please add device via Admin first.
+WARNING 2026-04-05 16:00:44,239 mqtt_handler Received status from unregistered device: ESP32-FARM-001-TK2468. Please add device via Admin first.
+WARNING 2026-04-05 16:00:44,240 mqtt_handler Received status from unregistered device: ESP32-FARM-000-Anekwong. Please add device via Admin first.
+WARNING 2026-04-05 16:00:44,241 mqtt_handler Received status from unregistered device: ESP32-FARM-001-HANAHARPER. Please add device via Admin first.
+WARNING 2026-04-05 16:00:44,242 mqtt_handler Received status from unregistered device: ESP32-FARM-001-ATTASIT. Please add device via Admin first.
+WARNING 2026-04-05 16:00:44,244 mqtt_handler Received status from unregistered device: ESP32-FARM-001-methee. Please add device via Admin first.
+WARNING 2026-04-05 16:00:44,245 mqtt_handler Received status from unregistered device: ESP32-FARM-001-chonmapat. Please add device via Admin first.
+WARNING 2026-04-05 16:00:44,247 mqtt_handler Received status from unregistered device: ESP32-FARM-001-SUWAN-LAR. Please add device via Admin first.
+WARNING 2026-04-05 16:00:44,248 mqtt_handler Received status from unregistered device: ESP32-FARM-001. Please add device via Admin first.
+WARNING 2026-04-05 16:00:44,249 mqtt_handler Received status from unregistered device: ESP32-FARM-WEERADEJ. Please add device via Admin first.
+WARNING 2026-04-05 16:01:41,720 mqtt_handler Received telemetry from unregistered device: ESP32-FARM-001-NATTAPHOL-PALM. Please add device via Admin first.
+WARNING 2026-04-05 16:01:51,722 mqtt_handler Received telemetry from unregistered device: ESP32-FARM-001-NATTAPHOL-PALM. Please add device via Admin first.
+WARNING 2026-04-05 16:01:51,945 mqtt_handler Received status from unregistered device: ESP32-FARM-001-NATTAPHOL-PALM. Please add device via Admin first.
+INFO 2026-04-05 16:03:00,423 mqtt_handler Publishing to smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/control: {'command': 'relay_control', 'relays': {'relay1_pump': True, 'relay2_fan': True, 'relay3_heater': True}}
