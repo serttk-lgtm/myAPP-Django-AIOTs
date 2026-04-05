@@ -104,7 +104,7 @@ INSTALLED_APPS = [
     'myapp.apps.MyappConfig',  # Use full path to enable AppConfig.ready()
 ]
 
-USE_WHITENOISE = env_bool('USE_WHITENOISE', default=False)
+USE_WHITENOISE = env_bool('USE_WHITENOISE', default=not DEBUG)
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
