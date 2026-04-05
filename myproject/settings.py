@@ -13,9 +13,31 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 import os
 from pathlib import Path
 from urllib.parse import urlparse
+from django.core.exceptions import ImproperlyConfigured
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+
+def load_env_file(env_path):
+    """Load simple KEY=VALUE pairs from a .env file without overriding real env vars."""
+    if not env_path.exists():
+        return
+
+    for raw_line in env_path.read_text(encoding='utf-8').splitlines():
+        line = raw_line.strip()
+        if not line or line.startswith('#') or '=' not in line:
+            continue
+
+        key, value = line.split('=', 1)
+        key = key.strip()
+        value = value.strip().strip('"').strip("'")
+
+        if key and key not in os.environ:
+            os.environ[key] = value
+
+
+load_env_file(BASE_DIR / '.env')
 
 
 def env_bool(name, default=False):
@@ -33,15 +55,12 @@ def env_list(name, default=''):
 
 
 def build_database_config():
-    """Build database config from DATABASE_URL with sqlite fallback."""
+    """Build database config from DATABASE_URL (PostgreSQL only)."""
     database_url = os.getenv('DATABASE_URL', '').strip()
     if not database_url:
-        return {
-            'default': {
-                'ENGINE': 'django.db.backends.sqlite3',
-                'NAME': BASE_DIR / 'db.sqlite3',
-            }
-        }
+        raise ImproperlyConfigured(
+            'DATABASE_URL is required. SQLite fallback has been disabled to prevent accidental local DB usage.'
+        )
 
     parsed = urlparse(database_url)
     scheme = (parsed.scheme or '').lower()
@@ -63,17 +82,9 @@ def build_database_config():
             }
         }
 
-    # Optional support for sqlite URL format: sqlite:///path/to/file.sqlite3
-    if scheme == 'sqlite':
-        sqlite_path = parsed.path or '/db.sqlite3'
-        return {
-            'default': {
-                'ENGINE': 'django.db.backends.sqlite3',
-                'NAME': sqlite_path,
-            }
-        }
-
-    raise ValueError(f'Unsupported DATABASE_URL scheme: {scheme}')
+    raise ImproperlyConfigured(
+        f'Unsupported DATABASE_URL scheme: {scheme}. Only postgres:// or postgresql:// are allowed.'
+    )
 
 
 # Quick-start development settings - unsuitable for production
@@ -219,6 +230,7 @@ N8N_WEBHOOK_URL = os.getenv('N8N_WEBHOOK_URL', '')
 
 # Logging configuration for MQTT handler
 LOG_LEVEL = os.getenv('LOG_LEVEL', 'DEBUG' if DEBUG else 'INFO').upper()
+DJANGO_LOG_LEVEL = os.getenv('DJANGO_LOG_LEVEL', 'INFO').upper()
 LOG_TO_FILE = env_bool('LOG_TO_FILE', default=DEBUG)
 
 log_handlers = ['console']
@@ -257,7 +269,7 @@ LOGGING = {
         },
         'django': {
             'handlers': ['console'],
-            'level': LOG_LEVEL,
+            'level': DJANGO_LOG_LEVEL,
             'propagate': False,
         },
     },
