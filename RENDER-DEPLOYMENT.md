@@ -79,6 +79,27 @@ pip install -r requirements.txt && python manage.py migrate
 python manage.py run_mqtt_worker
 ```
 
+### 4.3 Single Service Mode (Web + MQTT ใน service เดียว)
+
+กรณีต้องการ deploy จุดเดียวเท่านั้น สามารถเปิดโหมดนี้ได้ โดยให้ web process สตาร์ต MQTT worker อัตโนมัติ:
+
+ตั้งค่า env เพิ่มใน Web Service:
+
+- `RUN_MQTT_IN_WEBSERVICE=True`
+- `WEB_CONCURRENCY=1`  (สำคัญ: ลดความเสี่ยง worker ซ้ำ)
+
+Start Command (เหมือนเดิม):
+
+```bash
+gunicorn myproject.wsgi:application --bind 0.0.0.0:$PORT
+```
+
+ข้อควรระวัง:
+
+- โหมดนี้เหมาะเมื่อยอมรับ trade-off ด้านความเสถียรได้
+- ถ้า scale web มากกว่า 1 instance/process อาจเกิด MQTT worker หลายตัวพร้อมกัน
+- สำหรับ production ระยะยาว แนะนำแยก Worker Service เหมือนหัวข้อ 4.2
+
 ## 5. โครง Deploy ทีละขั้นตอนบน Render
 
 1. Push code ขึ้น GitHub branch ที่จะ deploy

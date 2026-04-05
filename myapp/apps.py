@@ -1,4 +1,5 @@
 import os
+import sys
 import threading
 import logging
 from django.apps import AppConfig
@@ -10,14 +11,52 @@ class MyappConfig(AppConfig):
     name = 'myapp'
     mqtt_worker_started = False  # Class variable to track worker status
     mqtt_lock = threading.Lock()  # Thread lock for safety
+
+    @staticmethod
+    def _env_bool(name, default=False):
+        value = os.environ.get(name)
+        if value is None:
+            return default
+        return value.strip().lower() in ('1', 'true', 'yes', 'on')
+
+    @staticmethod
+    def _is_blocked_management_command():
+        """Skip autostart for one-off management commands during build/deploy."""
+        blocked_commands = {
+            'check',
+            'collectstatic',
+            'createsuperuser',
+            'dbshell',
+            'flush',
+            'loaddata',
+            'makemigrations',
+            'migrate',
+            'shell',
+            'showmigrations',
+            'test',
+        }
+        return len(sys.argv) > 1 and sys.argv[1] in blocked_commands
+
+    def _should_start_mqtt_worker(self):
+        """Enable autostart only when explicitly requested for single-service deploys."""
+        if not self._env_bool('RUN_MQTT_IN_WEBSERVICE', default=False):
+            return False
+
+        if self._is_blocked_management_command():
+            return False
+
+        # Prevent duplicate start in the parent process when using runserver reloader.
+        if len(sys.argv) > 1 and sys.argv[1] == 'runserver' and os.environ.get('RUN_MAIN') != 'true':
+            return False
+
+        return True
     
     def ready(self):
         """
         Runs when Django starts. 
         Automatically starts MQTT worker in background thread.
         """
-        # Prevent running twice during development (Django's auto-reloader runs code twice)
-        if os.environ.get('RUN_MAIN') != 'true':
+        if not self._should_start_mqtt_worker():
             return
         
         # Check if worker already started (singleton pattern)
