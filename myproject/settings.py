@@ -10,22 +10,84 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
+import os
 from pathlib import Path
+from urllib.parse import urlparse
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+
+def env_bool(name, default=False):
+    """Read boolean value from environment variables."""
+    value = os.getenv(name)
+    if value is None:
+        return default
+    return value.strip().lower() in ('1', 'true', 'yes', 'on')
+
+
+def env_list(name, default=''):
+    """Read comma-separated values from environment variables."""
+    raw = os.getenv(name, default)
+    return [item.strip() for item in raw.split(',') if item.strip()]
+
+
+def build_database_config():
+    """Build database config from DATABASE_URL with sqlite fallback."""
+    database_url = os.getenv('DATABASE_URL', '').strip()
+    if not database_url:
+        return {
+            'default': {
+                'ENGINE': 'django.db.backends.sqlite3',
+                'NAME': BASE_DIR / 'db.sqlite3',
+            }
+        }
+
+    parsed = urlparse(database_url)
+    scheme = (parsed.scheme or '').lower()
+
+    # Render Postgres URL formats: postgres:// or postgresql://
+    if scheme in ('postgres', 'postgresql'):
+        return {
+            'default': {
+                'ENGINE': 'django.db.backends.postgresql',
+                'NAME': parsed.path.lstrip('/'),
+                'USER': parsed.username or '',
+                'PASSWORD': parsed.password or '',
+                'HOST': parsed.hostname or '',
+                'PORT': str(parsed.port or '5432'),
+                'CONN_MAX_AGE': int(os.getenv('DB_CONN_MAX_AGE', '600')),
+                'OPTIONS': {
+                    'sslmode': os.getenv('DB_SSLMODE', 'require')
+                },
+            }
+        }
+
+    # Optional support for sqlite URL format: sqlite:///path/to/file.sqlite3
+    if scheme == 'sqlite':
+        sqlite_path = parsed.path or '/db.sqlite3'
+        return {
+            'default': {
+                'ENGINE': 'django.db.backends.sqlite3',
+                'NAME': sqlite_path,
+            }
+        }
+
+    raise ValueError(f'Unsupported DATABASE_URL scheme: {scheme}')
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-fb%_3i9^s!!kz_o4hmfg3u*0c!v5bbn105#jm5jkyvk3xw$i^n'
+SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-local-dev-change-me')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env_bool('DEBUG', default=True)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = env_list('ALLOWED_HOSTS', '127.0.0.1,localhost')
+
+CSRF_TRUSTED_ORIGINS = env_list('CSRF_TRUSTED_ORIGINS', '')
 
 
 # Application definition
@@ -40,6 +102,8 @@ INSTALLED_APPS = [
     'myapp.apps.MyappConfig',  # Use full path to enable AppConfig.ready()
 ]
 
+USE_WHITENOISE = env_bool('USE_WHITENOISE', default=False)
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -49,6 +113,9 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+if USE_WHITENOISE:
+    MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
 
 ROOT_URLCONF = 'myproject.urls'
 
@@ -72,13 +139,7 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+DATABASES = build_database_config()
 
 
 # Password validation
@@ -123,26 +184,45 @@ SHORT_DATETIME_FORMAT = 'Y-m-d H:i:s'
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+if USE_WHITENOISE:
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/6.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# Production security settings (configurable via env vars)
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_SSL_REDIRECT = env_bool('SECURE_SSL_REDIRECT', default=False)
+SESSION_COOKIE_SECURE = env_bool('SESSION_COOKIE_SECURE', default=not DEBUG)
+CSRF_COOKIE_SECURE = env_bool('CSRF_COOKIE_SECURE', default=not DEBUG)
+SECURE_HSTS_SECONDS = int(os.getenv('SECURE_HSTS_SECONDS', '0' if DEBUG else '31536000'))
+SECURE_HSTS_INCLUDE_SUBDOMAINS = env_bool('SECURE_HSTS_INCLUDE_SUBDOMAINS', default=not DEBUG)
+SECURE_HSTS_PRELOAD = env_bool('SECURE_HSTS_PRELOAD', default=not DEBUG)
+
 # =============================================================================
 # MQTT Configuration for Smart Farm AIoT System
 # =============================================================================
 
 # MQTT Broker settings
-MQTT_BROKER = 'broker.hivemq.com'  # Replace with your MQTT broker address
-MQTT_PORT = 1883  # Default MQTT port (1883 for non-SSL, 8883 for SSL)
-MQTT_USER = 'your-user'  # Replace with your MQTT username (or set to None if no auth)
-MQTT_PASSWORD = 'your-password'  # Replace with your MQTT password (or set to None if no auth)
+MQTT_BROKER = os.getenv('MQTT_BROKER', 'broker.hivemq.com')
+MQTT_PORT = int(os.getenv('MQTT_PORT', '1883'))
+MQTT_USER = os.getenv('MQTT_USER', '')
+MQTT_PASSWORD = os.getenv('MQTT_PASSWORD', '')
 
 # n8n Webhook URL for automation alerts
-N8N_WEBHOOK_URL = 'https://your-n8n-instance/webhook/smartfarm-alert'  # Replace with your n8n webhook URL
+N8N_WEBHOOK_URL = os.getenv('N8N_WEBHOOK_URL', '')
 
 # Logging configuration for MQTT handler
+LOG_LEVEL = os.getenv('LOG_LEVEL', 'DEBUG' if DEBUG else 'INFO').upper()
+LOG_TO_FILE = env_bool('LOG_TO_FILE', default=DEBUG)
+
+log_handlers = ['console']
+if LOG_TO_FILE:
+    log_handlers.append('file')
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -164,18 +244,18 @@ LOGGING = {
         },
     },
     'root': {
-        'handlers': ['console', 'file'],
-        'level': 'INFO',
+        'handlers': log_handlers,
+        'level': LOG_LEVEL,
     },
     'loggers': {
         'myapp': {
-            'handlers': ['console', 'file'],
-            'level': 'INFO',
+            'handlers': log_handlers,
+            'level': LOG_LEVEL,
             'propagate': False,
         },
         'django': {
             'handlers': ['console'],
-            'level': 'INFO',
+            'level': LOG_LEVEL,
             'propagate': False,
         },
     },
