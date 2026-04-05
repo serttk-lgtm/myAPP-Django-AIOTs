@@ -1,528 +1,831 @@
-# 🌿 Smart Farm Full Stack Dashboard - Django Project
+# Smart Farm AIoT Dashboard (Django + MQTT + N8N)
 
-โปรเจกต์ Django Framework สำหรับสร้าง Landing Page และ Dashboard แบบ Full Stack พร้อม UI สไตล์ Smart Farm โทนสีเขียว
+โปรเจกต์นี้คือระบบ Smart Farm แบบ Full Stack ที่ใช้ Django เป็นศูนย์กลางในการ
+- รับข้อมูล Telemetry จาก ESP32 ผ่าน MQTT
+- แสดงผล Dashboard และ Admin
+- สั่งงาน Relay กลับไปที่อุปกรณ์
+- เชื่อมต่อ n8n ทั้งขาออก (event notifications) และขาเข้า (inbound relay control)
 
-> 📘 **สำหรับผู้ที่ Clone โปรเจกต์มาใหม่:** อ่านคู่มือฉบับเต็มได้ที่ [SETUP-GUIDE.md](SETUP-GUIDE.md)
+สถานะปัจจุบัน (อัปเดตล่าสุด)
+- Database: Supabase PostgreSQL (ปิด SQLite fallback แล้ว)
+- Production target: Render Web Service + (แนะนำ) Render Worker Service
+- รองรับโหมด Single Service (Web + MQTT ในโปรเซสเดียว) ด้วย `RUN_MQTT_IN_WEBSERVICE=True`
 
 ---
 
-## � เริ่มต้นอย่างรวดเร็ว (Quick Start)
+## 0) Clone และติดตั้งสภาพแวดล้อมสำหรับ Local Server
 
-### สำหรับผู้ที่ Clone โปรเจกต์มาใช้งาน
+หัวข้อนี้คือขั้นตอนเริ่มต้นแบบเรียงลำดับ สำหรับรันในเครื่องตัวเองได้ทันที
 
-```cmd
-REM 1. Clone repository
+### 0.1 สิ่งที่ต้องมีในเครื่อง
+
+- Python 3.10+ (แนะนำ 3.11 หรือสูงกว่า)
+- Git
+- อินเทอร์เน็ตสำหรับติดตั้ง dependencies
+- Supabase project พร้อม PostgreSQL connection string
+
+ตรวจสอบเวอร์ชัน
+
+```bash
+python --version
+pip --version
+git --version
+```
+
+### 0.2 Clone โปรเจกต์
+
+```bash
 git clone https://github.com/thaitechzone/myAPP-Django-AIOTs.git
 cd myAPP-Django-AIOTs
-
-REM 2. สร้างและเปิดใช้งาน virtual environment
-python -m venv venv
-venv\Scripts\activate.bat
-
-REM 3. ติดตั้ง dependencies
-pip install -r requirements.txt
-
-REM 4. รัน migration
-python manage.py migrate
-
-REM 5. สร้าง superuser สำหรับ Admin
-python manage.py createsuperuser
-
-REM 6. รัน development server (MQTT Worker จะเริ่มอัตโนมัติ)
-python manage.py runserver
-
-REM 7. เปิดเบราว์เซอร์ไปที่ http://127.0.0.1:8000/
-REM    Admin Panel: http://127.0.0.1:8000/admin/
 ```
 
-**✨ ข้อดี:**
-- MQTT Worker เริ่มทำงานอัตโนมัติทันทีที่รัน `runserver`
-- ไม่ต้องเปิด terminal แยกอีกอัน
-- ดูข้อความ log: `✅ MQTT Worker thread started successfully`
+### 0.3 สร้างและเปิด virtual environment
 
-### ✅ ตรวจสอบว่า Setup สำเร็จ
+CMD (Windows)
 
-- ✅ เห็น `(venv)` หน้า command line
-- ✅ ไม่มี error จากการติดตั้ง packages
-- ✅ Server รันได้ที่ http://127.0.0.1:8000/
-- ✅ เห็นหน้า Landing Page สไตล์ Smart Farm
-- ✅ เห็นข้อความ "Connected to MQTT broker" (ถ้าตั้งค่า MQTT settings แล้ว)
+```bat
+python -m venv venv
+venv\Scripts\activate.bat
+```
 
----
+### 0.4 ติดตั้ง dependencies
 
-## ⚙️ คำสั่งสำหรับใช้งานประจำวัน
+```bash
+pip install -r requirements.txt
+```
 
-หลังจาก clone และ setup เรียบร้อยแล้ว เมื่อเปิด terminal ใหม่ทุกครั้ง ให้ใช้คำสั่งเหล่านี้:
+### 0.5 สร้างไฟล์ .env สำหรับ local
 
-```cmd
-REM 1. เข้าไปยังโฟลเดอร์โปรเจกต์
+สร้างไฟล์ `.env` ที่ root ของโปรเจกต์ แล้วใส่ค่าขั้นต่ำดังนี้
+
+```env
+SECRET_KEY=change-this-to-a-random-secret
+DEBUG=True
+ALLOWED_HOSTS=127.0.0.1,localhost
+CSRF_TRUSTED_ORIGINS=
+
+DATABASE_URL=postgresql://<user>:<password>@aws-1-ap-southeast-2.pooler.supabase.com:5432/postgres
+DB_CONN_MAX_AGE=0
+DB_SSLMODE=require
+
+DJANGO_SETTINGS_MODULE=myproject.settings
+
+# Local mode (แนะนำให้รัน worker แยก)
+RUN_MQTT_IN_WEBSERVICE=False
+
+# MQTT defaults (แก้ได้ใน Admin ภายหลัง)
+MQTT_BROKER=broker.hivemq.com
+MQTT_PORT=1883
+MQTT_USER=
+MQTT_PASSWORD=
+```
+
+หมายเหตุสำคัญ
+- โปรเจกต์นี้ไม่รองรับ SQLite แล้ว ต้องมี `DATABASE_URL` เป็น PostgreSQL เท่านั้น
+- หากใช้ Supabase pooler แนะนำ `DB_CONN_MAX_AGE=0`
+
+### 0.6 รัน migration และสร้าง admin
+
+```bash
+python manage.py migrate
+python manage.py createsuperuser
+```
+
+### 0.7 รันระบบแบบ Local (แนะนำ)
+
+Terminal 1: รันเว็บ
+
+```bash
+python manage.py runserver
+```
+
+Terminal 2: รัน MQTT worker
+
+```bash
+python manage.py run_mqtt_worker
+```
+
+### 0.7.1 รันพร้อมกันแบบ 2 หน้าต่าง CMD (แนะนำที่สุด)
+
+หน้าต่างที่ 1
+
+```bat
 cd myAPP-Django-AIOTs
-
-REM 2. เปิดใช้งาน virtual environment
 venv\Scripts\activate.bat
-
-REM 3. รัน development server
 python manage.py runserver
 ```
 
-> 💡 **หมายเหตุ:** ต้อง activate virtual environment ทุกครั้งที่เปิด terminal ใหม่
+หน้าต่างที่ 2
 
----
-
-## 🔧 แก้ไขปัญหาที่พบบ่อยหลัง Clone
-
----
-
-### ❌ ปัญหา: Python ไม่อยู่ใน PATH
-
-```
-'python' is not recognized as an internal or external command
-```
-
-**วิธีแก้:**
-- ติดตั้ง Python ใหม่และเลือก "Add Python to PATH"
-- หรือใช้ `py` แทน `python`:
-```cmd
-py -m venv venv
-py manage.py runserver
-```
-
----
-
-### ❌ ปัญหา: ModuleNotFoundError หลังติดตั้ง
-
-```
-ModuleNotFoundError: No module named 'django'
-```
-
-**วิธีแก้:**
-```cmd
-REM 1. ตรวจสอบว่า activate venv แล้ว (ต้องมี (venv) หน้า command line)
-REM 2. ติดตั้ง dependencies อีกครั้ง
-pip install -r requirements.txt
-
-REM 3. ตรวจสอบว่าติดตั้งสำเร็จ
-pip list
-```
-
----
-
-### ❌ ปัญหา: requirements.txt ไม่มีหรือเสียหาย
-
-**วิธีแก้:**
-```cmd
-REM ติดตั้ง Django แบบ manual
-pip install django
-
-REM สร้าง requirements.txt ใหม่
-pip freeze > requirements.txt
-```
-
----
-
-### ❌ ปัญหา: Port 8000 ถูกใช้งานอยู่
-
-```
-Error: That port is already in use.
-```
-
-**วิธีแก้:**
-```cmd
-REM ใช้ port อื่นแทน เช่น 8080
-python manage.py runserver 8080
-
-REM เปิดเบราว์เซอร์ที่ http://127.0.0.1:8080/
-```
-
----
-
-### ❌ ปัญหา: Database เสียหายหรือขัดข้อง
-
-**วิธีแก้:**
-```cmd
-REM ลบ database เก่าและสร้างใหม่
-REM ⚠️ ระวัง: จะลบข้อมูลทั้งหมด
-del db.sqlite3
-
-REM รัน migration ใหม่
-python manage.py migrate
-```
-
----
-
-## 📋 สารบัญ
-
-1. [เริ่มต้นอย่างรวดเร็ว (Quick Start)](#-เริ่มต้นอย่างรวดเร็ว-quick-start)
-2. [ติดตั้งและเตรียมสภาพแวดล้อม](#2-ติดตั้งและเตรียมสภาพแวดล้อม)
-3. [สร้าง Django Project](#3-สร้าง-django-project)
-4. [สร้าง Landing Page](#4-สร้าง-landing-page)
-5. [รัน Development Server](#5-รัน-development-server)
-6. [แนะนำ Prompt สำหรับใช้ AI](#6-แนะนำ-prompt-สำหรับใช้-ai)
-
----
-
-## 2. ติดตั้งและเตรียมสภาพแวดล้อม
-
-### ✅ ขั้นตอนที่ 1: ตรวจสอบ Python
-
-```cmd
-REM ตรวจสอบเวอร์ชัน Python (ต้องการ Python 3.8+)
-python --version
-
-REM ตรวจสอบ pip
-pip --version
-```
-
-### ✅ ขั้นตอนที่ 2: สร้าง Virtual Environment
-
-```cmd
-REM สร้าง virtual environment
-python -m venv venv
-
-REM เปิดใช้งาน
+```bat
+cd myAPP-Django-AIOTs
 venv\Scripts\activate.bat
+python manage.py run_mqtt_worker
 ```
 
-> 💡 เมื่อ activate สำเร็จจะเห็น `(venv)` อยู่หน้า command line
+ข้อดี
+- ดู log web และ worker แยกกันชัดเจน
+- debug ง่าย และ restart แยก process ได้
 
-### ✅ ขั้นตอนที่ 3: ติดตั้ง Django
+### 0.7.2 รันพร้อมกันด้วยคำสั่งเดียว (CMD)
 
-```cmd
-REM ติดตั้ง Django เวอร์ชันล่าสุด
-pip install django
+กรณีอยากเปิดทีเดียว 2 หน้าต่างอัตโนมัติ ให้รันจาก CMD ในโฟลเดอร์โปรเจกต์:
 
-REM ตรวจสอบเวอร์ชัน Django
-python -m django --version
+```bat
+start "Django Web" cmd /k "venv\Scripts\activate.bat && python manage.py runserver"
+start "MQTT Worker" cmd /k "venv\Scripts\activate.bat && python manage.py run_mqtt_worker"
 ```
 
----
+หมายเหตุ
+- ใช้โหมดนี้เมื่อ `.env` ตั้ง `RUN_MQTT_IN_WEBSERVICE=False`
+- หากจะหยุดระบบ ให้ปิดทั้งสองหน้าต่าง CMD
 
-## 3. สร้าง Django Project
+URLs ที่ใช้บ่อย
+- Web: http://127.0.0.1:8000/
+- Admin: http://127.0.0.1:8000/admin/
 
-### ✅ สร้าง Project และ App
+### 0.8 ทางเลือก: รันแบบ Single Process
 
-```cmd
-REM สร้าง Django project
-django-admin startproject myproject
-cd myproject
+ถ้าต้องการให้ web process สตาร์ต worker ให้เอง (เหมาะทดสอบเร็ว)
 
-REM สร้าง Django app
-python manage.py startapp myapp
+1. ตั้งใน `.env`
+
+```env
+RUN_MQTT_IN_WEBSERVICE=True
 ```
 
-### ✅ ลงทะเบียน App ใน settings.py
+2. รันเพียงคำสั่งเดียว
 
-แก้ไขไฟล์ `myproject/settings.py`:
-
-```python
-INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'myapp',  # ← เพิ่มบรรทัดนี้
-]
-```
-
-### ✅ ทำ Migration
-
-```cmd
-REM สร้างและรัน migration
-python manage.py makemigrations
-python manage.py migrate
-
-REM สร้าง superuser สำหรับ admin (optional)
-python manage.py createsuperuser
-```
-
----
-
-## 4. สร้าง Landing Page
-
-### ✅ สร้าง View Function
-
-แก้ไขไฟล์ `myapp/views.py`:
-
-```python
-from django.shortcuts import render
-
-def landing_page(request):
-    return render(request, 'myapp/landing.html')
-```
-
-### ✅ ตั้งค่า URL Routing
-
-แก้ไขไฟล์ `myproject/urls.py`:
-
-```python
-from django.contrib import admin
-from django.urls import path
-from myapp import views
-
-urlpatterns = [
-    path('', views.landing_page, name='landing_page'),  # ← หน้าแรก
-    path('admin/', admin.site.urls),
-]
-```
-
-### ✅ สร้างโฟลเดอร์ templates
-
-```cmd
-REM สร้างโฟลเดอร์สำหรับเก็บ HTML template
-mkdir myapp\templates\myapp
-```
-
-### ✅ สร้างไฟล์ landing.html
-
-สร้างไฟล์ `myapp/templates/myapp/landing.html` ด้วยเนื้อหา UI ที่ต้องการ
-
-> 💡 **Tip**: ใช้ AI ช่วยสร้าง UI ได้ด้วย prompt ที่ชัดเจน (ดูตัวอย่างในหัวข้อถัดไป)
-
----
-
-## 5. รัน Development Server
-
-### ✅ สตาร์ท Django Server
-
-```cmd
-REM รัน server
+```bash
 python manage.py runserver
-
-REM รัน server ที่ port อื่น (เช่น 8080)
-python manage.py runserver 8080
 ```
 
-### ✅ เปิดเว็บในเบราว์เซอร์
+หมายเหตุ
+- โหมดนี้ใช้ง่าย แต่เสี่ยง worker ซ้ำในบางสถานการณ์
+- สำหรับงานจริง แนะนำแยก worker ตามขั้นตอน 0.7
 
-เปิด browser และไปที่:
-- **หน้าแรก**: http://127.0.0.1:8000/
-- **Admin Panel**: http://127.0.0.1:8000/admin/
+### 0.9 เช็กรันสำเร็จแบบเร็ว
+
+```bash
+python manage.py check
+```
+
+สิ่งที่ควรตรวจ
+- เปิดหน้าเว็บและหน้า admin ได้
+- worker log ขึ้นว่าเชื่อม MQTT broker สำเร็จ
+- เพิ่ม Device ใน admin แล้วส่ง telemetry test ได้
 
 ---
 
-## 6. แนะนำ Prompt สำหรับใช้ AI
+## 1) ภาพรวมการสร้างโปรเจกต์และโครงสร้างระบบทั้งหมด
 
-### 🤖 Prompt สำหรับสร้าง Landing Page UI
+### 1.1 แนวคิดสถาปัตยกรรม
 
-**ตัวอย่าง Prompt ที่ดี:**
+องค์ประกอบหลักมี 4 ส่วน
 
+1. Django Web Layer
+- หน้าเว็บ Landing
+- API สำหรับ Dashboard และ Relay Control
+- Django Admin สำหรับตั้งค่า/มอนิเตอร์ระบบ
+
+2. MQTT Worker Layer
+- รับข้อความจาก topic telemetry/status
+- อัปเดต Device และบันทึก TelemetryLog
+- ส่ง event ต่อไป n8n (Telemetry / Device Status / Overflow alert)
+
+3. Database Layer (Supabase PostgreSQL)
+- เก็บ Device registry
+- เก็บ Telemetry logs
+- เก็บ MQTT Settings และ N8N Settings (singleton)
+
+4. Automation Layer (n8n)
+- Outbound: Django ส่ง event ไป n8n webhook
+- Inbound: n8n เรียก API ของ Django เพื่อสั่ง relay โดยตรง
+
+### 1.2 โครงสร้างทำงานระดับระบบ
+
+```text
+ESP32 -> MQTT Broker -> MQTT Handler (Django) -> Supabase PostgreSQL
+Dashboard/Admin -> Django API -> MQTT publish -> ESP32
+Django Events -> n8n webhooks
+n8n -> /api/n8n/relay-control/ -> MQTT publish -> ESP32
 ```
-ช่วยสร้าง Landing Page : Full Stack Dev UI Dashboard ให้หน่อย 
-สไตล์ Smart Farm สีสันโทนเขียว สวยงาม 
-พร้อมทั้งเปิดหน้าแรกใน http://127.0.0.1:8000/ ให้แสดงผลได้ทันที
+
+ภาพรวมการไหลของระบบ (Web + ESP32 + n8n)
+
+```mermaid
+flowchart LR
+  U[User / Admin] -->|Browser| W[Django Web Service<br/>Landing / Admin / API]
+  N8N[n8n Workflows] -->|Inbound Control API<br/>POST /api/n8n/relay-control/| W
+  W -->|Publish Control| MQ[(MQTT Broker)]
+  E[ESP32 Devices] -->|Telemetry / Status| MQ
+  MQ -->|Subscribe & Process| M[MQTT Worker<br/>run_mqtt_worker or in-web thread]
+  M -->|Write| DB[(Supabase PostgreSQL)]
+  W -->|Read/Render| DB
+  M -->|Outbound Webhooks<br/>relay / telemetry / device_status| N8N
+  M -->|Overflow Alert (optional)| N8N
 ```
 
-**องค์ประกอบของ Prompt ที่ดี:**
-1. **ระบุชัดเจน** - บอกว่าต้องการ Landing Page หรือ Dashboard
-2. **ระบุสไตล์** - เช่น "สไตล์ Smart Farm", "โมเดิร์น", "มินิมอล"
-3. **ระบุโทนสี** - เช่น "โทนเขียว", "โทนฟ้า", "สีพาสเทล"
-4. **ระบุความต้องการ** - เช่น "สวยงาม", "responsive", "มี animation"
-5. **ระบุผลลัพธ์** - เช่น "ให้แสดงผลได้ทันที", "พร้อมใช้งาน"
+ลำดับการทำงานแบบ end-to-end
+
+```mermaid
+sequenceDiagram
+  participant ESP as ESP32
+  participant Broker as MQTT Broker
+  participant Worker as MQTT Worker
+  participant DB as Supabase PostgreSQL
+  participant Web as Django Web/API
+  participant N8N as n8n
+  participant User as User/Admin
+
+  Note over ESP,Worker: 1) Device -> Platform (Telemetry/Status)
+  ESP->>Broker: Publish smartfarm/<board_id>/telemetry
+  ESP->>Broker: Publish smartfarm/<board_id>/status
+  Worker->>Broker: Subscribe smartfarm/+/telemetry, smartfarm/+/status
+  Broker-->>Worker: Deliver messages
+  Worker->>DB: Update Device + Insert TelemetryLog
+  Worker->>N8N: Outbound event (telemetry/status/overflow) [if enabled]
+
+  Note over User,ESP: 2) Platform -> Device (Control)
+  User->>Web: Dashboard/Admin action
+  Web->>Broker: Publish smartfarm/<board_id>/control
+  Broker-->>ESP: Control payload (relay_control)
+
+  Note over N8N,ESP: 3) n8n -> Platform -> Device (Inbound Control)
+  N8N->>Web: POST /api/n8n/relay-control/ + X-N8N-Token
+  Web->>Broker: Publish control topic
+  Broker-->>ESP: Relay command
+```
+
+อธิบายลำดับการทำงานแบบเข้าใจง่าย (สั้นๆ)
+
+1. ESP32 ส่งข้อมูลขึ้นระบบ
+- อุปกรณ์ส่ง `telemetry` และ `status` ไปที่ MQTT Broker
+
+2. MQTT Worker รับข้อมูลและบันทึก
+- Worker ฝั่ง Django รับข้อความจาก broker แล้วอัปเดต Device/TelemetryLog ลง Supabase
+
+3. Web แสดงผลให้ผู้ใช้
+- Dashboard และ Admin อ่านข้อมูลจาก Supabase เพื่อแสดงสถานะล่าสุด
+
+4. ผู้ใช้สั่งงาน Relay กลับไปที่อุปกรณ์
+- ผู้ใช้กดสั่งจากหน้าเว็บ/API แล้ว Django publish คำสั่งไป topic `.../control`
+- ESP32 รับคำสั่งและเปลี่ยนสถานะ relay
+
+5. Django ส่ง event ไป n8n (Outbound)
+- เมื่อมีเหตุการณ์ เช่น telemetry/status/relay command ระบบส่ง webhook ไป n8n ได้
+
+6. n8n สั่งงานกลับเข้าระบบได้ (Inbound)
+- n8n เรียก `POST /api/n8n/relay-control/` พร้อม `X-N8N-Token`
+- Django ตรวจ token แล้วส่งคำสั่งต่อไป MQTT เพื่อควบคุม ESP32
+
+### 1.3 โครงสร้างโฟลเดอร์โปรเจกต์
+
+```text
+myproject/
+  settings.py   # config ทั้งระบบ, env loader, PostgreSQL-only DB config, security/logging
+  urls.py       # routing หลักของเว็บและ API
+
+myapp/
+  models.py     # Device, TelemetryLog, MQTTSettings, N8NSettings, RelayTestPanel
+  views.py      # dashboard API, relay control API, n8n inbound API
+  mqtt_handler.py
+  n8n_service.py
+  admin.py
+  apps.py
+  management/commands/run_mqtt_worker.py
+  templates/
+
+requirements.txt
+RENDER-DEPLOYMENT.md
+VPS.md
+N8NTest.md
+```
 
 ---
 
-### 🤖 Prompt Template สำหรับฟีเจอร์อื่นๆ
+## 2) รายละเอียด MQTT และผังการทำงานของโมดูล
 
-#### 1. สร้างระบบ CRUD
+### 2.1 Topic architecture
 
-```
-ช่วยสร้างระบบจัดการข้อมูล [ชื่อข้อมูล] ให้หน่อย
-ต้องการ Create, Read, Update, Delete
-พร้อม UI แบบตาราง และ form สำหรับแก้ไข
-ใช้สไตล์ [ระบุสไตล์] โทนสี [ระบุสี]
-```
+Device -> Server
+- `smartfarm/<board_id>/telemetry`
+- `smartfarm/<board_id>/status`
 
-**ตัวอย่าง:**
-```
-ช่วยสร้างระบบจัดการข้อมูลเซนเซอร์ให้หน่อย
-ต้องการ Create, Read, Update, Delete
-พร้อม UI แบบตาราง และ form สำหรับแก้ไข
-ใช้สไตล์โมเดิร์น โทนสีเขียว-ขาว
-```
+Server -> Device
+- `smartfarm/<board_id>/control`
+  (สร้างจาก `control_topic_pattern` โดยแทนค่า `{board_id}`)
 
-#### 2. เพิ่ม Authentication
+ค่าเริ่มต้น topic ถูกตั้งผ่าน MQTT Settings ใน Admin
 
-```
-ช่วยเพิ่มระบบ Login/Logout ให้กับโปรเจกต์ Django
-ต้องการหน้า Login, Register, และ Logout
-พร้อม UI แบบ [ระบุสไตล์]
-```
+### 2.2 MQTT payload ตัวอย่าง
 
-#### 3. สร้าง API Endpoint
+Telemetry payload
 
-```
-ช่วยสร้าง REST API สำหรับ [ชื่อข้อมูล] ให้หน่อย
-ต้องการ GET, POST, PUT, DELETE endpoints
-พร้อม serializer และ documentation
-```
-
-#### 4. เพิ่ม Dashboard Widgets
-
-```
-ช่วยเพิ่ม widget แสดง [ข้อมูลที่ต้องการ] ใน Dashboard
-แบบ real-time หรือ สรุปเป็นกราฟ
-สไตล์ [ระบุสไตล์] โทนสี [ระบุสี]
+```json
+{
+  "board_id": "ESP32-FARM-001-NATTAPHOL-PALM",
+  "rssi": -65,
+  "sensors": {
+    "water_temp": 25.5,
+    "air_temp": 30.2,
+    "air_humidity": 65.0,
+    "water_overflow": false,
+    "water_dry": false
+  },
+  "relays": {
+    "relay1_pump": false,
+    "relay2_fan": true,
+    "relay3_heater": false
+  }
+}
 ```
 
-**ตัวอย่าง:**
-```
-ช่วยเพิ่ม widget แสดงอุณหภูมิและความชื้นใน Dashboard
-แบบ real-time พร้อมกราฟเส้น
-สไตล์โมเดิร์น โทนสีเขียวธรรมชาติ
+Status payload
+
+```json
+{
+  "board_id": "ESP32-FARM-001-NATTAPHOL-PALM",
+  "status": "online",
+  "ip": "192.168.1.50",
+  "firmware": "1.0.0"
+}
 ```
 
-#### 5. ปรับแต่ง UI/UX
+Control payload (Django publish)
 
-```
-ช่วยปรับ UI ของ [ชื่อหน้า] ให้ [ระบุความต้องการ]
-เพิ่ม [รายละเอียดที่ต้องการ]
-โทนสี [ระบุสี] สไตล์ [ระบุสไตล์]
+```json
+{
+  "command": "relay_control",
+  "relays": {
+    "relay1_pump": true,
+    "relay2_fan": false,
+    "relay3_heater": false
+  }
+}
 ```
 
-**ตัวอย่าง:**
+### 2.3 ผังการทำงานของโมดูลหลัก
+
+`myapp/apps.py`
+- ตรวจ env `RUN_MQTT_IN_WEBSERVICE`
+- กันการ start ซ้ำใน runserver reloader
+- ไม่ start ในคำสั่ง one-off เช่น `migrate`, `collectstatic`, `check`, `test`
+- ถ้าผ่านเงื่อนไข จะสร้าง background thread แล้วเรียก `MQTTHandler.connect() + start()`
+
+`myapp/mqtt_handler.py`
+- `MQTTHandler.__init__`
+  - โหลด `MQTTSettings` จาก DB
+  - เซ็ต callbacks `on_connect` / `on_message` / `on_disconnect`
+- `connect()`
+  - เชื่อม broker ตามค่าจาก DB
+- `on_connect()`
+  - subscribe telemetry/status ตาม topic และ QoS ปัจจุบัน
+- `on_message()`
+  - แยกประเภท message จาก suffix topic
+  - `/status` -> `handle_status_message()`
+  - `/telemetry` -> `handle_telemetry_message()`
+- `handle_status_message()`
+  - อัปเดต Device ที่ลงทะเบียนแล้วเท่านั้น
+  - ส่ง `device_status` event ไป n8n (ถ้าเปิด)
+- `handle_telemetry_message()`
+  - อัปเดต `last_seen`
+  - บันทึก `TelemetryLog`
+  - ส่ง `telemetry` event ไป n8n (ถ้าเปิด)
+  - ถ้า `water_overflow=true` -> `trigger_n8n_alert()`
+- `hot_reload_topics()`
+  - ใช้เมื่อแก้ MQTT Settings ใน Admin
+  - ถ้า broker/auth/keepalive เปลี่ยน -> reconnect
+  - ถ้าเปลี่ยนเฉพาะ topic/QoS -> unsubscribe/subscribe ใหม่ทันที
+- `publish_control_command(board_id, relay_data)`
+  - สร้าง payload `relay_control`
+  - publish ไป topic control ของ board_id
+
+`myapp/n8n_service.py`
+- `notify_n8n_relay_command(...)`
+- `notify_n8n_telemetry(...)`
+- `notify_n8n_device_status(...)`
+- ทุกฟังก์ชันอ่าน flag/url/timeout จาก `N8NSettings` แล้ว `POST` ไป webhook
+
+`myapp/views.py`
+- `GET /api/dashboard/` ส่ง snapshot devices + latest telemetry
+- `POST /api/control/` รับ `board_id + relays` แล้ว publish MQTT
+- `POST /api/n8n/relay-control/` รับคำสั่งจาก n8n (action หรือ relays), ตรวจ token, publish MQTT
+
+`myapp/admin.py`
+- `DeviceAdmin`, `TelemetryLogAdmin`, `RelayTestPanelAdmin`
+- `MQTTSettingsAdmin`
+  - ปรับค่าการเชื่อมต่อ/topic ผ่าน UI
+  - save แล้วพยายาม hot-reload worker ทันที
+- `N8NSettingsAdmin`
+  - ตั้ง outbound webhooks
+  - เปิด inbound webhook และจัดการ `inbound_auth_token`
+
+### 2.4 ข้อกำหนดสำคัญของอุปกรณ์
+
+ระบบปัจจุบันไม่ auto-create Device
+- ถ้า `board_id` ยังไม่ถูกเพิ่มใน Admin
+- status/telemetry ที่เข้ามาจะถูก ignore พร้อม warning log
+
+ดังนั้นต้องเพิ่ม Device ก่อนเริ่มรับข้อมูลจริง
+
+---
+
+## 3) ส่วนประกอบทั้งหมดของโปรเจกต์
+
+### 3.1 Models
+
+1. Device
+- `board_id` (PK)
+- `status` (online/offline)
+- `ip_address`
+- `firmware_version`
+- `last_seen`
+
+2. TelemetryLog
+- `device` (FK)
+- `rssi`
+- `sensor_data` (JSONField)
+- `relay_status` (JSONField)
+- `created_at`
+
+3. MQTTSettings (singleton, pk=1)
+- `broker`, `port`, `username`, `password`
+- `telemetry_topic`, `status_topic`, `control_topic_pattern`
+- `keepalive`, `qos`
+
+4. N8NSettings (singleton, pk=1)
+- Outbound flags + URLs (relay/telemetry/device status)
+- `enable_inbound_webhook`
+- `inbound_auth_token`
+- `request_timeout_seconds`
+
+5. RelayTestPanel
+- Proxy model สำหรับเมนูทดสอบ relay ใน Admin
+
+### 3.2 API Endpoints
+
+1. `GET /`
+- Landing page
+
+2. `GET /api/dashboard/`
+- Dashboard snapshot
+
+3. `POST /api/control/`
+- Dashboard/API control ไป MQTT
+
+4. `POST /api/n8n/relay-control/`
+- n8n inbound control
+- Header: `X-N8N-Token: <inbound_auth_token>`
+- รองรับ payload 2 แบบ
+
+```json
+{
+  "board_id": "...",
+  "action": "pump_on"
+}
 ```
-ช่วยปรับ UI ของหน้า Landing ให้มี animation เคลื่อนไหว
-เพิ่มปุ่ม CTA และ section testimonials
-โทนสีเขียว-ขาว สไตล์ สมาร์ทฟาร์ม
+
+```json
+{
+  "board_id": "...",
+  "relays": {
+    "relay1_pump": true
+  }
+}
+```
+
+### 3.3 Dependencies สำคัญ
+
+```text
+Django==6.0.3
+paho-mqtt==2.1.0
+requests==2.32.3
+gunicorn==23.0.0
+psycopg[binary]==3.2.13
+whitenoise==6.9.0
 ```
 
 ---
 
-### 🎯 Tips สำหรับการใช้ AI อย่างมีประสิทธิภาพ
+## 4) การ Deploy จาก GitHub ไป Render
 
-1. **ระบุบริบท** - บอก AI ว่าคุณกำลังทำโปรเจกต์อะไร
-2. **แบ่งงานเป็นชิ้นเล็ก** - ไม่ควรขอทำทุกอย่างพร้อมกัน
-3. **ให้ข้อมูลเพียงพอ** - ระบุสี, สไตล์, ฟีเจอร์ที่ต้องการ
-4. **ตรวจสอบผลลัพธ์** - ทดสอบและให้ feedback กลับไป
-5. **ใช้ภาษาที่ชัดเจน** - หลีกเลี่ยงคำที่คลุมเครือ
+มี 2 โหมด
+- โหมดแนะนำ: Web Service + Worker Service แยก
+- โหมดทางเลือก: Single Service (`RUN_MQTT_IN_WEBSERVICE=True`)
+
+### 4.1 ก่อน deploy
+
+1. push โค้ดขึ้น GitHub branch ที่ต้องการ
+2. เตรียม Supabase PostgreSQL URL
+3. ยืนยันว่าไม่มีการใช้ sqlite URL
+
+### 4.2 สร้าง Render Web Service
+
+Build Command
+
+```bash
+pip install -r requirements.txt && python manage.py migrate && python manage.py collectstatic --noinput
+```
+
+Start Command
+
+```bash
+gunicorn myproject.wsgi:application --bind 0.0.0.0:$PORT
+```
+
+### 4.3 Environment Variables ขั้นต่ำที่ต้องมี
+
+```env
+SECRET_KEY=...
+DEBUG=False
+ALLOWED_HOSTS=myapp-django-aiots.onrender.com
+CSRF_TRUSTED_ORIGINS=https://myapp-django-aiots.onrender.com
+DATABASE_URL=postgresql://<user>:<password>@aws-1-ap-southeast-2.pooler.supabase.com:5432/postgres
+DJANGO_SETTINGS_MODULE=myproject.settings
+DB_CONN_MAX_AGE=0
+```
+
+สำหรับโหมด Single Service
+
+```env
+RUN_MQTT_IN_WEBSERVICE=True
+WEB_CONCURRENCY=1
+```
+
+### 4.4 สร้าง Worker Service (แนะนำ)
+
+Build Command
+
+```bash
+pip install -r requirements.txt && python manage.py migrate
+```
+
+Start Command
+
+```bash
+python manage.py run_mqtt_worker
+```
+
+หมายเหตุ
+- โหมดนี้เสถียรกว่าใน production
+- Web และ Worker ต้องใช้ `DATABASE_URL` เดียวกัน
+- ทั้งสอง service ต้องชี้ไป Supabase database เดียวกัน
+
+### 4.5 ตรวจสอบหลัง deploy
+
+1. เปิด `/admin/` ได้
+2. log ของ Web ไม่มี startup error
+3. log ของ Worker ขึ้น `Connected to MQTT broker` และ subscribe topics สำเร็จ
+4. ทดสอบ dashboard, relay control, telemetry ingestion, n8n webhook
 
 ---
 
-## 📦 โครงสร้างโปรเจกต์
+## 5) การทดสอบ MQTT
 
+### 5.1 เตรียมก่อนทดสอบ
+
+1. เพิ่ม Device ใน Admin ให้ตรงกับ board_id จริง
+2. ตั้งค่า MQTT Settings ให้ตรง broker/topic ที่ใช้
+3. ให้ worker ทำงาน (แยก service หรือ single-service)
+
+### 5.2 ทดสอบรับ telemetry
+
+Topic
+
+```text
+smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
 ```
-myAPP-Django-AIOTs/
-├── venv/                    # Virtual environment
-├── myproject/               # Django project folder
-│   ├── __init__.py
-│   ├── settings.py         # การตั้งค่าโปรเจกต์
-│   ├── urls.py             # URL routing หลัก
-│   ├── wsgi.py
-│   └── asgi.py
-├── myapp/                   # Django app folder
-│   ├── migrations/
-│   ├── templates/
-│   │   └── myapp/
-│   │       └── landing.html # Landing page template
-│   ├── __init__.py
-│   ├── admin.py
-│   ├── apps.py
-│   ├── models.py           # Model สำหรับ database
-│   ├── views.py            # View functions
-│   └── tests.py
-├── manage.py               # Django management script
-├── db.sqlite3              # Database (SQLite)
-├── requirements.txt        # Python dependencies
-└── README.md               # เอกสารนี้
+
+Payload: ใช้โครงสร้าง telemetry ตามหัวข้อ 2.2
+
+ผลที่คาดหวัง
+- มี `TelemetryLog` ใหม่ใน Admin
+- `Device.last_seen` อัปเดต
+- ถ้าเปิด telemetry webhook จะมี event ออกไป n8n
+
+### 5.3 ทดสอบรับ status
+
+Topic
+
+```text
+smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status
 ```
+
+Payload มี `status`/`ip`/`firmware`
+
+ผลที่คาดหวัง
+- Device status เปลี่ยนตาม payload
+- ถ้าเปิด device status webhook จะมี event ออกไป n8n
+
+### 5.4 ทดสอบส่ง control
+
+เรียก API
+
+```http
+POST /api/control/
+```
+
+Body ตัวอย่าง
+
+```json
+{
+  "board_id": "ESP32-FARM-001-NATTAPHOL-PALM",
+  "relays": {
+    "relay1_pump": true,
+    "relay2_fan": false,
+    "relay3_heater": false
+  }
+}
+```
+
+ผลที่คาดหวัง
+- MQTT publish ไป topic control ของ board_id
+- Device รับคำสั่งและสลับสถานะ relay
 
 ---
 
-## 🚀 คำสั่งที่ใช้บ่อย
+## 6) การทดสอบ N8N
 
-```cmd
-REM เปิด virtual environment
-venv\Scripts\activate.bat
+### 6.1 Outbound tests (Django -> n8n)
 
-REM รัน development server
+ตั้งค่าใน Admin > N8N Settings
+- `enable_outbound_webhook` + `outbound_webhook_url`
+- `enable_telemetry_webhook` + `telemetry_webhook_url`
+- `enable_device_status_webhook` + `device_status_webhook_url`
+
+ทดสอบ
+1. สั่ง relay ผ่าน dashboard/admin/api
+2. ส่ง telemetry/status เข้าระบบ
+3. ตรวจ n8n execution ว่ารับ event ครบ 3 ประเภท
+
+### 6.2 Inbound tests (n8n -> Django)
+
+เงื่อนไข
+1. เปิด `enable_inbound_webhook`
+2. มี `inbound_auth_token`
+3. เรียก endpoint ให้มี `/` ท้ายเสมอ
+
+Endpoint
+
+```text
+https://myapp-django-aiots.onrender.com/api/n8n/relay-control/
+```
+
+Headers
+
+```http
+Content-Type: application/json
+X-N8N-Token: <inbound_auth_token>
+```
+
+Payload แบบ action
+
+```json
+{
+  "board_id": "ESP32-FARM-001-NATTAPHOL-PALM",
+  "action": "pump_on"
+}
+```
+
+Payload แบบ direct relays
+
+```json
+{
+  "board_id": "ESP32-FARM-001-NATTAPHOL-PALM",
+  "relays": {
+    "relay1_pump": true,
+    "relay2_fan": false,
+    "relay3_heater": true
+  }
+}
+```
+
+ตัวอย่าง cURL สำหรับ import ใน n8n HTTP Request
+
+```bash
+curl -X POST "https://myapp-django-aiots.onrender.com/api/n8n/relay-control/" -H "Content-Type: application/json" -H "X-N8N-Token: YOUR_INBOUND_TOKEN" -d "{\"board_id\":\"ESP32-FARM-001-NATTAPHOL-PALM\",\"action\":\"pump_on\"}"
+```
+
+ตัวอย่างเพิ่ม (import ได้ทันที)
+
+```bash
+curl -X POST "https://myapp-django-aiots.onrender.com/api/n8n/relay-control/" -H "Content-Type: application/json" -H "X-N8N-Token: YOUR_INBOUND_TOKEN" -d "{\"board_id\":\"ESP32-FARM-001-NATTAPHOL-PALM\",\"action\":\"all_off\"}"
+```
+
+```bash
+curl -X POST "https://myapp-django-aiots.onrender.com/api/n8n/relay-control/" -H "Content-Type: application/json" -H "X-N8N-Token: YOUR_INBOUND_TOKEN" -d "{\"board_id\":\"ESP32-FARM-001-NATTAPHOL-PALM\",\"relays\":{\"relay1_pump\":true,\"relay2_fan\":false,\"relay3_heater\":true}}"
+```
+
+ดูชุดตัวอย่าง cURL แบบครบทุก action/relay/fallback auth ได้ที่ `N8NTest.md`
+
+Action ที่รองรับ
+- `all_on`, `all_off`
+- `pump_on`, `pump_off`
+- `fan_on`, `fan_off`
+- `heater_on`, `heater_off`
+
+### 6.3 ปัญหาที่พบบ่อยในการทดสอบ n8n
+
+1. `405 Method Not Allowed`
+- มักเกิดจาก URL ขาด `/` ท้าย endpoint
+
+2. `401 Invalid token`
+- token ใน header ไม่ตรงกับ `inbound_auth_token`
+
+3. `403 Inbound webhook is disabled`
+- ยังไม่ได้เปิด `enable_inbound_webhook`
+
+4. `400 board_id is required`
+- payload ไม่มี `board_id`
+
+5. `400 Unsupported action`
+- action ไม่อยู่ในรายการที่รองรับ
+
+---
+
+## 7) Local Development (สรุปเร็ว)
+
+1. สร้าง venv และติดตั้ง dependencies
+2. ตั้งค่า `.env` ให้มี `DATABASE_URL` ของ Supabase
+3. รัน migrate
+4. สร้าง superuser
+5. รันเว็บ
+
+```bash
 python manage.py runserver
+```
 
-REM สร้าง migration จาก model ใหม่
-python manage.py makemigrations
+6. รัน worker แยก (แนะนำตอน dev)
 
-REM ใช้ migration กับ database
-python manage.py migrate
+```bash
+python manage.py run_mqtt_worker
+```
 
-REM สร้าง superuser
-python manage.py createsuperuser
+ถ้าต้องการให้ `runserver` start worker อัตโนมัติ
+- ตั้ง `RUN_MQTT_IN_WEBSERVICE=True`
+- ใช้เฉพาะกรณีที่เข้าใจผลกระทบเรื่อง duplicate workers
 
-REM สร้าง app ใหม่
-python manage.py startapp [app_name]
+---
 
-REM บันทึก dependencies
-pip freeze > requirements.txt
+## 8) Environment variables สำคัญ
 
-REM ติดตั้ง dependencies
-pip install -r requirements.txt
+ขั้นต่ำสำหรับการรัน
+
+```env
+DATABASE_URL=postgresql://<user>:<password>@aws-1-ap-southeast-2.pooler.supabase.com:5432/postgres
+SECRET_KEY=...
+DEBUG=False
+ALLOWED_HOSTS=...
+```
+
+แนะนำสำหรับ production
+
+```env
+CSRF_TRUSTED_ORIGINS=https://...
+DB_CONN_MAX_AGE=0
+DB_SSLMODE=require
+DJANGO_SETTINGS_MODULE=myproject.settings
+WEB_CONCURRENCY=1
+```
+
+MQTT defaults (override ได้)
+
+```env
+MQTT_BROKER=broker.hivemq.com
+MQTT_PORT=1883
+MQTT_USER=
+MQTT_PASSWORD=
 ```
 
 ---
 
-## 🎨 ฟีเจอร์ที่มีใน Landing Page ปัจจุบัน
+## 9) เอกสารประกอบใน repo
 
-- ✅ UI Dashboard สไตล์ Smart Farm โทนสีเขียว
-- ✅ แสดงข้อมูล Real-time Statistics
-- ✅ Sensor Live Feed แบบ Card Layout
-- ✅ Resource Usage Progress Bars
-- ✅ Responsive Design (รองรับ Mobile)
-- ✅ Gradient Background ธรรมชาติ
-- ✅ Animation แบบค่อยๆ ปรากฏ
-
----
-
-## 📝 หมายเหตุ
-
-- โปรเจกต์นี้ใช้ **Django 6.0.3** และ **Python 3.14**
-- Database ใช้ **SQLite** (เหมาะสำหรับ development)
-- ไฟล์ `SECRET_KEY` ใน settings.py ควรเปลี่ยนก่อนใช้งาน production
-- สามารถปรับแต่ง UI ใน `myapp/templates/myapp/landing.html` ได้ตามต้องการ
+- `SETUP-GUIDE.md`: ขั้นตอนติดตั้งพื้นฐาน
+- `QUICK-START.md`: คู่มือย่อ
+- `MQTT_USAGE.md`: usage ของระบบ MQTT
+- `MQTT-SETTINGS-GUIDE.md`: คู่มือตั้งค่า MQTT ผ่าน Admin
+- `RENDER-DEPLOYMENT.md`: แนวทาง deploy บน Render
+- `VPS.md`: คู่มือ deploy ล่าสุดแบบ step-by-step
+- `N8NTest.md`: คู่มือทดสอบ n8n relay control แบบล่าสุด
 
 ---
 
-## 🆘 แก้ไขปัญหาที่พบบ่อย
+## 10) ข้อควรระวังด้านความปลอดภัย
 
-### ปัญหา: ModuleNotFoundError: No module named 'django'
-
-**วิธีแก้:**
-```cmd
-REM ตรวจสอบว่า activate virtual environment แล้ว
-REM ติดตั้ง Django ใหม่
-pip install django
-```
-
-### ปัญหา: TemplateDoesNotExist
-
-**วิธีแก้:**
-- ตรวจสอบว่าโฟลเดอร์ `templates/myapp/` ถูกสร้างแล้ว
-- ตรวจสอบว่า app ถูกเพิ่มใน `INSTALLED_APPS` ใน settings.py
-
-### ปัญหา: Port 8000 already in use
-
-**วิธีแก้:**
-```cmd
-REM ใช้ port อื่นแทน
-python manage.py runserver 8080
-```
+1. อย่า commit credentials และ token ลง repo
+2. ถ้า token เคยถูกแชร์ ให้ rotate ทันที
+3. ใช้ `DEBUG=False` ใน production
+4. ตั้ง `ALLOWED_HOSTS` และ `CSRF_TRUSTED_ORIGINS` ให้ถูกต้อง
+5. ใช้ HTTPS เท่านั้นสำหรับ endpoint ที่รับคำสั่งควบคุม
 
 ---
 
-## 📚 แหล่งเรียนรู้เพิ่มเติม
+## 11) ผู้ออกแบบระบบและหลักสูตร
 
-- [Django Official Documentation](https://docs.djangoproject.com/)
-- [Django Tutorial for Beginners](https://www.djangoproject.com/start/)
-- [Django REST Framework](https://www.django-rest-framework.org/)
-
----
-
-## 👨‍💻 สร้างโดย
-
-Full Stack Development with AI Assistance  
-สร้างด้วย Django Framework & GitHub Copilot
-
-**วันที่สร้าง:** April 2026
-
----
-
-**Happy Coding! 🌱💻**
+- หลักสูตร: Full Stack Dashboard Control & Monitoring
+- ผู้ออกแบบระบบ: อ.ณัฐพล จะสูงเนิน
+- LINE: thaitechzone
+- โทร: 0939391546
+- Facebook: https://www.facebook.com/thaitechzone

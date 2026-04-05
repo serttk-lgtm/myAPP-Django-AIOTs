@@ -112,6 +112,25 @@ git push origin 04_Add_N8N_Handle
 | `MQTT_PASSWORD` | ถ้ามี |
 | `N8N_WEBHOOK_URL` | URL ของ n8n ถ้าใช้ outbound |
 
+### ✅ ค่าที่ทดสอบแล้วบน Host (ใช้งานได้จริง)
+
+ชุดด้านล่างคือค่าหลักที่ยืนยันแล้วว่า deploy ทำงานได้บน Render:
+
+```env
+ALLOWED_HOSTS=myapp-django-aiots.onrender.com
+DATABASE_URL=postgresql://postgres.zqdybzextauatcgyliwm:xxx@aws-1-ap-southeast-2.pooler.supabase.com:5432/postgres
+DB_CONN_MAX_AGE=0
+DEBUG=False
+DJANGO_SETTINGS_MODULE=myproject.settings
+RUN_MQTT_IN_WEBSERVICE=True
+SECRET_KEY=xxx
+WEB_CONCURRENCY=1
+```
+
+หมายเหตุ:
+- ค่า `SECRET_KEY` และ password ใน `DATABASE_URL` ต้องเก็บเป็นความลับเสมอ
+- แนะนำเพิ่ม `CSRF_TRUSTED_ORIGINS=https://myapp-django-aiots.onrender.com` เพื่อเลี่ยง CSRF error ใน production
+
 ---
 
 ## ขั้นตอนที่ 5 — เลือกโหมด MQTT Worker
@@ -224,22 +243,22 @@ Build Command จะรัน:
 
 ```env
 # Required
-SECRET_KEY=<random-50+-chars>
+SECRET_KEY=xxx
 DEBUG=False
-ALLOWED_HOSTS=<your-app>.onrender.com
-CSRF_TRUSTED_ORIGINS=https://<your-app>.onrender.com
-DATABASE_URL=postgresql://user:password@host:5432/dbname
+ALLOWED_HOSTS=myapp-django-aiots.onrender.com
+CSRF_TRUSTED_ORIGINS=https://myapp-django-aiots.onrender.com
+DATABASE_URL=postgresql://postgres.zqdybzextauatcgyliwm:xxx@aws-1-ap-southeast-2.pooler.supabase.com:5432/postgres
+DJANGO_SETTINGS_MODULE=myproject.settings
 
 # Database tuning
 DB_CONN_MAX_AGE=0
 DB_SSLMODE=require
 
 # MQTT Worker mode (เลือกอย่างใดอย่างหนึ่ง)
-RUN_MQTT_IN_WEBSERVICE=False   # โหมด A: Worker Service แยก
-# RUN_MQTT_IN_WEBSERVICE=True  # โหมด B: Single Service
-# WEB_CONCURRENCY=1            # บังคับถ้าใช้โหมด B
+RUN_MQTT_IN_WEBSERVICE=True
+WEB_CONCURRENCY=1
 
 # Optional
-SITE_URL=https://<your-app>.onrender.com
+SITE_URL=https://myapp-django-aiots.onrender.com
 N8N_WEBHOOK_URL=https://your-n8n.com/webhook/xxx
 ```
