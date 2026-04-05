@@ -22,4 +22,5 @@ urlpatterns = [
     path('', views.landing_page, name='landing_page'),
     path('admin/', admin.site.urls),
     path('api/control/', views.send_control_command, name='send_control_command'),
+    path('api/n8n/relay-control/', views.n8n_relay_control, name='n8n_relay_control'),
 ]

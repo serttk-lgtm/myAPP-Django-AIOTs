@@ -11,6 +11,7 @@ import paho.mqtt.client as mqtt
 from django.conf import settings
 from django.utils import timezone
 from myapp.models import Device, TelemetryLog, MQTTSettings
+from myapp.n8n_service import notify_n8n_device_status, notify_n8n_telemetry
 
 logger = logging.getLogger(__name__)
 
@@ -273,6 +274,15 @@ class MQTTHandler:
             device.ip_address = payload.get('ip')
             device.firmware_version = payload.get('firmware')
             device.save()
+
+            notify_n8n_device_status(
+                board_id=device.board_id,
+                status=device.status,
+                ip_address=device.ip_address,
+                firmware_version=device.firmware_version,
+                last_seen=device.last_seen,
+                metadata={'source': 'mqtt_status_message'},
+            )
             
             logger.debug(f"Updated device: {board_id} with status {device.status}")
         
@@ -307,6 +317,17 @@ class MQTTHandler:
                 rssi=rssi,
                 sensor_data=sensors,
                 relay_status=relays
+            )
+
+            notify_n8n_telemetry(
+                board_id=device.board_id,
+                rssi=rssi,
+                sensor_data=sensors,
+                relay_status=relays,
+                metadata={
+                    'source': 'mqtt_telemetry_message',
+                    'telemetry_log_id': telemetry_log.pk,
+                },
             )
             
             logger.debug(f"Created telemetry log for {board_id}")

@@ -5,8 +5,23 @@ from django.views.decorators.http import require_http_methods
 import json
 import logging
 from myapp.mqtt_handler import publish_control_command
+from myapp.models import N8NSettings
+from myapp.n8n_service import notify_n8n_relay_command
 
 logger = logging.getLogger(__name__)
+
+
+def _relay_action_map():
+    return {
+        'all_on': {'relay1_pump': True, 'relay2_fan': True, 'relay3_heater': True},
+        'all_off': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False},
+        'pump_on': {'relay1_pump': True},
+        'pump_off': {'relay1_pump': False},
+        'fan_on': {'relay2_fan': True},
+        'fan_off': {'relay2_fan': False},
+        'heater_on': {'relay3_heater': True},
+        'heater_off': {'relay3_heater': False},
+    }
 
 
 def landing_page(request):
@@ -54,6 +69,15 @@ def send_control_command(request):
         
         # Publish control command via MQTT
         success = publish_control_command(board_id, relay_data)
+
+        notify_n8n_relay_command(
+            source='dashboard_api',
+            board_id=board_id,
+            relays=relay_data,
+            action='direct_relays',
+            success=success,
+            metadata={'endpoint': '/api/control/'},
+        )
         
         if success:
             return JsonResponse({
@@ -79,3 +103,106 @@ def send_control_command(request):
             'success': False,
             'error': str(e)
         }, status=500)
+
+
+@csrf_exempt
+@require_http_methods(["POST"])
+def n8n_relay_control(request):
+    """
+    Inbound webhook: n8n -> Dashboard -> MQTT Relay Control.
+
+    Header auth (recommended):
+      X-N8N-Token: <token>
+
+    Expected payload (one of two modes):
+    1) action mode:
+    {
+      "board_id": "ESP32-FARM-001",
+      "action": "pump_on"
+    }
+
+    2) direct relays mode:
+    {
+      "board_id": "ESP32-FARM-001",
+      "relays": {"relay1_pump": true, "relay2_fan": false, "relay3_heater": true}
+    }
+    """
+    try:
+        n8n_settings = N8NSettings.get_settings()
+
+        if not n8n_settings.enable_inbound_webhook:
+            return JsonResponse(
+                {'success': False, 'error': 'Inbound webhook is disabled'},
+                status=403,
+            )
+
+        configured_token = n8n_settings.inbound_auth_token or ''
+        provided_token = (
+            request.headers.get('X-N8N-Token')
+            or request.POST.get('token')
+            or request.GET.get('token')
+            or ''
+        )
+
+        if configured_token and provided_token != configured_token:
+            return JsonResponse({'success': False, 'error': 'Invalid token'}, status=401)
+
+        data = json.loads(request.body)
+        board_id = data.get('board_id')
+        relays = data.get('relays')
+        action = data.get('action')
+
+        if not board_id:
+            return JsonResponse({'success': False, 'error': 'board_id is required'}, status=400)
+
+        if relays is None and not action:
+            return JsonResponse(
+                {'success': False, 'error': 'Provide either relays object or action'},
+                status=400,
+            )
+
+        relay_payload = relays
+        action_name = action or 'direct_relays'
+
+        if relay_payload is None:
+            relay_payload = _relay_action_map().get(action)
+            if relay_payload is None:
+                return JsonResponse(
+                    {'success': False, 'error': f'Unsupported action: {action}'},
+                    status=400,
+                )
+
+        if not isinstance(relay_payload, dict):
+            return JsonResponse({'success': False, 'error': 'relays must be an object'}, status=400)
+
+        success = publish_control_command(board_id, relay_payload)
+
+        notify_n8n_relay_command(
+            source='n8n_inbound_webhook',
+            board_id=board_id,
+            relays=relay_payload,
+            action=action_name,
+            success=success,
+            metadata={'endpoint': '/api/n8n/relay-control/'},
+        )
+
+        if success:
+            return JsonResponse(
+                {
+                    'success': True,
+                    'message': f'Command sent to {board_id}',
+                    'board_id': board_id,
+                    'action': action_name,
+                    'relays': relay_payload,
+                }
+            )
+
+        return JsonResponse(
+            {'success': False, 'error': 'Failed to publish MQTT message'},
+            status=500,
+        )
+    except json.JSONDecodeError:
+        return JsonResponse({'success': False, 'error': 'Invalid JSON in request body'}, status=400)
+    except Exception as exc:
+        logger.error('Error in n8n_relay_control: %s', exc, exc_info=True)
+        return JsonResponse({'success': False, 'error': str(exc)}, status=500)

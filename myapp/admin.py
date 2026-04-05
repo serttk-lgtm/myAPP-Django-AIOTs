@@ -4,8 +4,9 @@ from django.contrib import messages
 from django.urls import path
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
-from .models import Device, TelemetryLog, RelayTestPanel, MQTTSettings
+from .models import Device, TelemetryLog, RelayTestPanel, MQTTSettings, N8NSettings
 from .mqtt_handler import publish_control_command, trigger_mqtt_hot_reload
+from .n8n_service import notify_n8n_relay_command
 
 
 @admin.register(Device)
@@ -89,7 +90,19 @@ class DeviceAdmin(admin.ModelAdmin):
                 }
                 
                 if action in relay_commands:
-                    if publish_control_command(device_id, relay_commands[action]):
+                    relay_payload = relay_commands[action]
+                    mqtt_ok = publish_control_command(device_id, relay_payload)
+
+                    notify_n8n_relay_command(
+                        source='admin_relay_panel',
+                        board_id=device_id,
+                        relays=relay_payload,
+                        action=action,
+                        success=mqtt_ok,
+                        metadata={'path': '/admin/myapp/device/relay-control/'},
+                    )
+
+                    if mqtt_ok:
                         messages.success(request, f'✅ Command {action.upper()} sent to {device_id}')
                     else:
                         messages.error(request, f'❌ Failed to send command to {device_id}')
@@ -422,4 +435,93 @@ class MQTTSettingsAdmin(admin.ModelAdmin):
         if MQTTSettings.objects.exists():
             obj = MQTTSettings.objects.first()
             return HttpResponseRedirect(f'/admin/myapp/mqttsettings/{obj.pk}/change/')
+        return super().changelist_view(request, extra_context=extra_context)
+
+
+@admin.register(N8NSettings)
+class N8NSettingsAdmin(admin.ModelAdmin):
+    """Admin interface for N8N integration settings."""
+
+    fieldsets = (
+        ('🔗 Outbound: Dashboard -> N8N', {
+            'fields': ('enable_outbound_webhook', 'outbound_webhook_url'),
+            'description': (
+                'ส่ง event เมื่อมีการสั่ง Relay จาก Dashboard/Admin ไปยัง n8n webhook<br>'
+                '<strong>ตัวอย่าง event:</strong> event_type, source, board_id, action, success, relays, timestamp'
+            )
+        }),
+        ('📊 Outbound: Telemetry -> N8N', {
+            'fields': ('enable_telemetry_webhook', 'telemetry_webhook_url'),
+            'description': (
+                'ส่งข้อมูล Telemetry จาก ESP32 ไปยัง n8n webhook ทุกครั้งที่ระบบรับข้อมูลสำเร็จ<br>'
+                '<strong>ข้อมูลที่ส่ง:</strong> board_id, rssi, sensor_data, relay_status, timestamp'
+            )
+        }),
+        ('🛰️ Outbound: Device Status -> N8N', {
+            'fields': ('enable_device_status_webhook', 'device_status_webhook_url'),
+            'description': (
+                'ส่งสถานะอุปกรณ์ online/offline และข้อมูล device ไปยัง n8n webhook<br>'
+                '<strong>ข้อมูลที่ส่ง:</strong> board_id, status, ip_address, firmware_version, last_seen, timestamp'
+            )
+        }),
+        ('📥 Inbound: N8N -> Dashboard', {
+            'fields': ('enable_inbound_webhook', 'inbound_auth_token'),
+            'description': (
+                'เปิดให้ n8n เรียก API มาควบคุม Relay ได้โดยตรง<br>'
+                '<strong>Endpoint:</strong> <code>/api/n8n/relay-control/</code><br>'
+                '<strong>Header:</strong> <code>X-N8N-Token: &lt;inbound_auth_token&gt;</code><br>'
+                '<strong>Payload ตัวอย่าง:</strong> '
+                '<code>{"board_id":"ESP32-FARM-001","action":"pump_on"}</code> '
+                'หรือ '
+                '<code>{"board_id":"ESP32-FARM-001","relays":{"relay1_pump":true}}</code>'
+            )
+        }),
+        ('⚙️ Advanced', {
+            'fields': ('request_timeout_seconds',),
+        }),
+        ('📅 ข้อมูล', {
+            'fields': ('updated_at',),
+            'classes': ('collapse',),
+        }),
+    )
+
+    readonly_fields = ('updated_at',)
+
+    def get_form(self, request, obj=None, change=False, **kwargs):
+        form = super().get_form(request, obj, change=change, **kwargs)
+        form.base_fields['outbound_webhook_url'].widget.attrs.update({
+            'style': 'width: 720px; max-width: 100%;',
+            'placeholder': 'https://your-n8n-host/webhook/dashboard-relay-events',
+        })
+        form.base_fields['telemetry_webhook_url'].widget.attrs.update({
+            'style': 'width: 720px; max-width: 100%;',
+            'placeholder': 'https://your-n8n-host/webhook/telemetry-events',
+        })
+        form.base_fields['device_status_webhook_url'].widget.attrs.update({
+            'style': 'width: 720px; max-width: 100%;',
+            'placeholder': 'https://your-n8n-host/webhook/device-status-events',
+        })
+        form.base_fields['inbound_auth_token'].widget.attrs.update({
+            'style': 'width: 560px; max-width: 100%;',
+            'placeholder': 'ใส่ token สำหรับรับคำสั่งจาก n8n',
+        })
+        return form
+
+    def save_model(self, request, obj, form, change):
+        super().save_model(request, obj, form, change)
+        messages.success(
+            request,
+            '✅ บันทึก N8N Settings สำเร็จแล้ว (มีผลทันทีสำหรับ API/webhook)'
+        )
+
+    def has_add_permission(self, request):
+        return not N8NSettings.objects.exists()
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+    def changelist_view(self, request, extra_context=None):
+        if N8NSettings.objects.exists():
+            obj = N8NSettings.objects.first()
+            return HttpResponseRedirect(f'/admin/myapp/n8nsettings/{obj.pk}/change/')
         return super().changelist_view(request, extra_context=extra_context)

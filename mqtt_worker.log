@@ -10812,3 +10812,783 @@ INFO 2026-04-05 17:02:02,727 mqtt_handler Auto-reconnect applied due to connecti
 INFO 2026-04-05 17:02:09,848 mqtt_handler Connected to MQTT broker successfully (Client ID: django_smartfarm_da053af7)
 INFO 2026-04-05 17:02:09,855 mqtt_handler Subscribed to topics: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry, smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status (QoS 0)
 INFO 2026-04-05 17:02:17,139 mqtt_handler Publishing to smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/control: {'command': 'relay_control', 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+INFO 2026-04-05 17:06:09,174 apps [MQTT] Starting MQTT Worker automatically...
+INFO 2026-04-05 17:06:09,174 apps [MQTT] Worker thread started successfully
+INFO 2026-04-05 17:06:09,181 mqtt_handler Connecting to MQTT broker at broker.hivemq.com:1883
+INFO 2026-04-05 17:06:09,409 mqtt_handler Starting MQTT client loop
+INFO 2026-04-05 17:06:16,078 mqtt_handler Connected to MQTT broker successfully (Client ID: django_smartfarm_75d79ba4)
+INFO 2026-04-05 17:06:16,089 mqtt_handler Subscribed to topics: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry, smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status (QoS 0)
+INFO 2026-04-05 17:06:24,343 apps [MQTT] Starting MQTT Worker automatically...
+INFO 2026-04-05 17:06:24,343 apps [MQTT] Worker thread started successfully
+INFO 2026-04-05 17:06:24,349 mqtt_handler Connecting to MQTT broker at broker.hivemq.com:1883
+INFO 2026-04-05 17:06:24,583 mqtt_handler Starting MQTT client loop
+INFO 2026-04-05 17:06:24,787 mqtt_handler Connected to MQTT broker successfully (Client ID: django_smartfarm_d8cd2cda)
+INFO 2026-04-05 17:06:24,789 mqtt_handler Subscribed to topics: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry, smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status (QoS 0)
+INFO 2026-04-05 17:06:41,410 apps [MQTT] Starting MQTT Worker automatically...
+INFO 2026-04-05 17:06:41,410 apps [MQTT] Worker thread started successfully
+INFO 2026-04-05 17:06:41,427 mqtt_handler Connecting to MQTT broker at broker.hivemq.com:1883
+INFO 2026-04-05 17:06:41,674 mqtt_handler Starting MQTT client loop
+INFO 2026-04-05 17:06:41,875 mqtt_handler Connected to MQTT broker successfully (Client ID: django_smartfarm_e3c618c2)
+INFO 2026-04-05 17:06:41,886 mqtt_handler Subscribed to topics: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry, smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status (QoS 0)
+INFO 2026-04-05 17:37:47,556 apps [MQTT] Starting MQTT Worker automatically...
+INFO 2026-04-05 17:37:47,556 apps [MQTT] Worker thread started successfully
+INFO 2026-04-05 17:37:47,564 mqtt_handler Connecting to MQTT broker at broker.hivemq.com:1883
+INFO 2026-04-05 17:37:47,816 mqtt_handler Starting MQTT client loop
+INFO 2026-04-05 17:37:48,015 mqtt_handler Connected to MQTT broker successfully (Client ID: django_smartfarm_db0f415e)
+INFO 2026-04-05 17:37:48,022 mqtt_handler Subscribed to topics: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry, smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status (QoS 0)
+INFO 2026-04-05 17:46:12,330 apps [MQTT] Starting MQTT Worker automatically...
+INFO 2026-04-05 17:46:12,330 apps [MQTT] Worker thread started successfully
+INFO 2026-04-05 17:46:12,335 mqtt_handler Connecting to MQTT broker at broker.hivemq.com:1883
+INFO 2026-04-05 17:46:12,581 mqtt_handler Starting MQTT client loop
+INFO 2026-04-05 17:46:12,781 mqtt_handler Connected to MQTT broker successfully (Client ID: django_smartfarm_7149473e)
+INFO 2026-04-05 17:46:12,787 mqtt_handler Subscribed to topics: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry, smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status (QoS 0)
+INFO 2026-04-05 17:46:30,087 apps [MQTT] Starting MQTT Worker automatically...
+INFO 2026-04-05 17:46:30,087 apps [MQTT] Worker thread started successfully
+INFO 2026-04-05 17:46:30,093 mqtt_handler Connecting to MQTT broker at broker.hivemq.com:1883
+INFO 2026-04-05 17:46:30,322 mqtt_handler Starting MQTT client loop
+INFO 2026-04-05 17:46:30,527 mqtt_handler Connected to MQTT broker successfully (Client ID: django_smartfarm_43e7ebb2)
+INFO 2026-04-05 17:46:30,534 mqtt_handler Subscribed to topics: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry, smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status (QoS 0)
+ERROR 2026-04-05 17:46:30,961 mqtt_handler Error updating device status: no such column: myapp_n8nsettings.enable_telemetry_webhook
+Traceback (most recent call last):
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\backends\sqlite3\base.py", line 359, in execute
+    return super().execute(query, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such column: myapp_n8nsettings.enable_telemetry_webhook
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\myapp\mqtt_handler.py", line 278, in handle_status_message
+    notify_n8n_device_status(
+    ~~~~~~~~~~~~~~~~~~~~~~~~^
+        board_id=device.board_id,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+        metadata={'source': 'mqtt_status_message'},
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\myapp\n8n_service.py", line 98, in notify_n8n_device_status
+    settings = N8NSettings.get_settings()
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\myapp\models.py", line 234, in get_settings
+    settings, _ = cls.objects.get_or_create(pk=1)
+                  ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\models\query.py", line 987, in get_or_create
+    return self.get(**kwargs), False
+           ~~~~~~~~^^^^^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\models\query.py", line 635, in get
+    num = len(clone)
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\models\query.py", line 372, in __len__
+    self._fetch_all()
+    ~~~~~~~~~~~~~~~^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\models\query.py", line 2000, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\models\query.py", line 95, in __iter__
+    results = compiler.execute_sql(
+        chunked_fetch=self.chunked_fetch, chunk_size=self.chunk_size
+    )
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\models\sql\compiler.py", line 1624, in execute_sql
+    cursor.execute(sql, params)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\backends\utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\backends\utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        sql, params, many=False, executor=self._execute
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\backends\utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\backends\utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\utils.py", line 94, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\backends\sqlite3\base.py", line 359, in execute
+    return super().execute(query, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+django.db.utils.OperationalError: no such column: myapp_n8nsettings.enable_telemetry_webhook
+ERROR 2026-04-05 17:46:33,940 mqtt_handler Error processing telemetry: no such column: myapp_n8nsettings.enable_telemetry_webhook
+Traceback (most recent call last):
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\backends\sqlite3\base.py", line 359, in execute
+    return super().execute(query, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such column: myapp_n8nsettings.enable_telemetry_webhook
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\myapp\mqtt_handler.py", line 322, in handle_telemetry_message
+    notify_n8n_telemetry(
+    ~~~~~~~~~~~~~~~~~~~~^
+        board_id=device.board_id,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+        },
+        ^^
+    )
+    ^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\myapp\n8n_service.py", line 75, in notify_n8n_telemetry
+    settings = N8NSettings.get_settings()
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\myapp\models.py", line 234, in get_settings
+    settings, _ = cls.objects.get_or_create(pk=1)
+                  ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\models\query.py", line 987, in get_or_create
+    return self.get(**kwargs), False
+           ~~~~~~~~^^^^^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\models\query.py", line 635, in get
+    num = len(clone)
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\models\query.py", line 372, in __len__
+    self._fetch_all()
+    ~~~~~~~~~~~~~~~^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\models\query.py", line 2000, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\models\query.py", line 95, in __iter__
+    results = compiler.execute_sql(
+        chunked_fetch=self.chunked_fetch, chunk_size=self.chunk_size
+    )
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\models\sql\compiler.py", line 1624, in execute_sql
+    cursor.execute(sql, params)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\backends\utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\backends\utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        sql, params, many=False, executor=self._execute
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\backends\utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\backends\utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\utils.py", line 94, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\backends\sqlite3\base.py", line 359, in execute
+    return super().execute(query, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+django.db.utils.OperationalError: no such column: myapp_n8nsettings.enable_telemetry_webhook
+ERROR 2026-04-05 17:46:35,035 mqtt_handler Error updating device status: no such column: myapp_n8nsettings.enable_telemetry_webhook
+Traceback (most recent call last):
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\backends\sqlite3\base.py", line 359, in execute
+    return super().execute(query, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such column: myapp_n8nsettings.enable_telemetry_webhook
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\myapp\mqtt_handler.py", line 278, in handle_status_message
+    notify_n8n_device_status(
+    ~~~~~~~~~~~~~~~~~~~~~~~~^
+        board_id=device.board_id,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+        metadata={'source': 'mqtt_status_message'},
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\myapp\n8n_service.py", line 98, in notify_n8n_device_status
+    settings = N8NSettings.get_settings()
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\myapp\models.py", line 234, in get_settings
+    settings, _ = cls.objects.get_or_create(pk=1)
+                  ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\models\query.py", line 987, in get_or_create
+    return self.get(**kwargs), False
+           ~~~~~~~~^^^^^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\models\query.py", line 635, in get
+    num = len(clone)
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\models\query.py", line 372, in __len__
+    self._fetch_all()
+    ~~~~~~~~~~~~~~~^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\models\query.py", line 2000, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\models\query.py", line 95, in __iter__
+    results = compiler.execute_sql(
+        chunked_fetch=self.chunked_fetch, chunk_size=self.chunk_size
+    )
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\models\sql\compiler.py", line 1624, in execute_sql
+    cursor.execute(sql, params)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\backends\utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\backends\utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        sql, params, many=False, executor=self._execute
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\backends\utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\backends\utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\utils.py", line 94, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\backends\sqlite3\base.py", line 359, in execute
+    return super().execute(query, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+django.db.utils.OperationalError: no such column: myapp_n8nsettings.enable_telemetry_webhook
+ERROR 2026-04-05 17:46:43,944 mqtt_handler Error processing telemetry: no such column: myapp_n8nsettings.enable_telemetry_webhook
+Traceback (most recent call last):
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\backends\sqlite3\base.py", line 359, in execute
+    return super().execute(query, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such column: myapp_n8nsettings.enable_telemetry_webhook
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\myapp\mqtt_handler.py", line 322, in handle_telemetry_message
+    notify_n8n_telemetry(
+    ~~~~~~~~~~~~~~~~~~~~^
+        board_id=device.board_id,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+        },
+        ^^
+    )
+    ^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\myapp\n8n_service.py", line 75, in notify_n8n_telemetry
+    settings = N8NSettings.get_settings()
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\myapp\models.py", line 234, in get_settings
+    settings, _ = cls.objects.get_or_create(pk=1)
+                  ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\models\query.py", line 987, in get_or_create
+    return self.get(**kwargs), False
+           ~~~~~~~~^^^^^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\models\query.py", line 635, in get
+    num = len(clone)
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\models\query.py", line 372, in __len__
+    self._fetch_all()
+    ~~~~~~~~~~~~~~~^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\models\query.py", line 2000, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\models\query.py", line 95, in __iter__
+    results = compiler.execute_sql(
+        chunked_fetch=self.chunked_fetch, chunk_size=self.chunk_size
+    )
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\models\sql\compiler.py", line 1624, in execute_sql
+    cursor.execute(sql, params)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\backends\utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\backends\utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        sql, params, many=False, executor=self._execute
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\backends\utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\backends\utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\utils.py", line 94, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\backends\sqlite3\base.py", line 359, in execute
+    return super().execute(query, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+django.db.utils.OperationalError: no such column: myapp_n8nsettings.enable_telemetry_webhook
+INFO 2026-04-05 17:46:50,249 apps [MQTT] Starting MQTT Worker automatically...
+INFO 2026-04-05 17:46:50,249 apps [MQTT] Worker thread started successfully
+INFO 2026-04-05 17:46:50,258 mqtt_handler Connecting to MQTT broker at broker.hivemq.com:1883
+INFO 2026-04-05 17:46:50,498 mqtt_handler Starting MQTT client loop
+INFO 2026-04-05 17:46:57,275 mqtt_handler Connected to MQTT broker successfully (Client ID: django_smartfarm_5df264e1)
+INFO 2026-04-05 17:46:57,280 mqtt_handler Subscribed to topics: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry, smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status (QoS 0)
+ERROR 2026-04-05 17:46:57,691 mqtt_handler Error updating device status: no such column: myapp_n8nsettings.enable_telemetry_webhook
+Traceback (most recent call last):
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\backends\sqlite3\base.py", line 359, in execute
+    return super().execute(query, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such column: myapp_n8nsettings.enable_telemetry_webhook
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\myapp\mqtt_handler.py", line 278, in handle_status_message
+    notify_n8n_device_status(
+    ~~~~~~~~~~~~~~~~~~~~~~~~^
+        board_id=device.board_id,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+        metadata={'source': 'mqtt_status_message'},
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\myapp\n8n_service.py", line 98, in notify_n8n_device_status
+    settings = N8NSettings.get_settings()
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\myapp\models.py", line 234, in get_settings
+    settings, _ = cls.objects.get_or_create(pk=1)
+                  ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\models\query.py", line 987, in get_or_create
+    return self.get(**kwargs), False
+           ~~~~~~~~^^^^^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\models\query.py", line 635, in get
+    num = len(clone)
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\models\query.py", line 372, in __len__
+    self._fetch_all()
+    ~~~~~~~~~~~~~~~^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\models\query.py", line 2000, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\models\query.py", line 95, in __iter__
+    results = compiler.execute_sql(
+        chunked_fetch=self.chunked_fetch, chunk_size=self.chunk_size
+    )
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\models\sql\compiler.py", line 1624, in execute_sql
+    cursor.execute(sql, params)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\backends\utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\backends\utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        sql, params, many=False, executor=self._execute
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\backends\utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\backends\utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\utils.py", line 94, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\backends\sqlite3\base.py", line 359, in execute
+    return super().execute(query, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+django.db.utils.OperationalError: no such column: myapp_n8nsettings.enable_telemetry_webhook
+ERROR 2026-04-05 17:47:03,934 mqtt_handler Error processing telemetry: no such column: myapp_n8nsettings.enable_telemetry_webhook
+Traceback (most recent call last):
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\backends\sqlite3\base.py", line 359, in execute
+    return super().execute(query, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such column: myapp_n8nsettings.enable_telemetry_webhook
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\myapp\mqtt_handler.py", line 322, in handle_telemetry_message
+    notify_n8n_telemetry(
+    ~~~~~~~~~~~~~~~~~~~~^
+        board_id=device.board_id,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+        },
+        ^^
+    )
+    ^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\myapp\n8n_service.py", line 75, in notify_n8n_telemetry
+    settings = N8NSettings.get_settings()
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\myapp\models.py", line 234, in get_settings
+    settings, _ = cls.objects.get_or_create(pk=1)
+                  ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\models\query.py", line 987, in get_or_create
+    return self.get(**kwargs), False
+           ~~~~~~~~^^^^^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\models\query.py", line 635, in get
+    num = len(clone)
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\models\query.py", line 372, in __len__
+    self._fetch_all()
+    ~~~~~~~~~~~~~~~^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\models\query.py", line 2000, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\models\query.py", line 95, in __iter__
+    results = compiler.execute_sql(
+        chunked_fetch=self.chunked_fetch, chunk_size=self.chunk_size
+    )
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\models\sql\compiler.py", line 1624, in execute_sql
+    cursor.execute(sql, params)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\backends\utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\backends\utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        sql, params, many=False, executor=self._execute
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\backends\utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\backends\utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\utils.py", line 94, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\backends\sqlite3\base.py", line 359, in execute
+    return super().execute(query, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+django.db.utils.OperationalError: no such column: myapp_n8nsettings.enable_telemetry_webhook
+ERROR 2026-04-05 17:47:04,414 mqtt_handler Error updating device status: no such column: myapp_n8nsettings.enable_telemetry_webhook
+Traceback (most recent call last):
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\backends\sqlite3\base.py", line 359, in execute
+    return super().execute(query, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such column: myapp_n8nsettings.enable_telemetry_webhook
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\myapp\mqtt_handler.py", line 278, in handle_status_message
+    notify_n8n_device_status(
+    ~~~~~~~~~~~~~~~~~~~~~~~~^
+        board_id=device.board_id,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+        metadata={'source': 'mqtt_status_message'},
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\myapp\n8n_service.py", line 98, in notify_n8n_device_status
+    settings = N8NSettings.get_settings()
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\myapp\models.py", line 234, in get_settings
+    settings, _ = cls.objects.get_or_create(pk=1)
+                  ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\models\query.py", line 987, in get_or_create
+    return self.get(**kwargs), False
+           ~~~~~~~~^^^^^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\models\query.py", line 635, in get
+    num = len(clone)
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\models\query.py", line 372, in __len__
+    self._fetch_all()
+    ~~~~~~~~~~~~~~~^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\models\query.py", line 2000, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\models\query.py", line 95, in __iter__
+    results = compiler.execute_sql(
+        chunked_fetch=self.chunked_fetch, chunk_size=self.chunk_size
+    )
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\models\sql\compiler.py", line 1624, in execute_sql
+    cursor.execute(sql, params)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\backends\utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\backends\utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        sql, params, many=False, executor=self._execute
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\backends\utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\backends\utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\utils.py", line 94, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\backends\sqlite3\base.py", line 359, in execute
+    return super().execute(query, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+django.db.utils.OperationalError: no such column: myapp_n8nsettings.enable_telemetry_webhook
+ERROR 2026-04-05 17:47:13,917 mqtt_handler Error processing telemetry: no such column: myapp_n8nsettings.enable_telemetry_webhook
+Traceback (most recent call last):
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\backends\sqlite3\base.py", line 359, in execute
+    return super().execute(query, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such column: myapp_n8nsettings.enable_telemetry_webhook
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\myapp\mqtt_handler.py", line 322, in handle_telemetry_message
+    notify_n8n_telemetry(
+    ~~~~~~~~~~~~~~~~~~~~^
+        board_id=device.board_id,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+        },
+        ^^
+    )
+    ^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\myapp\n8n_service.py", line 75, in notify_n8n_telemetry
+    settings = N8NSettings.get_settings()
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\myapp\models.py", line 234, in get_settings
+    settings, _ = cls.objects.get_or_create(pk=1)
+                  ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\models\query.py", line 987, in get_or_create
+    return self.get(**kwargs), False
+           ~~~~~~~~^^^^^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\models\query.py", line 635, in get
+    num = len(clone)
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\models\query.py", line 372, in __len__
+    self._fetch_all()
+    ~~~~~~~~~~~~~~~^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\models\query.py", line 2000, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\models\query.py", line 95, in __iter__
+    results = compiler.execute_sql(
+        chunked_fetch=self.chunked_fetch, chunk_size=self.chunk_size
+    )
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\models\sql\compiler.py", line 1624, in execute_sql
+    cursor.execute(sql, params)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\backends\utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\backends\utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        sql, params, many=False, executor=self._execute
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\backends\utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\backends\utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\utils.py", line 94, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\backends\sqlite3\base.py", line 359, in execute
+    return super().execute(query, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+django.db.utils.OperationalError: no such column: myapp_n8nsettings.enable_telemetry_webhook
+ERROR 2026-04-05 17:47:23,924 mqtt_handler Error processing telemetry: no such column: myapp_n8nsettings.enable_telemetry_webhook
+Traceback (most recent call last):
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\backends\sqlite3\base.py", line 359, in execute
+    return super().execute(query, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such column: myapp_n8nsettings.enable_telemetry_webhook
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\myapp\mqtt_handler.py", line 322, in handle_telemetry_message
+    notify_n8n_telemetry(
+    ~~~~~~~~~~~~~~~~~~~~^
+        board_id=device.board_id,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+        },
+        ^^
+    )
+    ^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\myapp\n8n_service.py", line 75, in notify_n8n_telemetry
+    settings = N8NSettings.get_settings()
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\myapp\models.py", line 234, in get_settings
+    settings, _ = cls.objects.get_or_create(pk=1)
+                  ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\models\query.py", line 987, in get_or_create
+    return self.get(**kwargs), False
+           ~~~~~~~~^^^^^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\models\query.py", line 635, in get
+    num = len(clone)
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\models\query.py", line 372, in __len__
+    self._fetch_all()
+    ~~~~~~~~~~~~~~~^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\models\query.py", line 2000, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\models\query.py", line 95, in __iter__
+    results = compiler.execute_sql(
+        chunked_fetch=self.chunked_fetch, chunk_size=self.chunk_size
+    )
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\models\sql\compiler.py", line 1624, in execute_sql
+    cursor.execute(sql, params)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\backends\utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\backends\utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        sql, params, many=False, executor=self._execute
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\backends\utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\backends\utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\utils.py", line 94, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "D:\GitAGThaiTechZone\myAPP-Django-AIOTs\venv\Lib\site-packages\django\db\backends\sqlite3\base.py", line 359, in execute
+    return super().execute(query, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+django.db.utils.OperationalError: no such column: myapp_n8nsettings.enable_telemetry_webhook
+INFO 2026-04-05 17:47:53,985 apps [MQTT] Starting MQTT Worker automatically...
+INFO 2026-04-05 17:47:53,985 apps [MQTT] Worker thread started successfully
+INFO 2026-04-05 17:47:53,994 mqtt_handler Connecting to MQTT broker at broker.hivemq.com:1883
+INFO 2026-04-05 17:47:54,226 mqtt_handler Starting MQTT client loop
+INFO 2026-04-05 17:47:54,430 mqtt_handler Connected to MQTT broker successfully (Client ID: django_smartfarm_a3d86d01)
+INFO 2026-04-05 17:47:54,438 mqtt_handler Subscribed to topics: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry, smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status (QoS 0)
+INFO 2026-04-05 17:49:59,156 mqtt_handler Publishing to smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/control: {'command': 'relay_control', 'relays': {'relay1_pump': True, 'relay2_fan': True, 'relay3_heater': True}}
+WARNING 2026-04-05 17:53:18,513 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+WARNING 2026-04-05 17:53:25,647 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+WARNING 2026-04-05 17:53:35,567 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+WARNING 2026-04-05 17:53:45,529 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+WARNING 2026-04-05 17:53:55,547 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+WARNING 2026-04-05 17:54:05,571 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+WARNING 2026-04-05 17:54:15,569 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+WARNING 2026-04-05 17:54:25,542 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+WARNING 2026-04-05 17:54:36,375 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+WARNING 2026-04-05 17:54:45,548 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+WARNING 2026-04-05 17:55:01,520 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+WARNING 2026-04-05 17:55:12,340 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+WARNING 2026-04-05 17:55:15,582 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+INFO 2026-04-05 17:55:15,641 mqtt_handler Publishing to smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/control: {'command': 'relay_control', 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+WARNING 2026-04-05 17:55:17,222 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"This webhook is not registered for POST requests. Did you mean to make a GET request?"}
+WARNING 2026-04-05 17:55:18,511 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+WARNING 2026-04-05 17:55:25,549 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+WARNING 2026-04-05 17:55:35,545 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+WARNING 2026-04-05 17:55:45,538 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+WARNING 2026-04-05 17:55:55,560 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+WARNING 2026-04-05 17:56:06,134 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+INFO 2026-04-05 17:56:12,678 mqtt_handler Publishing to smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/control: {'command': 'relay_control', 'relays': {'relay1_pump': True, 'relay2_fan': True, 'relay3_heater': True}}
+WARNING 2026-04-05 17:56:14,122 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+WARNING 2026-04-05 17:56:15,587 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+WARNING 2026-04-05 17:56:25,540 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+WARNING 2026-04-05 17:56:35,581 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+WARNING 2026-04-05 17:56:45,968 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+WARNING 2026-04-05 17:56:56,401 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+WARNING 2026-04-05 17:57:05,537 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+WARNING 2026-04-05 17:57:08,411 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"0594e983-5b07-45c0-9942-ad1595224f1f\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+WARNING 2026-04-05 17:57:15,916 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+WARNING 2026-04-05 17:57:25,720 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+WARNING 2026-04-05 17:57:35,579 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+WARNING 2026-04-05 17:57:45,532 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+WARNING 2026-04-05 17:57:55,803 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+WARNING 2026-04-05 17:58:05,561 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+WARNING 2026-04-05 17:58:06,191 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"0594e983-5b07-45c0-9942-ad1595224f1f\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+WARNING 2026-04-05 17:58:16,360 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+WARNING 2026-04-05 17:58:25,550 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+WARNING 2026-04-05 17:58:43,389 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+WARNING 2026-04-05 17:58:44,388 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"0594e983-5b07-45c0-9942-ad1595224f1f\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+WARNING 2026-04-05 17:58:45,569 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+WARNING 2026-04-05 17:58:55,729 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+WARNING 2026-04-05 17:59:05,555 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+WARNING 2026-04-05 17:59:06,080 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"0594e983-5b07-45c0-9942-ad1595224f1f\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+WARNING 2026-04-05 17:59:15,526 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+WARNING 2026-04-05 17:59:25,528 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+WARNING 2026-04-05 17:59:35,541 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+WARNING 2026-04-05 17:59:38,913 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"0594e983-5b07-45c0-9942-ad1595224f1f\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+WARNING 2026-04-05 17:59:45,808 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+WARNING 2026-04-05 17:59:55,578 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+WARNING 2026-04-05 18:00:05,902 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+WARNING 2026-04-05 18:00:06,314 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"0594e983-5b07-45c0-9942-ad1595224f1f\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+WARNING 2026-04-05 18:00:15,535 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+WARNING 2026-04-05 18:00:25,550 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+WARNING 2026-04-05 18:00:35,557 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+WARNING 2026-04-05 18:00:35,915 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"0594e983-5b07-45c0-9942-ad1595224f1f\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+WARNING 2026-04-05 18:00:45,549 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+WARNING 2026-04-05 18:00:55,553 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+WARNING 2026-04-05 18:01:05,555 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+WARNING 2026-04-05 18:01:05,991 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"0594e983-5b07-45c0-9942-ad1595224f1f\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+WARNING 2026-04-05 18:01:15,552 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+WARNING 2026-04-05 18:01:25,557 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+WARNING 2026-04-05 18:01:35,542 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+WARNING 2026-04-05 18:01:36,282 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"0594e983-5b07-45c0-9942-ad1595224f1f\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+WARNING 2026-04-05 18:01:45,561 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+WARNING 2026-04-05 18:01:55,703 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+WARNING 2026-04-05 18:02:06,064 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+WARNING 2026-04-05 18:02:06,487 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"0594e983-5b07-45c0-9942-ad1595224f1f\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+WARNING 2026-04-05 18:02:15,553 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+WARNING 2026-04-05 18:02:25,575 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+WARNING 2026-04-05 18:02:35,540 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+WARNING 2026-04-05 18:02:36,080 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"0594e983-5b07-45c0-9942-ad1595224f1f\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+WARNING 2026-04-05 18:02:45,557 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}

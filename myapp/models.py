@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.exceptions import ValidationError
+import secrets
 
 
 class Device(models.Model):
@@ -153,4 +154,86 @@ class MQTTSettings(models.Model):
     
     def __str__(self):
         return f"MQTT Settings - {self.broker}:{self.port}"
+
+
+class N8NSettings(models.Model):
+    """
+    N8N integration settings (singleton) for outbound and inbound communication.
+    """
+
+    # Outbound: Dashboard/Admin -> n8n webhook
+    enable_outbound_webhook = models.BooleanField(
+        default=False,
+        help_text='Send relay command events from Dashboard/Admin to n8n webhook'
+    )
+    outbound_webhook_url = models.URLField(
+        blank=True,
+        null=True,
+        help_text='n8n webhook URL for receiving relay command events'
+    )
+    enable_telemetry_webhook = models.BooleanField(
+        default=False,
+        help_text='Send telemetry data from ESP32 devices to n8n webhook'
+    )
+    telemetry_webhook_url = models.URLField(
+        blank=True,
+        null=True,
+        help_text='n8n webhook URL for receiving telemetry events'
+    )
+    enable_device_status_webhook = models.BooleanField(
+        default=False,
+        help_text='Send device online/offline status updates to n8n webhook'
+    )
+    device_status_webhook_url = models.URLField(
+        blank=True,
+        null=True,
+        help_text='n8n webhook URL for receiving device status events'
+    )
+
+    # Inbound: n8n -> Dashboard API
+    enable_inbound_webhook = models.BooleanField(
+        default=False,
+        help_text='Allow n8n to call Dashboard API for relay control'
+    )
+    inbound_auth_token = models.CharField(
+        max_length=128,
+        blank=True,
+        default='',
+        help_text='Token for authenticating inbound n8n webhook requests'
+    )
+
+    request_timeout_seconds = models.IntegerField(
+        default=10,
+        help_text='HTTP timeout for outbound webhook requests (seconds)'
+    )
+
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = 'N8N Setting'
+        verbose_name_plural = 'N8N Settings'
+
+    def save(self, *args, **kwargs):
+        """
+        Singleton pattern - allow only one settings record.
+        Auto-generate inbound token when inbound webhook is enabled.
+        """
+        if not self.pk and N8NSettings.objects.exists():
+            raise ValidationError('Only one N8N Settings record is allowed. Please edit the existing settings.')
+
+        if self.enable_inbound_webhook and not self.inbound_auth_token:
+            self.inbound_auth_token = secrets.token_urlsafe(24)
+
+        # Always use pk=1 for singleton
+        self.pk = 1
+        return super().save(*args, **kwargs)
+
+    @classmethod
+    def get_settings(cls):
+        """Get or create singleton N8N settings instance."""
+        settings, _ = cls.objects.get_or_create(pk=1)
+        return settings
+
+    def __str__(self):
+        return 'N8N Integration Settings'
  
