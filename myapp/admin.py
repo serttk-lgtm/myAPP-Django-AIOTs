@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.urls import path
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
-from .models import Device, TelemetryLog
+from .models import Device, TelemetryLog, RelayTestPanel
 from .mqtt_handler import publish_control_command
 
 
@@ -367,3 +367,31 @@ class TelemetryLogAdmin(admin.ModelAdmin):
         status = obj.relay_status.get('relay3_heater', None)
         return '🟢 ON' if status else '🔴 OFF' if status is False else 'N/A'
     get_relay3_heater.short_description = 'Heater'
+
+
+@admin.register(RelayTestPanel)
+class RelayTestPanelAdmin(admin.ModelAdmin):
+    """
+    Custom admin for Relay Test Panel menu item.
+    Redirects to the relay control panel page.
+    """
+    
+    def has_add_permission(self, request):
+        """Disable add functionality"""
+        return False
+    
+    def has_change_permission(self, request, obj=None):
+        """Allow view access"""
+        return True
+    
+    def has_delete_permission(self, request, obj=None):
+        """Disable delete functionality"""
+        return False
+    
+    def has_module_permission(self, request):
+        """Show this in the admin index"""
+        return True
+    
+    def changelist_view(self, request, extra_context=None):
+        """Redirect to relay control panel"""
+        return HttpResponseRedirect('/admin/myapp/device/relay-control/')

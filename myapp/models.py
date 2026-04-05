@@ -53,4 +53,15 @@ class TelemetryLog(models.Model):
     
     def __str__(self):
         return f"{self.device.board_id} - {self.created_at.strftime('%Y-%m-%d %H:%M:%S')}"
+
+
+class RelayTestPanel(Device):
+    """
+    Proxy model for Relay Control Panel menu item.
+    This is used to create a dedicated menu entry in Django Admin.
+    """
+    class Meta:
+        proxy = True
+        verbose_name = 'Relay Test Panel'
+        verbose_name_plural = 'Relay Test Panel'
  
