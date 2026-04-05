@@ -25,18 +25,28 @@ pip install -r requirements.txt
 REM 4. รัน migration
 python manage.py migrate
 
-REM 5. รัน development server
+REM 5. สร้าง superuser สำหรับ Admin
+python manage.py createsuperuser
+
+REM 6. รัน development server (MQTT Worker จะเริ่มอัตโนมัติ)
 python manage.py runserver
 
-REM 6. เปิดเบราว์เซอร์ไปที่ http://127.0.0.1:8000/
+REM 7. เปิดเบราว์เซอร์ไปที่ http://127.0.0.1:8000/
+REM    Admin Panel: http://127.0.0.1:8000/admin/
 ```
+
+**✨ ข้อดี:**
+- MQTT Worker เริ่มทำงานอัตโนมัติทันทีที่รัน `runserver`
+- ไม่ต้องเปิด terminal แยกอีกอัน
+- ดูข้อความ log: `✅ MQTT Worker thread started successfully`
 
 ### ✅ ตรวจสอบว่า Setup สำเร็จ
 
-- เห็น `(venv)` หน้า command line
-- ไม่มี error จากการติดตั้ง packages
-- Server รันได้ที่ http://127.0.0.1:8000/
-- เห็นหน้า Landing Page สไตล์ Smart Farm
+- ✅ เห็น `(venv)` หน้า command line
+- ✅ ไม่มี error จากการติดตั้ง packages
+- ✅ Server รันได้ที่ http://127.0.0.1:8000/
+- ✅ เห็นหน้า Landing Page สไตล์ Smart Farm
+- ✅ เห็นข้อความ "Connected to MQTT broker" (ถ้าตั้งค่า MQTT settings แล้ว)
 
 ---
 

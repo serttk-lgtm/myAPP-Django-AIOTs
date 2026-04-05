@@ -13,10 +13,19 @@ python -m venv venv
 venv\Scripts\activate.bat
 pip install -r requirements.txt
 python manage.py migrate
+python manage.py createsuperuser
 python manage.py runserver
 ```
 
 🌐 **เปิดเบราว์เซอร์:** http://127.0.0.1:8000/
+
+**✨ MQTT Worker จะเริ่มทำงานอัตโนมัติทันที!** ไม่ต้องรัน terminal แยก
+
+### 📝 ขั้นตอนต่อไป: ลงทะเบียน Devices
+1. เปิด Admin Panel: http://127.0.0.1:8000/admin/
+2. Login ด้วย superuser ที่สร้างไว้
+3. เพิ่ม Device ใหม่โดยใส่ **Board ID** ที่ตรงกับ ESP32 (เช่น `ESP32-FARM-001-NATTAPHOL-PALM`)
+4. ✅ เสร็จแล้ว! ตอนนี้ device สามารถส่ง MQTT messages ได้
 
 ---
 
@@ -29,6 +38,8 @@ cd myAPP-Django-AIOTs
 venv\Scripts\activate.bat
 python manage.py runserver
 ```
+
+**✅ MQTT Worker เริ่มอัตโนมัติ** - ไม่ต้องรัน terminal แยก
 
 🛑 **หยุด Server:** `Ctrl+C`
 

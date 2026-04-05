@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'myapp',
+    'myapp.apps.MyappConfig',  # Use full path to enable AppConfig.ready()
 ]
 
 MIDDLEWARE = [
@@ -105,14 +105,79 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Bangkok'
 
 USE_I18N = True
 
 USE_TZ = True
+
+# Custom datetime format (24-hour format with seconds)
+USE_L10N = False
+DATETIME_FORMAT = 'Y-m-d H:i:s'  # 2026-04-05 14:30:45
+DATE_FORMAT = 'Y-m-d'             # 2026-04-05
+TIME_FORMAT = 'H:i:s'             # 14:30:45
+SHORT_DATETIME_FORMAT = 'Y-m-d H:i:s'
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+# Default primary key field type
+# https://docs.djangoproject.com/en/6.0/ref/settings/#default-auto-field
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# =============================================================================
+# MQTT Configuration for Smart Farm AIoT System
+# =============================================================================
+
+# MQTT Broker settings
+MQTT_BROKER = 'broker.hivemq.com'  # Replace with your MQTT broker address
+MQTT_PORT = 1883  # Default MQTT port (1883 for non-SSL, 8883 for SSL)
+MQTT_USER = 'your-user'  # Replace with your MQTT username (or set to None if no auth)
+MQTT_PASSWORD = 'your-password'  # Replace with your MQTT password (or set to None if no auth)
+
+# n8n Webhook URL for automation alerts
+N8N_WEBHOOK_URL = 'https://your-n8n-instance/webhook/smartfarm-alert'  # Replace with your n8n webhook URL
+
+# Logging configuration for MQTT handler
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose',
+        },
+        'file': {
+            'class': 'logging.FileHandler',
+            'filename': BASE_DIR / 'mqtt_worker.log',
+            'formatter': 'verbose',
+        },
+    },
+    'root': {
+        'handlers': ['console', 'file'],
+        'level': 'INFO',
+    },
+    'loggers': {
+        'myapp': {
+            'handlers': ['console', 'file'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+        'django': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+    },
+}
+
