@@ -232,6 +232,8 @@ def publish_control_command(board_id, relay_data):
         Boolean indicating success or failure
     """
     try:
+        import time
+        
         client = mqtt.Client()
         
         # Set credentials if available
@@ -244,23 +246,36 @@ def publish_control_command(board_id, relay_data):
         port = getattr(settings, 'MQTT_PORT', 1883)
         client.connect(broker, port, 60)
         
+        # Start network loop to handle message sending
+        client.loop_start()
+        
         # Prepare control payload
         control_payload = {
             'command': 'relay_control',
             'relays': relay_data
         }
         
-        # Publish to control topic
+        # Publish to control topic with QoS 1 for guaranteed delivery
         topic = f"smartfarm/{board_id}/control"
-        result = client.publish(topic, json.dumps(control_payload))
+        logger.info(f"Publishing to {topic}: {control_payload}")
         
+        msg_info = client.publish(topic, json.dumps(control_payload), qos=1)
+        
+        # Wait for message to be published (max 2 seconds)
+        msg_info.wait_for_publish(timeout=2.0)
+        
+        # Give time for message to be sent
+        time.sleep(0.5)
+        
+        # Stop loop and disconnect
+        client.loop_stop()
         client.disconnect()
         
-        if result.rc == mqtt.MQTT_ERR_SUCCESS:
-            logger.info(f"Successfully published control command to {board_id}")
+        if msg_info.is_published():
+            logger.info(f"✅ Successfully published control command to {board_id}")
             return True
         else:
-            logger.error(f"Failed to publish control command. Error code: {result.rc}")
+            logger.error(f"❌ Failed to publish control command to {board_id}")
             return False
     
     except Exception as e:

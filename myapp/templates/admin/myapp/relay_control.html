@@ -1,0 +1,77 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+
+{% block title %}Relay Control Panel{% endblock %}
+
+{% block content %}
+<h1>🎮 Relay Control Panel</h1>
+
+<div class="module">
+    <!-- Device Selection -->
+    <form method="get" style="margin-bottom: 20px;">
+        <label for="device-select"><strong>Select Device:</strong></label>
+        <select name="device" id="device-select" onchange="this.form.submit()" style="padding: 5px; margin-left: 10px;">
+            <option value="">-- Choose Device --</option>
+            {% for device in online_devices %}
+                <option value="{{ device.board_id }}" {% if selected_device and selected_device.board_id == device.board_id %}selected{% endif %}>
+                    {{ device.board_id }}
+                </option>
+            {% endfor %}
+        </select>
+    </form>
+
+    {% if selected_device %}
+    <!-- Device Info -->
+    <div style="background: #f8f9fa; padding: 15px; margin-bottom: 20px; border-left: 4px solid #417690;">
+        <h3 style="margin-top: 0;">📟 {{ selected_device.board_id }}</h3>
+        <p style="margin: 5px 0;"><strong>Status:</strong> <span style="color: green;">{{ selected_device.status|upper }}</span></p>
+        <p style="margin: 5px 0;"><strong>IP Address:</strong> {{ selected_device.ip_address|default:"N/A" }}</p>
+        <p style="margin: 5px 0;"><strong>Last Seen:</strong> {{ selected_device.last_seen|date:"Y-m-d H:i:s" }}</p>
+    </div>
+
+    <!-- Relay Controls -->
+    <form method="post" style="margin-top: 20px;">
+        {% csrf_token %}
+        <input type="hidden" name="device_id" value="{{ selected_device.board_id }}">
+        
+        <h3>All Relays</h3>
+        <button type="submit" name="action" value="all_on" class="button" style="background: #28a745; color: white; margin-right: 10px;">🟢 ALL ON</button>
+        <button type="submit" name="action" value="all_off" class="button" style="background: #dc3545; color: white;">🔴 ALL OFF</button>
+        
+        <hr style="margin: 20px 0;">
+        
+        <h3>💧 Relay 1: Pump</h3>
+        <button type="submit" name="action" value="pump_on" class="button" style="background: #007bff; color: white; margin-right: 10px;">ON</button>
+        <button type="submit" name="action" value="pump_off" class="button" style="background: #6c757d; color: white;">OFF</button>
+        
+        <hr style="margin: 20px 0;">
+        
+        <h3>🌀 Relay 2: Fan</h3>
+        <button type="submit" name="action" value="fan_on" class="button" style="background: #17a2b8; color: white; margin-right: 10px;">ON</button>
+        <button type="submit" name="action" value="fan_off" class="button" style="background: #6c757d; color: white;">OFF</button>
+        
+        <hr style="margin: 20px 0;">
+        
+        <h3>🔥 Relay 3: Heater</h3>
+        <button type="submit" name="action" value="heater_on" class="button" style="background: #fd7e14; color: white; margin-right: 10px;">ON</button>
+        <button type="submit" name="action" value="heater_off" class="button" style="background: #6c757d; color: white;">OFF</button>
+    </form>
+    {% else %}
+    <p style="color: #666; padding: 20px; text-align: center;">Please select a device to control relays</p>
+    {% endif %}
+</div>
+
+<style>
+    .button {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: bold;
+    }
+    .button:hover {
+        opacity: 0.8;
+    }
+</style>
+{% endblock %}
