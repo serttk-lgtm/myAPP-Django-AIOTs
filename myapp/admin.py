@@ -5,7 +5,7 @@ from django.urls import path
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from .models import Device, TelemetryLog, RelayTestPanel, MQTTSettings
-from .mqtt_handler import publish_control_command
+from .mqtt_handler import publish_control_command, trigger_mqtt_hot_reload
 
 
 @admin.register(Device)
@@ -42,11 +42,17 @@ class DeviceAdmin(admin.ModelAdmin):
         """Relay Control Panel - Simple interface for testing relays"""
         # Get all online devices
         online_devices = Device.objects.filter(status='online').order_by('board_id')
+        online_device_count = online_devices.count()
+        show_device_selector = online_device_count > 1
         
         # Get selected device
         selected_device_id = request.GET.get('device')
         selected_device = None
         relay_status = None
+
+        # If there is only one online device, auto-select it.
+        if online_device_count == 1 and not selected_device_id:
+            selected_device_id = online_devices.first().board_id
         
         if selected_device_id:
             try:
@@ -94,6 +100,7 @@ class DeviceAdmin(admin.ModelAdmin):
             **self.admin_site.each_context(request),
             'title': 'Relay Control Panel',
             'online_devices': online_devices,
+            'show_device_selector': show_device_selector,
             'selected_device': selected_device,
             'relay_status': relay_status,
             'opts': self.model._meta,
@@ -231,7 +238,20 @@ class MQTTSettingsAdmin(admin.ModelAdmin):
                 '<strong>ตัวอย่าง Topic แบบเต็ม:</strong><br>'
                 '<code>smartfarm/{board_id}/telemetry</code><br>'
                 '<code>smartfarm/{board_id}/status</code><br>'
-                '<code>smartfarm/{board_id}/control</code>'
+                '<code>smartfarm/{board_id}/control</code><br><br>'
+                '<strong>ตัวอย่างสำหรับทดสอบใน MQTT Explorer (board_id = ESP32-FARM-001):</strong><br>'
+                'Subscribe: <code>smartfarm/ESP32-FARM-001/telemetry</code><br>'
+                'Subscribe: <code>smartfarm/ESP32-FARM-001/status</code><br>'
+                'Publish: <code>smartfarm/ESP32-FARM-001/control</code><br>'
+                '<strong>ตัวอย่าง JSON สำหรับทดสอบ Relay:</strong>'
+                '<pre style="margin-top:6px;">{\n'
+                '  "command": "relay_control",\n'
+                '  "relays": {\n'
+                '    "relay1_pump": true,\n'
+                '    "relay2_fan": false,\n'
+                '    "relay3_heater": true\n'
+                '  }\n'
+                '}</pre>'
             )
         }),
         ('⚙️ ตั้งค่าขั้นสูง', {
@@ -251,9 +271,73 @@ class MQTTSettingsAdmin(admin.ModelAdmin):
     
     readonly_fields = ('updated_at',)
 
+    def _get_example_board_ids(self):
+        """Return up to 3 board IDs for examples (prefer online devices)."""
+        board_ids = list(
+            Device.objects.filter(status='online')
+            .order_by('board_id')
+            .values_list('board_id', flat=True)[:3]
+        )
+        if board_ids:
+            return board_ids
+
+        return list(
+            Device.objects.order_by('board_id').values_list('board_id', flat=True)[:3]
+        )
+
+    def _build_topic_description(self):
+        """Build topic description with dynamic board_id examples."""
+        board_ids = self._get_example_board_ids()
+        sample_board_id = board_ids[0] if board_ids else 'ESP32-FARM-001'
+
+        if board_ids:
+            board_id_list_html = ', '.join(f'<code>{bid}</code>' for bid in board_ids)
+            board_id_hint = f'<strong>board_id ที่พบในระบบ:</strong> {board_id_list_html}<br>'
+        else:
+            board_id_hint = (
+                '<strong>board_id ที่พบในระบบ:</strong> ยังไม่พบข้อมูลอุปกรณ์ '
+                '(จะแสดงตัวอย่างค่าเริ่มต้น)<br>'
+            )
+
+        return (
+            'กำหนดรูปแบบ Topic สำหรับรับและส่งข้อมูล<br>'
+            '<strong>Wildcards:</strong> ใช้ <code>+</code> สำหรับ 1 ระดับ, ใช้ <code>#</code> สำหรับหลายระดับ<br>'
+            '<strong>Placeholder:</strong> ใช้ <code>{board_id}</code> ใน <code>control_topic_pattern</code><br>'
+            '<strong>ตัวอย่าง Topic แบบเต็ม:</strong><br>'
+            '<code>smartfarm/{board_id}/telemetry</code><br>'
+            '<code>smartfarm/{board_id}/status</code><br>'
+            '<code>smartfarm/{board_id}/control</code><br><br>'
+            f'{board_id_hint}'
+            f'<strong>ตัวอย่างสำหรับทดสอบใน MQTT Explorer (board_id = {sample_board_id}):</strong><br>'
+            f'Subscribe: <code>smartfarm/{sample_board_id}/telemetry</code><br>'
+            f'Subscribe: <code>smartfarm/{sample_board_id}/status</code><br>'
+            f'Publish: <code>smartfarm/{sample_board_id}/control</code><br>'
+            '<strong>ตัวอย่าง JSON สำหรับทดสอบ Relay:</strong>'
+            '<pre style="margin-top:6px;">{\n'
+            '  "command": "relay_control",\n'
+            '  "relays": {\n'
+            '    "relay1_pump": true,\n'
+            '    "relay2_fan": false,\n'
+            '    "relay3_heater": true\n'
+            '  }\n'
+            '}</pre>'
+        )
+
+    def get_fieldsets(self, request, obj=None):
+        """Inject dynamic topic examples based on real board IDs."""
+        fieldsets = []
+        for title, options in self.fieldsets:
+            new_options = options.copy()
+            if title == '📡 ตั้งค่า Topic':
+                new_options['description'] = self._build_topic_description()
+            fieldsets.append((title, new_options))
+        return tuple(fieldsets)
+
     def get_form(self, request, obj=None, change=False, **kwargs):
         """Customize labels and help texts for Thai readability."""
         form = super().get_form(request, obj, change=change, **kwargs)
+        board_ids = self._get_example_board_ids()
+        sample_board_id = board_ids[0] if board_ids else 'ESP32-FARM-001'
 
         form.base_fields['broker'].label = 'Broker'
         form.base_fields['broker'].help_text = 'ชื่อโฮสต์หรือ IP ของ MQTT Broker เช่น broker.hivemq.com'
@@ -268,21 +352,35 @@ class MQTTSettingsAdmin(admin.ModelAdmin):
         form.base_fields['password'].help_text = 'กรอกเมื่อ Broker ต้องการยืนยันตัวตน (ถ้าไม่ใช้ให้เว้นว่าง)'
 
         form.base_fields['telemetry_topic'].label = 'Telemetry topic'
+        form.base_fields['telemetry_topic'].widget.attrs.update({
+            'style': 'width: 640px; max-width: 100%;',
+            'placeholder': 'เช่น smartfarm/{board_id}/telemetry หรือ smartfarm/+/telemetry'
+        })
         form.base_fields['telemetry_topic'].help_text = (
-            'Topic สำหรับรับข้อมูลเซ็นเซอร์ เช่น smartfarm/{board_id}/telemetry '
-            'หรือ smartfarm/+/telemetry'
+            'Topic สำหรับรับข้อมูลเซ็นเซอร์ เช่น smartfarm/{board_id}/telemetry หรือ smartfarm/+/telemetry '
+            f'(MQTT Explorer ทดสอบ: Subscribe ที่ smartfarm/{sample_board_id}/telemetry)'
         )
 
         form.base_fields['status_topic'].label = 'Status topic'
+        form.base_fields['status_topic'].widget.attrs.update({
+            'style': 'width: 640px; max-width: 100%;',
+            'placeholder': 'เช่น smartfarm/{board_id}/status หรือ smartfarm/+/status'
+        })
         form.base_fields['status_topic'].help_text = (
-            'Topic สำหรับรับสถานะอุปกรณ์ เช่น smartfarm/{board_id}/status '
-            'หรือ smartfarm/+/status'
+            'Topic สำหรับรับสถานะอุปกรณ์ เช่น smartfarm/{board_id}/status หรือ smartfarm/+/status '
+            f'(MQTT Explorer ทดสอบ: Subscribe ที่ smartfarm/{sample_board_id}/status)'
         )
 
         form.base_fields['control_topic_pattern'].label = 'Control topic pattern'
+        form.base_fields['control_topic_pattern'].widget.attrs.update({
+            'style': 'width: 640px; max-width: 100%;',
+            'placeholder': 'เช่น smartfarm/{board_id}/control'
+        })
         form.base_fields['control_topic_pattern'].help_text = (
             'Topic สำหรับส่งคำสั่งควบคุม เช่น smartfarm/{board_id}/control '
-            '(ระบบจะแทน {board_id} อัตโนมัติ)'
+            '(ระบบจะแทน {board_id} อัตโนมัติ, MQTT Explorer ทดสอบ: Publish ไปที่ '
+            f'smartfarm/{sample_board_id}/control, Payload: '
+            '{"command":"relay_control","relays":{"relay1_pump":true,"relay2_fan":false,"relay3_heater":true}})'
         )
 
         form.base_fields['keepalive'].label = 'Keepalive (วินาที)'
@@ -294,14 +392,22 @@ class MQTTSettingsAdmin(admin.ModelAdmin):
         return form
     
     def save_model(self, request, obj, form, change):
-        """Save settings and notify user to restart server"""
+        """Save settings and trigger topic hot-reload when worker is running."""
         from django.contrib import messages
         super().save_model(request, obj, form, change)
-        messages.warning(
-            request,
-            '⚠️ บันทึก MQTT Settings สำเร็จแล้ว กรุณารีสตาร์ต Django server เพื่อให้ค่ามีผล '
-            'โดยกด Ctrl+C แล้วรัน: python manage.py run_mqtt_worker'
-        )
+
+        hot_reload_ok, hot_reload_message = trigger_mqtt_hot_reload()
+        if hot_reload_ok:
+            messages.success(
+                request,
+                f'✅ บันทึก MQTT Settings สำเร็จ และ {hot_reload_message}'
+            )
+        else:
+            messages.warning(
+                request,
+                f'⚠️ บันทึก MQTT Settings สำเร็จ แต่ {hot_reload_message} '
+                'กรณีนี้ให้รีสตาร์ต worker/server เพื่อให้ค่ามีผล'
+            )
     
     def has_add_permission(self, request):
         """Only one settings record allowed"""

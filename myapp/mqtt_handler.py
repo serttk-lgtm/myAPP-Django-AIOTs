@@ -4,6 +4,7 @@ Handles incoming MQTT messages from ESP32 devices and updates database.
 """
 import json
 import logging
+import threading
 from datetime import datetime
 import requests
 import paho.mqtt.client as mqtt
@@ -14,6 +15,45 @@ from myapp.models import Device, TelemetryLog, MQTTSettings
 logger = logging.getLogger(__name__)
 
 
+# Active handler registry for runtime hot-reload from Admin save action.
+_active_handler = None
+_handler_lock = threading.Lock()
+
+
+def set_active_handler(handler):
+    """Register active MQTT handler instance."""
+    global _active_handler
+    with _handler_lock:
+        _active_handler = handler
+
+
+def clear_active_handler(handler=None):
+    """Clear active handler instance."""
+    global _active_handler
+    with _handler_lock:
+        if handler is None or _active_handler is handler:
+            _active_handler = None
+
+
+def get_active_handler():
+    """Get active MQTT handler instance if available."""
+    with _handler_lock:
+        return _active_handler
+
+
+def trigger_mqtt_hot_reload():
+    """
+    Trigger runtime MQTT topic hot-reload from latest DB settings.
+
+    Returns:
+        (success: bool, message: str)
+    """
+    handler = get_active_handler()
+    if not handler:
+        return False, 'ยังไม่พบ MQTT worker ที่กำลังทำงาน จึงยัง hot-reload ไม่ได้'
+    return handler.hot_reload_topics()
+
+
 class MQTTHandler:
     """
     Manages MQTT connection and message processing for Smart Farm devices.
@@ -22,6 +62,11 @@ class MQTTHandler:
     def __init__(self):
         # Get MQTT settings from database
         self.mqtt_settings = MQTTSettings.get_settings()
+        self.reload_lock = threading.Lock()
+        self.stop_event = threading.Event()
+        self.current_telemetry_topic = None
+        self.current_status_topic = None
+        self.current_qos = None
         
         # Use unique client_id and clean_session to prevent duplicate subscriptions
         import uuid
@@ -30,10 +75,49 @@ class MQTTHandler:
         self.client.on_connect = self.on_connect
         self.client.on_message = self.on_message
         self.client.on_disconnect = self.on_disconnect
-        
-        # Set username and password if provided
-        if self.mqtt_settings.username and self.mqtt_settings.password:
-            self.client.username_pw_set(self.mqtt_settings.username, self.mqtt_settings.password)
+        self._apply_credentials(self.mqtt_settings)
+
+    def refresh_settings(self):
+        """Refresh MQTT settings from database."""
+        self.mqtt_settings = MQTTSettings.get_settings()
+
+    @staticmethod
+    def _normalize_auth(username, password):
+        """Normalize auth values for comparisons."""
+        return username or '', password or ''
+
+    def _connection_signature(self, settings_obj):
+        """Build a comparable signature for broker connection settings."""
+        user, pwd = self._normalize_auth(settings_obj.username, settings_obj.password)
+        return settings_obj.broker, settings_obj.port, settings_obj.keepalive, user, pwd
+
+    def _apply_credentials(self, settings_obj):
+        """
+        Apply credentials to MQTT client.
+        If username/password are empty, clear auth settings.
+        """
+        user, pwd = self._normalize_auth(settings_obj.username, settings_obj.password)
+        if user and pwd:
+            self.client.username_pw_set(user, pwd)
+        else:
+            # Clear credentials when auth is not configured.
+            self.client.username_pw_set(None, None)
+
+    def _unsubscribe_current_topics(self):
+        """Unsubscribe from current topics if any."""
+        if self.current_telemetry_topic:
+            self.client.unsubscribe(self.current_telemetry_topic)
+        if self.current_status_topic:
+            self.client.unsubscribe(self.current_status_topic)
+
+    def _subscribe_current_settings(self):
+        """Subscribe based on latest settings and cache active topics."""
+        self.client.subscribe(self.mqtt_settings.telemetry_topic, qos=self.mqtt_settings.qos)
+        self.client.subscribe(self.mqtt_settings.status_topic, qos=self.mqtt_settings.qos)
+
+        self.current_telemetry_topic = self.mqtt_settings.telemetry_topic
+        self.current_status_topic = self.mqtt_settings.status_topic
+        self.current_qos = self.mqtt_settings.qos
     
     def on_connect(self, client, userdata, flags, rc):
         """
@@ -41,14 +125,88 @@ class MQTTHandler:
         """
         if rc == 0:
             logger.info(f"Connected to MQTT broker successfully (Client ID: {client._client_id.decode() if hasattr(client._client_id, 'decode') else client._client_id})")
-            
-            # Subscribe to topics from settings with configured QoS
-            client.subscribe(self.mqtt_settings.telemetry_topic, qos=self.mqtt_settings.qos)
-            client.subscribe(self.mqtt_settings.status_topic, qos=self.mqtt_settings.qos)
-            
-            logger.info(f"Subscribed to topics: {self.mqtt_settings.telemetry_topic}, {self.mqtt_settings.status_topic} (QoS {self.mqtt_settings.qos})")
+
+            # Always refresh settings on (re)connect before subscribing.
+            self.refresh_settings()
+            self._subscribe_current_settings()
+
+            logger.info(
+                f"Subscribed to topics: {self.current_telemetry_topic}, "
+                f"{self.current_status_topic} (QoS {self.current_qos})"
+            )
         else:
             logger.error(f"Failed to connect to MQTT broker with code: {rc}")
+
+    def hot_reload_topics(self):
+        """
+        Runtime reload from DB settings without restarting worker.
+        - If broker/port/credentials/keepalive changed: reconnect automatically.
+        - If only topic/QoS changed: unsubscribe/subscribe automatically.
+
+        Returns:
+            (success: bool, message: str)
+        """
+        with self.reload_lock:
+            try:
+                old_settings = self.mqtt_settings
+                old_conn_sig = self._connection_signature(old_settings)
+                old_telemetry = self.current_telemetry_topic
+                old_status = self.current_status_topic
+                old_qos = self.current_qos
+
+                self.refresh_settings()
+                new_settings = self.mqtt_settings
+                new_conn_sig = self._connection_signature(new_settings)
+
+                new_telemetry = new_settings.telemetry_topic
+                new_status = new_settings.status_topic
+                new_qos = new_settings.qos
+                connection_changed = old_conn_sig != new_conn_sig
+
+                # Reconnect when broker/port/keepalive/credentials changed.
+                if connection_changed:
+                    self._apply_credentials(new_settings)
+
+                    if self.client.is_connected():
+                        self._unsubscribe_current_topics()
+                        self.client.disconnect()
+
+                    self.client.connect(new_settings.broker, new_settings.port, new_settings.keepalive)
+
+                    logger.info(
+                        'Auto-reconnect applied due to connection setting changes: '
+                        f'{old_conn_sig} -> {new_conn_sig}'
+                    )
+
+                    return (
+                        True,
+                        'auto-reconnect สำเร็จแล้ว (broker/credential/connection settings เปลี่ยน)'
+                    )
+
+                if not self.client.is_connected():
+                    return False, 'MQTT worker ยังไม่เชื่อมต่อ broker จึงยัง reload topic ไม่ได้'
+
+                if (
+                    old_telemetry == new_telemetry
+                    and old_status == new_status
+                    and old_qos == new_qos
+                ):
+                    return True, 'ค่าการเชื่อมต่อและ Topic/QoS ไม่เปลี่ยนแปลง จึงไม่ต้อง reload'
+
+                # Unsubscribe old topics first, then subscribe new topics.
+                self._unsubscribe_current_topics()
+                self._subscribe_current_settings()
+
+                logger.info(
+                    'Hot-reload topic subscriptions: '
+                    f'{old_telemetry}, {old_status} (QoS {old_qos}) -> '
+                    f'{new_telemetry}, {new_status} (QoS {new_qos})'
+                )
+
+                return True, 'hot-reload Topic สำเร็จแล้ว (unsubscribe/subscribe ใหม่อัตโนมัติ)'
+            except Exception as e:
+                logger.error(f'Failed to hot-reload topics: {e}', exc_info=True)
+                return False, f'hot-reload ล้มเหลว: {e}'
     
     def on_disconnect(self, client, userdata, rc):
         """
@@ -202,35 +360,39 @@ class MQTTHandler:
         """
         try:
             # Get broker settings from database
-            mqtt_settings = MQTTSettings.get_settings()
+            self.refresh_settings()
+            mqtt_settings = self.mqtt_settings
             
             logger.info(f"Connecting to MQTT broker at {mqtt_settings.broker}:{mqtt_settings.port}")
             self.client.connect(mqtt_settings.broker, mqtt_settings.port, mqtt_settings.keepalive)
+            set_active_handler(self)
         except Exception as e:
             logger.error(f"Failed to connect to MQTT broker: {e}", exc_info=True)
             raise
     
     def start(self):
         """
-        Starts the MQTT client loop.
+        Starts MQTT network loop and blocks until stop is requested.
         """
         logger.info("Starting MQTT client loop")
-        self.client.loop_forever()
+        self.stop_event.clear()
+        self.client.loop_start()
+        self.stop_event.wait()
     
     def stop(self):
         """
         Stops the MQTT client loop and disconnects.
         """
         logger.info("Stopping MQTT client")
+        self.stop_event.set()
         # Unsubscribe from topics using settings
         try:
-            mqtt_settings = MQTTSettings.get_settings()
-            self.client.unsubscribe(mqtt_settings.telemetry_topic)
-            self.client.unsubscribe(mqtt_settings.status_topic)
+            self._unsubscribe_current_topics()
         except Exception as e:
             logger.warning(f"Error unsubscribing: {e}")
-        self.client.loop_stop()
         self.client.disconnect()
+        self.client.loop_stop()
+        clear_active_handler(self)
 
 
 # Module-level function to publish control commands
