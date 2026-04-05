@@ -246,10 +246,20 @@ class DeviceAdmin(admin.ModelAdmin):
         # Get selected device
         selected_device_id = request.GET.get('device')
         selected_device = None
+        relay_status = None
         
         if selected_device_id:
             try:
                 selected_device = Device.objects.get(board_id=selected_device_id)
+                
+                # Get latest telemetry to show current relay status
+                latest_telemetry = TelemetryLog.objects.filter(
+                    device=selected_device
+                ).order_by('-created_at').first()
+                
+                if latest_telemetry and latest_telemetry.relay_status:
+                    relay_status = latest_telemetry.relay_status
+                    
             except Device.DoesNotExist:
                 messages.error(request, f'Device {selected_device_id} not found')
         
@@ -285,6 +295,7 @@ class DeviceAdmin(admin.ModelAdmin):
             'title': 'Relay Control Panel',
             'online_devices': online_devices,
             'selected_device': selected_device,
+            'relay_status': relay_status,
             'opts': self.model._meta,
         }
         

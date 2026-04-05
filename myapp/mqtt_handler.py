@@ -20,7 +20,10 @@ class MQTTHandler:
     """
     
     def __init__(self):
-        self.client = mqtt.Client()
+        # Use unique client_id and clean_session to prevent duplicate subscriptions
+        import uuid
+        client_id = f"django_smartfarm_{uuid.uuid4().hex[:8]}"
+        self.client = mqtt.Client(client_id=client_id, clean_session=True)
         self.client.on_connect = self.on_connect
         self.client.on_message = self.on_message
         self.client.on_disconnect = self.on_disconnect
@@ -35,11 +38,11 @@ class MQTTHandler:
         Callback when client connects to MQTT broker.
         """
         if rc == 0:
-            logger.info("Connected to MQTT broker successfully")
-            # Subscribe to all smartfarm topics
-            client.subscribe("smartfarm/+/telemetry")
-            client.subscribe("smartfarm/+/status")
-            logger.info("Subscribed to smartfarm topics")
+            logger.info(f"Connected to MQTT broker successfully (Client ID: {client._client_id.decode() if hasattr(client._client_id, 'decode') else client._client_id})")
+            # Subscribe to all smartfarm topics with QoS 0 to prevent message duplication
+            client.subscribe("smartfarm/+/telemetry", qos=0)
+            client.subscribe("smartfarm/+/status", qos=0)
+            logger.info("Subscribed to smartfarm topics (QoS 0)")
         else:
             logger.error(f"Failed to connect to MQTT broker with code: {rc}")
     
@@ -215,6 +218,12 @@ class MQTTHandler:
         Stops the MQTT client loop and disconnects.
         """
         logger.info("Stopping MQTT client")
+        # Unsubscribe before disconnecting to clean up
+        try:
+            self.client.unsubscribe("smartfarm/+/telemetry")
+            self.client.unsubscribe("smartfarm/+/status")
+        except Exception as e:
+            logger.warning(f"Error unsubscribing: {e}")
         self.client.loop_stop()
         self.client.disconnect()
 
