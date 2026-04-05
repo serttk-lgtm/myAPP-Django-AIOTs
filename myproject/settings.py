@@ -89,6 +89,8 @@ ALLOWED_HOSTS = env_list('ALLOWED_HOSTS', '127.0.0.1,localhost')
 
 CSRF_TRUSTED_ORIGINS = env_list('CSRF_TRUSTED_ORIGINS', '')
 
+SITE_URL = os.getenv('SITE_URL', 'http://127.0.0.1:8000' if DEBUG else '')
+
 
 # Application definition
 

@@ -2,10 +2,11 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
+from django.utils import timezone
 import json
 import logging
 from myapp.mqtt_handler import publish_control_command
-from myapp.models import N8NSettings
+from myapp.models import Device, TelemetryLog, N8NSettings
 from myapp.n8n_service import notify_n8n_relay_command
 
 logger = logging.getLogger(__name__)
@@ -26,6 +27,50 @@ def _relay_action_map():
 
 def landing_page(request):
     return render(request, 'myapp/landing.html')
+
+
+@require_http_methods(["GET"])
+def dashboard_data(request):
+    """Provide dashboard snapshot (devices + latest telemetry)."""
+    devices_payload = []
+
+    for device in Device.objects.order_by('board_id'):
+        latest_telemetry = (
+            TelemetryLog.objects
+            .filter(device=device)
+            .order_by('-created_at')
+            .first()
+        )
+
+        sensor_data = latest_telemetry.sensor_data if latest_telemetry else {}
+        relay_status = latest_telemetry.relay_status if latest_telemetry else {}
+
+        devices_payload.append({
+            'board_id': device.board_id,
+            'status': device.status,
+            'ip_address': device.ip_address,
+            'firmware_version': device.firmware_version,
+            'last_seen': device.last_seen.isoformat() if device.last_seen else None,
+            'latest_telemetry': {
+                'created_at': latest_telemetry.created_at.isoformat() if latest_telemetry else None,
+                'rssi': latest_telemetry.rssi if latest_telemetry else None,
+                'sensor_data': sensor_data,
+                'relay_status': relay_status,
+            }
+        })
+
+    online_count = sum(1 for d in devices_payload if d['status'] == 'online')
+
+    return JsonResponse({
+        'success': True,
+        'server_time': timezone.now().isoformat(),
+        'summary': {
+            'device_count': len(devices_payload),
+            'online_count': online_count,
+            'offline_count': len(devices_payload) - online_count,
+        },
+        'devices': devices_payload,
+    })
 
 
 @csrf_exempt

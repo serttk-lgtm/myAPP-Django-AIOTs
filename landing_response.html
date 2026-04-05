@@ -1,0 +1,408 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit V2  Smart Farm Full Stack Dashboard</title>
+    <style>
+        :root {
+            --bg-start: #f2fff3;
+            --bg-end: #d9f7de;
+            --primary: #1f9d55;
+            --primary-dark: #147a40;
+            --accent: #66c96d;
+            --ink: #143120;
+            --muted: #4d6b57;
+            --card: #ffffff;
+            --shadow: 0 20px 40px rgba(20, 60, 32, 0.14);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", "Trebuchet MS", sans-serif;
+            color: var(--ink);
+            background: radial-gradient(circle at 10% 10%, #ffffff 0%, #effff2 25%, transparent 60%),
+                        linear-gradient(135deg, var(--bg-start), var(--bg-end));
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .page {
+            width: min(1200px, 92%);
+            margin: 0 auto;
+            padding: 32px 0 48px;
+        }
+
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 26px;
+            flex-wrap: wrap;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .leaf {
+            width: 44px;
+            height: 44px;
+            border-radius: 14px;
+            background: linear-gradient(145deg, #25b85f, #178145);
+            box-shadow: 0 10px 18px rgba(26, 122, 66, 0.35);
+            position: relative;
+        }
+
+        .leaf::before,
+        .leaf::after {
+            content: "";
+            position: absolute;
+            background: rgba(255, 255, 255, 0.92);
+            border-radius: 12px 12px 0 12px;
+            transform: rotate(45deg);
+        }
+
+        .leaf::before {
+            width: 16px;
+            height: 16px;
+            top: 9px;
+            left: 10px;
+        }
+
+        .leaf::after {
+            width: 10px;
+            height: 10px;
+            top: 21px;
+            left: 22px;
+        }
+
+        .brand h1 {
+            margin: 0;
+            font-size: 1.18rem;
+            letter-spacing: 0.3px;
+        }
+
+        .tag {
+            margin-top: 3px;
+            font-size: 0.83rem;
+            color: var(--muted);
+        }
+
+        .status {
+            background: rgba(31, 157, 85, 0.12);
+            border: 1px solid rgba(31, 157, 85, 0.22);
+            color: var(--primary-dark);
+            padding: 10px 14px;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: 1.25fr 1fr;
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+
+        .hero-card {
+            background: var(--card);
+            border-radius: 24px;
+            padding: 28px;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-card::after {
+            content: "";
+            position: absolute;
+            right: -70px;
+            top: -70px;
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(80, 210, 123, 0.33), rgba(80, 210, 123, 0));
+        }
+
+        .hero h2 {
+            margin: 0 0 10px;
+            font-size: clamp(1.4rem, 2.6vw, 2.1rem);
+            line-height: 1.2;
+        }
+
+        .hero p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 0.98rem;
+            max-width: 620px;
+        }
+
+        .cta-group {
+            margin-top: 18px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            border: none;
+            padding: 11px 16px;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .btn-main {
+            background: linear-gradient(135deg, var(--primary), #2cb562);
+            color: #fff;
+        }
+
+        .btn-sub {
+            background: #eef9f0;
+            color: var(--primary-dark);
+            border: 1px solid #cbeed1;
+        }
+
+        .hero-stats {
+            display: grid;
+            gap: 14px;
+        }
+
+        .stat {
+            background: var(--card);
+            border-radius: 18px;
+            padding: 18px;
+            box-shadow: var(--shadow);
+        }
+
+        .label {
+            color: var(--muted);
+            font-size: 0.86rem;
+        }
+
+        .value {
+            margin-top: 8px;
+            font-size: 1.7rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+        }
+
+        .delta {
+            margin-top: 7px;
+            color: #267f43;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 16px;
+        }
+
+        .card {
+            background: var(--card);
+            border-radius: 18px;
+            box-shadow: var(--shadow);
+            padding: 18px;
+        }
+
+        .card h3 {
+            margin: 0 0 14px;
+            font-size: 1rem;
+        }
+
+        .col-8 { grid-column: span 8; }
+        .col-4 { grid-column: span 4; }
+
+        .sensor-list {
+            display: grid;
+            gap: 10px;
+        }
+
+        .sensor-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f5fdf7;
+            border: 1px solid #ddf4e3;
+            border-radius: 12px;
+            padding: 10px 12px;
+        }
+
+        .sensor-row b {
+            color: var(--ink);
+        }
+
+        .badge {
+            background: #e9f9ec;
+            border: 1px solid #cdeed3;
+            color: #1f7a40;
+            padding: 4px 8px;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .progress-wrap {
+            display: grid;
+            gap: 12px;
+        }
+
+        .progress-item {
+            display: grid;
+            gap: 8px;
+        }
+
+        .bar {
+            height: 9px;
+            border-radius: 999px;
+            background: #e5f5e8;
+            overflow: hidden;
+        }
+
+        .fill {
+            height: 100%;
+            border-radius: inherit;
+            background: linear-gradient(135deg, #3ec070, #1f9d55);
+        }
+
+        .footnote {
+            margin-top: 18px;
+            text-align: center;
+            color: var(--muted);
+            font-size: 0.83rem;
+        }
+
+        .appear {
+            animation: rise 0.7s ease both;
+        }
+
+        .delay-1 { animation-delay: 0.08s; }
+        .delay-2 { animation-delay: 0.16s; }
+        .delay-3 { animation-delay: 0.24s; }
+
+        @keyframes rise {
+            from {
+                opacity: 0;
+                transform: translateY(16px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 980px) {
+            .hero {
+                grid-template-columns: 1fr;
+            }
+            .col-8,
+            .col-4 {
+                grid-column: span 12;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="page">
+        <header class="topbar appear">
+            <div class="brand">
+                <div class="leaf"></div>
+                <div>
+                    <h1>Full Stack Dev UI Dashboard</h1>
+                    <div class="tag">Smart Farm Command Center</div>
+                </div>
+            </div>
+            <div class="status">System Online • Greenhouse Node Sync: 99.9%</div>
+        </header>
+
+        <section class="hero">
+            <article class="hero-card appear delay-1">
+                <h2>ติดตามฟาร์มอัจฉริยะได้แบบ Real-time ในหน้าเดียว</h2>
+                <p>
+                    Dashboard สำหรับนักพัฒนา Full Stack ที่ต้องการภาพรวมเซนเซอร์ น้ำ ปุ๋ย สภาพอากาศ
+                    และพลังงาน พร้อม UI ที่อ่านง่าย ตอบสนองไว และสวยงามในโทนสีเขียวธรรมชาติ
+                </p>
+                <div class="cta-group">
+                    <button class="btn btn-main">Open Monitoring</button>
+                    <button class="btn btn-sub">Export Report</button>
+                </div>
+            </article>
+
+            <aside class="hero-stats">
+                <div class="stat appear delay-2">
+                    <div class="label">Yield Prediction</div>
+                    <div class="value">92.4%</div>
+                    <div class="delta">+4.1% from last week</div>
+                </div>
+                <div class="stat appear delay-3">
+                    <div class="label">Active Devices</div>
+                    <div class="value">48</div>
+                    <div class="delta">All sensors connected</div>
+                </div>
+            </aside>
+        </section>
+
+        <section class="grid">
+            <div class="card col-8 appear delay-1">
+                <h3>Sensor Live Feed</h3>
+                <div class="sensor-list">
+                    <div class="sensor-row">
+                        <span><b>Soil Moisture</b> • Plot A</span>
+                        <span>61% <span class="badge">Stable</span></span>
+                    </div>
+                    <div class="sensor-row">
+                        <span><b>Temperature</b> • Greenhouse 2</span>
+                        <span>27.8°C <span class="badge">Optimal</span></span>
+                    </div>
+                    <div class="sensor-row">
+                        <span><b>Humidity</b> • Hydroponic Zone</span>
+                        <span>73% <span class="badge">Good</span></span>
+                    </div>
+                    <div class="sensor-row">
+                        <span><b>Water Tank</b> • Main Supply</span>
+                        <span>84% <span class="badge">Healthy</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card col-4 appear delay-2">
+                <h3>Resource Usage</h3>
+                <div class="progress-wrap">
+                    <div class="progress-item">
+                        <div class="label">Water Consumption</div>
+                        <div class="bar"><div class="fill" style="width: 68%;"></div></div>
+                    </div>
+                    <div class="progress-item">
+                        <div class="label">Solar Capacity</div>
+                        <div class="bar"><div class="fill" style="width: 81%;"></div></div>
+                    </div>
+                    <div class="progress-item">
+                        <div class="label">Fertilizer Stock</div>
+                        <div class="bar"><div class="fill" style="width: 56%;"></div></div>
+                    </div>
+                    <div class="progress-item">
+                        <div class="label">Irrigation Efficiency</div>
+                        <div class="bar"><div class="fill" style="width: 89%;"></div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="footnote">
+            Built with Django • Smart Farm UI Theme • April 2026
+        </div>
+    </main>
+</body>
+</html>
+

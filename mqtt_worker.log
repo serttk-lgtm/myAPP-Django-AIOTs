@@ -12081,3 +12081,821 @@ DEBUG 2026-04-05 18:29:08,347 connectionpool Starting new HTTPS connection (1): 
 DEBUG 2026-04-05 18:29:08,507 connectionpool https://n8n.thaitechzone.cloud:443 "POST /webhook-test/d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4 HTTP/1.1" 404 262
 WARNING 2026-04-05 18:29:08,512 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
 DEBUG 2026-04-05 18:29:08,519 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:29:15,336 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:29:15,337 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 9354173, 'rssi': -50, 'sensors': {'water_temp': 30.6, 'air_temp': 32.7, 'air_humidity': 63.3, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:29:15,375 connectionpool Starting new HTTPS connection (1): n8n.thaitechzone.cloud:443
+DEBUG 2026-04-05 18:29:15,530 connectionpool https://n8n.thaitechzone.cloud:443 "POST /webhook-test/d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4 HTTP/1.1" 404 262
+WARNING 2026-04-05 18:29:15,530 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+DEBUG 2026-04-05 18:29:15,531 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:29:25,322 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:29:25,324 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 9364173, 'rssi': -49, 'sensors': {'water_temp': 30.6, 'air_temp': 32.7, 'air_humidity': 63.3, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:29:25,357 connectionpool Starting new HTTPS connection (1): n8n.thaitechzone.cloud:443
+DEBUG 2026-04-05 18:29:25,524 connectionpool https://n8n.thaitechzone.cloud:443 "POST /webhook-test/d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4 HTTP/1.1" 404 262
+WARNING 2026-04-05 18:29:25,528 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+DEBUG 2026-04-05 18:29:25,532 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:29:35,331 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:29:35,334 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 9374173, 'rssi': -50, 'sensors': {'water_temp': 30.6, 'air_temp': 32.7, 'air_humidity': 63.4, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:29:35,364 connectionpool Starting new HTTPS connection (1): n8n.thaitechzone.cloud:443
+DEBUG 2026-04-05 18:29:35,522 connectionpool https://n8n.thaitechzone.cloud:443 "POST /webhook-test/d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4 HTTP/1.1" 404 262
+WARNING 2026-04-05 18:29:35,523 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+DEBUG 2026-04-05 18:29:35,524 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:29:35,771 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status
+DEBUG 2026-04-05 18:29:35,772 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'status': 'online', 'ip': '192.168.1.7', 'firmware': '1.0.0', 'uptime': 9374, 'timestamp': 9374207}
+DEBUG 2026-04-05 18:29:35,825 connectionpool Starting new HTTPS connection (1): n8n.thaitechzone.cloud:443
+DEBUG 2026-04-05 18:29:35,996 connectionpool https://n8n.thaitechzone.cloud:443 "POST /webhook-test/0594e983-5b07-45c0-9942-ad1595224f1f HTTP/1.1" 404 262
+WARNING 2026-04-05 18:29:36,001 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"0594e983-5b07-45c0-9942-ad1595224f1f\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+DEBUG 2026-04-05 18:29:36,005 mqtt_handler Updated device: ESP32-FARM-001-NATTAPHOL-PALM with status online
+DEBUG 2026-04-05 18:29:45,336 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:29:45,338 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 9384173, 'rssi': -47, 'sensors': {'water_temp': 30.6, 'air_temp': 32.7, 'air_humidity': 63.5, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:29:45,366 connectionpool Starting new HTTPS connection (1): n8n.thaitechzone.cloud:443
+DEBUG 2026-04-05 18:29:45,554 connectionpool https://n8n.thaitechzone.cloud:443 "POST /webhook-test/d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4 HTTP/1.1" 404 262
+WARNING 2026-04-05 18:29:45,558 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+DEBUG 2026-04-05 18:29:45,562 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:29:55,330 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:29:55,332 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 9394173, 'rssi': -49, 'sensors': {'water_temp': 30.6, 'air_temp': 32.7, 'air_humidity': 63.5, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:29:55,373 connectionpool Starting new HTTPS connection (1): n8n.thaitechzone.cloud:443
+DEBUG 2026-04-05 18:29:55,552 connectionpool https://n8n.thaitechzone.cloud:443 "POST /webhook-test/d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4 HTTP/1.1" 404 262
+WARNING 2026-04-05 18:29:55,555 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+DEBUG 2026-04-05 18:29:55,558 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:30:05,327 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:30:05,329 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 9404173, 'rssi': -48, 'sensors': {'water_temp': 30.6, 'air_temp': 32.7, 'air_humidity': 63.7, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:30:05,368 connectionpool Starting new HTTPS connection (1): n8n.thaitechzone.cloud:443
+DEBUG 2026-04-05 18:30:05,563 connectionpool https://n8n.thaitechzone.cloud:443 "POST /webhook-test/d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4 HTTP/1.1" 404 262
+WARNING 2026-04-05 18:30:05,566 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+DEBUG 2026-04-05 18:30:05,569 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:30:05,887 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status
+DEBUG 2026-04-05 18:30:05,889 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'status': 'online', 'ip': '192.168.1.7', 'firmware': '1.0.0', 'uptime': 9404, 'timestamp': 9404207}
+DEBUG 2026-04-05 18:30:05,942 connectionpool Starting new HTTPS connection (1): n8n.thaitechzone.cloud:443
+DEBUG 2026-04-05 18:30:06,132 connectionpool https://n8n.thaitechzone.cloud:443 "POST /webhook-test/0594e983-5b07-45c0-9942-ad1595224f1f HTTP/1.1" 404 262
+WARNING 2026-04-05 18:30:06,135 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"0594e983-5b07-45c0-9942-ad1595224f1f\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+DEBUG 2026-04-05 18:30:06,138 mqtt_handler Updated device: ESP32-FARM-001-NATTAPHOL-PALM with status online
+DEBUG 2026-04-05 18:30:15,425 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:30:15,425 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 9414176, 'rssi': -49, 'sensors': {'water_temp': 30.6, 'air_temp': 32.7, 'air_humidity': 63.8, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:30:15,450 connectionpool Starting new HTTPS connection (1): n8n.thaitechzone.cloud:443
+DEBUG 2026-04-05 18:30:15,616 connectionpool https://n8n.thaitechzone.cloud:443 "POST /webhook-test/d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4 HTTP/1.1" 404 262
+WARNING 2026-04-05 18:30:15,618 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+DEBUG 2026-04-05 18:30:15,619 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:30:25,355 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:30:25,357 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 9424182, 'rssi': -49, 'sensors': {'water_temp': 30.6, 'air_temp': 32.7, 'air_humidity': 64, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:30:25,385 connectionpool Starting new HTTPS connection (1): n8n.thaitechzone.cloud:443
+DEBUG 2026-04-05 18:30:25,551 connectionpool https://n8n.thaitechzone.cloud:443 "POST /webhook-test/d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4 HTTP/1.1" 404 262
+WARNING 2026-04-05 18:30:25,551 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+DEBUG 2026-04-05 18:30:25,552 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:30:35,348 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:30:35,349 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 9434187, 'rssi': -49, 'sensors': {'water_temp': 30.6, 'air_temp': 32.7, 'air_humidity': 63.8, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:30:35,374 connectionpool Starting new HTTPS connection (1): n8n.thaitechzone.cloud:443
+DEBUG 2026-04-05 18:30:35,538 connectionpool https://n8n.thaitechzone.cloud:443 "POST /webhook-test/d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4 HTTP/1.1" 404 262
+WARNING 2026-04-05 18:30:35,539 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+DEBUG 2026-04-05 18:30:35,540 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:30:37,997 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status
+DEBUG 2026-04-05 18:30:37,999 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'status': 'online', 'ip': '192.168.1.7', 'firmware': '1.0.0', 'uptime': 9434, 'timestamp': 9434220}
+DEBUG 2026-04-05 18:30:38,026 connectionpool Starting new HTTPS connection (1): n8n.thaitechzone.cloud:443
+DEBUG 2026-04-05 18:30:38,197 connectionpool https://n8n.thaitechzone.cloud:443 "POST /webhook-test/0594e983-5b07-45c0-9942-ad1595224f1f HTTP/1.1" 404 262
+WARNING 2026-04-05 18:30:38,198 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"0594e983-5b07-45c0-9942-ad1595224f1f\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+DEBUG 2026-04-05 18:30:38,199 mqtt_handler Updated device: ESP32-FARM-001-NATTAPHOL-PALM with status online
+DEBUG 2026-04-05 18:30:45,334 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:30:45,334 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 9444173, 'rssi': -49, 'sensors': {'water_temp': 30.6, 'air_temp': 32.7, 'air_humidity': 63.6, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:30:45,359 connectionpool Starting new HTTPS connection (1): n8n.thaitechzone.cloud:443
+DEBUG 2026-04-05 18:30:45,522 connectionpool https://n8n.thaitechzone.cloud:443 "POST /webhook-test/d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4 HTTP/1.1" 404 262
+WARNING 2026-04-05 18:30:45,523 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+DEBUG 2026-04-05 18:30:45,524 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:30:55,324 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:30:55,325 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 9454173, 'rssi': -49, 'sensors': {'water_temp': 30.6, 'air_temp': 32.7, 'air_humidity': 63.6, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:30:55,370 connectionpool Starting new HTTPS connection (1): n8n.thaitechzone.cloud:443
+DEBUG 2026-04-05 18:30:55,534 connectionpool https://n8n.thaitechzone.cloud:443 "POST /webhook-test/d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4 HTTP/1.1" 404 262
+WARNING 2026-04-05 18:30:55,535 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+DEBUG 2026-04-05 18:30:55,536 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:31:05,331 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:31:05,332 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 9464173, 'rssi': -51, 'sensors': {'water_temp': 30.6, 'air_temp': 32.7, 'air_humidity': 63.5, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:31:05,364 connectionpool Starting new HTTPS connection (1): n8n.thaitechzone.cloud:443
+DEBUG 2026-04-05 18:31:05,519 connectionpool https://n8n.thaitechzone.cloud:443 "POST /webhook-test/d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4 HTTP/1.1" 404 262
+WARNING 2026-04-05 18:31:05,520 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+DEBUG 2026-04-05 18:31:05,521 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:31:05,955 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status
+DEBUG 2026-04-05 18:31:05,956 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'status': 'online', 'ip': '192.168.1.7', 'firmware': '1.0.0', 'uptime': 9464, 'timestamp': 9464206}
+DEBUG 2026-04-05 18:31:05,969 connectionpool Starting new HTTPS connection (1): n8n.thaitechzone.cloud:443
+DEBUG 2026-04-05 18:31:06,164 connectionpool https://n8n.thaitechzone.cloud:443 "POST /webhook-test/0594e983-5b07-45c0-9942-ad1595224f1f HTTP/1.1" 404 262
+WARNING 2026-04-05 18:31:06,166 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"0594e983-5b07-45c0-9942-ad1595224f1f\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+DEBUG 2026-04-05 18:31:06,168 mqtt_handler Updated device: ESP32-FARM-001-NATTAPHOL-PALM with status online
+DEBUG 2026-04-05 18:31:16,012 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:31:16,012 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 9474173, 'rssi': -48, 'sensors': {'water_temp': 30.6, 'air_temp': 32.7, 'air_humidity': 63.6, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:31:16,030 connectionpool Starting new HTTPS connection (1): n8n.thaitechzone.cloud:443
+DEBUG 2026-04-05 18:31:16,194 connectionpool https://n8n.thaitechzone.cloud:443 "POST /webhook-test/d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4 HTTP/1.1" 404 262
+WARNING 2026-04-05 18:31:16,195 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+DEBUG 2026-04-05 18:31:16,196 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:31:25,317 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:31:25,320 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 9484173, 'rssi': -49, 'sensors': {'water_temp': 30.6, 'air_temp': 32.7, 'air_humidity': 63.7, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:31:25,378 connectionpool Starting new HTTPS connection (1): n8n.thaitechzone.cloud:443
+DEBUG 2026-04-05 18:31:25,551 connectionpool https://n8n.thaitechzone.cloud:443 "POST /webhook-test/d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4 HTTP/1.1" 404 262
+WARNING 2026-04-05 18:31:25,554 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+DEBUG 2026-04-05 18:31:25,557 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:31:35,905 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:31:35,907 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 9494173, 'rssi': -49, 'sensors': {'water_temp': 30.6, 'air_temp': 32.7, 'air_humidity': 63.7, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:31:35,970 connectionpool Starting new HTTPS connection (1): n8n.thaitechzone.cloud:443
+DEBUG 2026-04-05 18:31:36,159 connectionpool https://n8n.thaitechzone.cloud:443 "POST /webhook-test/d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4 HTTP/1.1" 404 262
+WARNING 2026-04-05 18:31:36,161 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+DEBUG 2026-04-05 18:31:36,164 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:31:36,381 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status
+DEBUG 2026-04-05 18:31:36,382 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'status': 'online', 'ip': '192.168.1.7', 'firmware': '1.0.0', 'uptime': 9494, 'timestamp': 9494206}
+DEBUG 2026-04-05 18:31:36,404 connectionpool Starting new HTTPS connection (1): n8n.thaitechzone.cloud:443
+DEBUG 2026-04-05 18:31:36,593 connectionpool https://n8n.thaitechzone.cloud:443 "POST /webhook-test/0594e983-5b07-45c0-9942-ad1595224f1f HTTP/1.1" 404 262
+WARNING 2026-04-05 18:31:36,594 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"0594e983-5b07-45c0-9942-ad1595224f1f\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+DEBUG 2026-04-05 18:31:36,595 mqtt_handler Updated device: ESP32-FARM-001-NATTAPHOL-PALM with status online
+DEBUG 2026-04-05 18:31:45,314 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:31:45,314 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 9504173, 'rssi': -50, 'sensors': {'water_temp': 30.6, 'air_temp': 32.7, 'air_humidity': 63.7, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:31:45,334 connectionpool Starting new HTTPS connection (1): n8n.thaitechzone.cloud:443
+DEBUG 2026-04-05 18:31:45,496 connectionpool https://n8n.thaitechzone.cloud:443 "POST /webhook-test/d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4 HTTP/1.1" 404 262
+WARNING 2026-04-05 18:31:45,497 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+DEBUG 2026-04-05 18:31:45,498 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:31:55,330 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:31:55,331 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 9514173, 'rssi': -50, 'sensors': {'water_temp': 30.5, 'air_temp': 32.7, 'air_humidity': 63.6, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:31:55,371 connectionpool Starting new HTTPS connection (1): n8n.thaitechzone.cloud:443
+DEBUG 2026-04-05 18:31:55,579 connectionpool https://n8n.thaitechzone.cloud:443 "POST /webhook-test/d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4 HTTP/1.1" 404 262
+WARNING 2026-04-05 18:31:55,583 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+DEBUG 2026-04-05 18:31:55,585 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+INFO 2026-04-05 18:32:09,110 apps [MQTT] Starting MQTT Worker automatically...
+INFO 2026-04-05 18:32:09,110 apps [MQTT] Worker thread started successfully
+INFO 2026-04-05 18:32:09,129 mqtt_handler Connecting to MQTT broker at broker.hivemq.com:1883
+INFO 2026-04-05 18:32:09,362 mqtt_handler Starting MQTT client loop
+INFO 2026-04-05 18:32:09,562 mqtt_handler Connected to MQTT broker successfully (Client ID: django_smartfarm_050fe5a4)
+INFO 2026-04-05 18:32:09,566 mqtt_handler Subscribed to topics: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry, smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status (QoS 0)
+DEBUG 2026-04-05 18:32:09,970 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status
+DEBUG 2026-04-05 18:32:09,972 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'status': 'online', 'ip': '192.168.1.7', 'firmware': '1.0.0', 'uptime': 9524, 'timestamp': 9524207}
+DEBUG 2026-04-05 18:32:10,058 connectionpool Starting new HTTPS connection (1): n8n.thaitechzone.cloud:443
+DEBUG 2026-04-05 18:32:10,327 connectionpool https://n8n.thaitechzone.cloud:443 "POST /webhook-test/0594e983-5b07-45c0-9942-ad1595224f1f HTTP/1.1" 404 262
+WARNING 2026-04-05 18:32:10,330 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"0594e983-5b07-45c0-9942-ad1595224f1f\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+DEBUG 2026-04-05 18:32:10,332 mqtt_handler Updated device: ESP32-FARM-001-NATTAPHOL-PALM with status online
+DEBUG 2026-04-05 18:32:15,325 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:32:15,326 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 9534173, 'rssi': -51, 'sensors': {'water_temp': 30.5, 'air_temp': 32.7, 'air_humidity': 63.5, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:32:15,357 connectionpool Starting new HTTPS connection (1): n8n.thaitechzone.cloud:443
+DEBUG 2026-04-05 18:32:15,547 connectionpool https://n8n.thaitechzone.cloud:443 "POST /webhook-test/d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4 HTTP/1.1" 404 262
+WARNING 2026-04-05 18:32:15,549 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+DEBUG 2026-04-05 18:32:15,550 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:32:25,326 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:32:25,326 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 9544173, 'rssi': -48, 'sensors': {'water_temp': 30.5, 'air_temp': 32.7, 'air_humidity': 63.5, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:32:25,347 connectionpool Starting new HTTPS connection (1): n8n.thaitechzone.cloud:443
+DEBUG 2026-04-05 18:32:25,507 connectionpool https://n8n.thaitechzone.cloud:443 "POST /webhook-test/d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4 HTTP/1.1" 404 262
+WARNING 2026-04-05 18:32:25,508 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+DEBUG 2026-04-05 18:32:25,509 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:32:35,313 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:32:35,314 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 9554173, 'rssi': -46, 'sensors': {'water_temp': 30.5, 'air_temp': 32.7, 'air_humidity': 63.5, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:32:35,346 connectionpool Starting new HTTPS connection (1): n8n.thaitechzone.cloud:443
+DEBUG 2026-04-05 18:32:35,503 connectionpool https://n8n.thaitechzone.cloud:443 "POST /webhook-test/d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4 HTTP/1.1" 404 262
+WARNING 2026-04-05 18:32:35,505 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+DEBUG 2026-04-05 18:32:35,506 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:32:35,706 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status
+DEBUG 2026-04-05 18:32:35,707 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'status': 'online', 'ip': '192.168.1.7', 'firmware': '1.0.0', 'uptime': 9554, 'timestamp': 9554208}
+DEBUG 2026-04-05 18:32:35,738 connectionpool Starting new HTTPS connection (1): n8n.thaitechzone.cloud:443
+DEBUG 2026-04-05 18:32:35,912 connectionpool https://n8n.thaitechzone.cloud:443 "POST /webhook-test/0594e983-5b07-45c0-9942-ad1595224f1f HTTP/1.1" 404 262
+WARNING 2026-04-05 18:32:35,914 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"0594e983-5b07-45c0-9942-ad1595224f1f\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+DEBUG 2026-04-05 18:32:35,915 mqtt_handler Updated device: ESP32-FARM-001-NATTAPHOL-PALM with status online
+DEBUG 2026-04-05 18:32:45,310 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:32:45,310 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 9564173, 'rssi': -49, 'sensors': {'water_temp': 30.5, 'air_temp': 32.7, 'air_humidity': 63.5, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:32:45,328 connectionpool Starting new HTTPS connection (1): n8n.thaitechzone.cloud:443
+DEBUG 2026-04-05 18:32:45,504 connectionpool https://n8n.thaitechzone.cloud:443 "POST /webhook-test/d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4 HTTP/1.1" 404 262
+WARNING 2026-04-05 18:32:45,504 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+DEBUG 2026-04-05 18:32:45,505 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:32:55,313 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:32:55,314 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 9574173, 'rssi': -48, 'sensors': {'water_temp': 30.5, 'air_temp': 32.8, 'air_humidity': 63.3, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:32:55,331 connectionpool Starting new HTTPS connection (1): n8n.thaitechzone.cloud:443
+DEBUG 2026-04-05 18:32:55,493 connectionpool https://n8n.thaitechzone.cloud:443 "POST /webhook-test/d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4 HTTP/1.1" 404 262
+WARNING 2026-04-05 18:32:55,494 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+DEBUG 2026-04-05 18:32:55,495 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:33:05,314 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:33:05,315 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 9584173, 'rssi': -47, 'sensors': {'water_temp': 30.5, 'air_temp': 32.7, 'air_humidity': 63.3, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:33:05,335 connectionpool Starting new HTTPS connection (1): n8n.thaitechzone.cloud:443
+DEBUG 2026-04-05 18:33:05,536 connectionpool https://n8n.thaitechzone.cloud:443 "POST /webhook-test/d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4 HTTP/1.1" 404 262
+WARNING 2026-04-05 18:33:05,537 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+DEBUG 2026-04-05 18:33:05,538 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:33:05,785 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status
+DEBUG 2026-04-05 18:33:05,785 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'status': 'online', 'ip': '192.168.1.7', 'firmware': '1.0.0', 'uptime': 9584, 'timestamp': 9584207}
+DEBUG 2026-04-05 18:33:05,800 connectionpool Starting new HTTPS connection (1): n8n.thaitechzone.cloud:443
+DEBUG 2026-04-05 18:33:05,963 connectionpool https://n8n.thaitechzone.cloud:443 "POST /webhook-test/0594e983-5b07-45c0-9942-ad1595224f1f HTTP/1.1" 404 262
+WARNING 2026-04-05 18:33:05,964 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"0594e983-5b07-45c0-9942-ad1595224f1f\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+DEBUG 2026-04-05 18:33:05,965 mqtt_handler Updated device: ESP32-FARM-001-NATTAPHOL-PALM with status online
+DEBUG 2026-04-05 18:33:15,324 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:33:15,325 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 9594173, 'rssi': -49, 'sensors': {'water_temp': 30.5, 'air_temp': 32.7, 'air_humidity': 63.2, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:33:15,351 connectionpool Starting new HTTPS connection (1): n8n.thaitechzone.cloud:443
+DEBUG 2026-04-05 18:33:15,519 connectionpool https://n8n.thaitechzone.cloud:443 "POST /webhook-test/d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4 HTTP/1.1" 404 262
+WARNING 2026-04-05 18:33:15,521 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+DEBUG 2026-04-05 18:33:15,524 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:33:25,311 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:33:25,311 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 9604173, 'rssi': -51, 'sensors': {'water_temp': 30.5, 'air_temp': 32.7, 'air_humidity': 63.2, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:33:25,332 connectionpool Starting new HTTPS connection (1): n8n.thaitechzone.cloud:443
+DEBUG 2026-04-05 18:33:25,497 connectionpool https://n8n.thaitechzone.cloud:443 "POST /webhook-test/d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4 HTTP/1.1" 404 262
+WARNING 2026-04-05 18:33:25,498 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+DEBUG 2026-04-05 18:33:25,499 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:33:35,324 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:33:35,325 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 9614173, 'rssi': -49, 'sensors': {'water_temp': 30.5, 'air_temp': 32.7, 'air_humidity': 63.1, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:33:35,344 connectionpool Starting new HTTPS connection (1): n8n.thaitechzone.cloud:443
+DEBUG 2026-04-05 18:33:35,512 connectionpool https://n8n.thaitechzone.cloud:443 "POST /webhook-test/d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4 HTTP/1.1" 404 262
+WARNING 2026-04-05 18:33:35,513 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+DEBUG 2026-04-05 18:33:35,514 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:33:35,759 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status
+DEBUG 2026-04-05 18:33:35,759 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'status': 'online', 'ip': '192.168.1.7', 'firmware': '1.0.0', 'uptime': 9614, 'timestamp': 9614207}
+DEBUG 2026-04-05 18:33:35,772 connectionpool Starting new HTTPS connection (1): n8n.thaitechzone.cloud:443
+DEBUG 2026-04-05 18:33:35,936 connectionpool https://n8n.thaitechzone.cloud:443 "POST /webhook-test/0594e983-5b07-45c0-9942-ad1595224f1f HTTP/1.1" 404 262
+WARNING 2026-04-05 18:33:35,937 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"0594e983-5b07-45c0-9942-ad1595224f1f\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+DEBUG 2026-04-05 18:33:35,939 mqtt_handler Updated device: ESP32-FARM-001-NATTAPHOL-PALM with status online
+DEBUG 2026-04-05 18:33:45,332 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:33:45,333 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 9624173, 'rssi': -51, 'sensors': {'water_temp': 30.5, 'air_temp': 32.7, 'air_humidity': 63.1, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:33:45,354 connectionpool Starting new HTTPS connection (1): n8n.thaitechzone.cloud:443
+DEBUG 2026-04-05 18:33:45,526 connectionpool https://n8n.thaitechzone.cloud:443 "POST /webhook-test/d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4 HTTP/1.1" 404 262
+WARNING 2026-04-05 18:33:45,527 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+DEBUG 2026-04-05 18:33:45,528 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:33:55,322 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:33:55,323 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 9634173, 'rssi': -48, 'sensors': {'water_temp': 30.5, 'air_temp': 32.7, 'air_humidity': 63.2, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:33:55,354 connectionpool Starting new HTTPS connection (1): n8n.thaitechzone.cloud:443
+DEBUG 2026-04-05 18:33:55,526 connectionpool https://n8n.thaitechzone.cloud:443 "POST /webhook-test/d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4 HTTP/1.1" 404 262
+WARNING 2026-04-05 18:33:55,527 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+DEBUG 2026-04-05 18:33:55,528 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+INFO 2026-04-05 18:34:04,842 apps [MQTT] Starting MQTT Worker automatically...
+INFO 2026-04-05 18:34:04,842 apps [MQTT] Worker thread started successfully
+INFO 2026-04-05 18:34:04,851 mqtt_handler Connecting to MQTT broker at broker.hivemq.com:1883
+INFO 2026-04-05 18:34:05,137 mqtt_handler Starting MQTT client loop
+INFO 2026-04-05 18:34:05,337 mqtt_handler Connected to MQTT broker successfully (Client ID: django_smartfarm_713acc85)
+INFO 2026-04-05 18:34:05,341 mqtt_handler Subscribed to topics: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry, smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status (QoS 0)
+DEBUG 2026-04-05 18:34:05,742 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status
+DEBUG 2026-04-05 18:34:05,742 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'status': 'online', 'ip': '192.168.1.7', 'firmware': '1.0.0', 'uptime': 9614, 'timestamp': 9614207}
+DEBUG 2026-04-05 18:34:05,758 connectionpool Starting new HTTPS connection (1): n8n.thaitechzone.cloud:443
+DEBUG 2026-04-05 18:34:05,935 connectionpool https://n8n.thaitechzone.cloud:443 "POST /webhook-test/0594e983-5b07-45c0-9942-ad1595224f1f HTTP/1.1" 404 262
+WARNING 2026-04-05 18:34:05,938 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"0594e983-5b07-45c0-9942-ad1595224f1f\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+DEBUG 2026-04-05 18:34:05,941 mqtt_handler Updated device: ESP32-FARM-001-NATTAPHOL-PALM with status online
+DEBUG 2026-04-05 18:34:06,460 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status
+DEBUG 2026-04-05 18:34:06,462 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'status': 'online', 'ip': '192.168.1.7', 'firmware': '1.0.0', 'uptime': 9644, 'timestamp': 9644207}
+DEBUG 2026-04-05 18:34:06,495 connectionpool Starting new HTTPS connection (1): n8n.thaitechzone.cloud:443
+DEBUG 2026-04-05 18:34:06,652 connectionpool https://n8n.thaitechzone.cloud:443 "POST /webhook-test/0594e983-5b07-45c0-9942-ad1595224f1f HTTP/1.1" 404 262
+WARNING 2026-04-05 18:34:06,655 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"0594e983-5b07-45c0-9942-ad1595224f1f\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+DEBUG 2026-04-05 18:34:06,659 mqtt_handler Updated device: ESP32-FARM-001-NATTAPHOL-PALM with status online
+DEBUG 2026-04-05 18:34:15,481 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:34:15,482 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 9654173, 'rssi': -49, 'sensors': {'water_temp': 30.5, 'air_temp': 32.7, 'air_humidity': 63.2, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:34:15,538 connectionpool Starting new HTTPS connection (1): n8n.thaitechzone.cloud:443
+DEBUG 2026-04-05 18:34:15,712 connectionpool https://n8n.thaitechzone.cloud:443 "POST /webhook-test/d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4 HTTP/1.1" 404 262
+WARNING 2026-04-05 18:34:15,714 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+DEBUG 2026-04-05 18:34:15,716 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:34:25,321 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:34:25,323 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 9664173, 'rssi': -49, 'sensors': {'water_temp': 30.5, 'air_temp': 32.7, 'air_humidity': 63.2, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:34:25,381 connectionpool Starting new HTTPS connection (1): n8n.thaitechzone.cloud:443
+DEBUG 2026-04-05 18:34:25,554 connectionpool https://n8n.thaitechzone.cloud:443 "POST /webhook-test/d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4 HTTP/1.1" 404 262
+WARNING 2026-04-05 18:34:25,557 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+DEBUG 2026-04-05 18:34:25,562 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:34:35,309 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:34:35,310 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 9674173, 'rssi': -48, 'sensors': {'water_temp': 30.5, 'air_temp': 32.7, 'air_humidity': 63.2, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:34:35,354 connectionpool Starting new HTTPS connection (1): n8n.thaitechzone.cloud:443
+DEBUG 2026-04-05 18:34:35,530 connectionpool https://n8n.thaitechzone.cloud:443 "POST /webhook-test/d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4 HTTP/1.1" 404 262
+WARNING 2026-04-05 18:34:35,531 n8n_service n8n outbound webhook failed: status=404 body={"code":404,"message":"The requested webhook \"d7efede5-3537-46a6-9bd0-fcc3ea6e9ac4\" is not registered.","hint":"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works for one call after you click this button)"}
+DEBUG 2026-04-05 18:34:35,532 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:34:35,966 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status
+DEBUG 2026-04-05 18:34:35,969 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'status': 'online', 'ip': '192.168.1.7', 'firmware': '1.0.0', 'uptime': 9674, 'timestamp': 9674207}
+DEBUG 2026-04-05 18:34:36,028 mqtt_handler Updated device: ESP32-FARM-001-NATTAPHOL-PALM with status online
+INFO 2026-04-05 18:34:47,353 apps [MQTT] Starting MQTT Worker automatically...
+INFO 2026-04-05 18:34:47,353 apps [MQTT] Worker thread started successfully
+INFO 2026-04-05 18:34:47,360 mqtt_handler Connecting to MQTT broker at broker.hivemq.com:1883
+INFO 2026-04-05 18:34:47,594 mqtt_handler Starting MQTT client loop
+INFO 2026-04-05 18:34:55,396 mqtt_handler Connected to MQTT broker successfully (Client ID: django_smartfarm_99af8688)
+INFO 2026-04-05 18:34:55,407 mqtt_handler Subscribed to topics: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry, smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status (QoS 0)
+DEBUG 2026-04-05 18:34:55,872 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status
+DEBUG 2026-04-05 18:34:55,872 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'status': 'online', 'ip': '192.168.1.7', 'firmware': '1.0.0', 'uptime': 9674, 'timestamp': 9674207}
+DEBUG 2026-04-05 18:34:55,887 mqtt_handler Updated device: ESP32-FARM-001-NATTAPHOL-PALM with status online
+DEBUG 2026-04-05 18:35:05,316 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:35:05,318 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 9704173, 'rssi': -49, 'sensors': {'water_temp': 30.5, 'air_temp': 32.7, 'air_humidity': 62.9, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:35:05,363 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:35:05,893 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status
+DEBUG 2026-04-05 18:35:05,894 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'status': 'online', 'ip': '192.168.1.7', 'firmware': '1.0.0', 'uptime': 9704, 'timestamp': 9704206}
+DEBUG 2026-04-05 18:35:05,908 mqtt_handler Updated device: ESP32-FARM-001-NATTAPHOL-PALM with status online
+DEBUG 2026-04-05 18:35:15,313 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:35:15,313 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 9714173, 'rssi': -48, 'sensors': {'water_temp': 30.4, 'air_temp': 32.7, 'air_humidity': 62.8, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:35:15,333 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:35:25,330 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:35:25,330 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 9724173, 'rssi': -49, 'sensors': {'water_temp': 30.5, 'air_temp': 32.7, 'air_humidity': 62.9, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:35:25,357 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:35:35,320 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:35:35,321 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 9734173, 'rssi': -49, 'sensors': {'water_temp': 30.5, 'air_temp': 32.7, 'air_humidity': 63.2, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:35:35,361 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:35:35,729 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status
+DEBUG 2026-04-05 18:35:35,732 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'status': 'online', 'ip': '192.168.1.7', 'firmware': '1.0.0', 'uptime': 9734, 'timestamp': 9734207}
+DEBUG 2026-04-05 18:35:35,763 mqtt_handler Updated device: ESP32-FARM-001-NATTAPHOL-PALM with status online
+DEBUG 2026-04-05 18:35:45,316 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:35:45,317 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 9744173, 'rssi': -49, 'sensors': {'water_temp': 30.4, 'air_temp': 32.7, 'air_humidity': 62.9, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:35:45,374 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:35:55,319 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:35:55,319 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 9754173, 'rssi': -48, 'sensors': {'water_temp': 30.4, 'air_temp': 32.7, 'air_humidity': 63, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:35:55,337 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:36:05,312 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:36:05,313 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 9764173, 'rssi': -47, 'sensors': {'water_temp': 30.4, 'air_temp': 32.7, 'air_humidity': 62.9, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:36:05,361 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:36:06,537 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status
+DEBUG 2026-04-05 18:36:06,538 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'status': 'online', 'ip': '192.168.1.7', 'firmware': '1.0.0', 'uptime': 9764, 'timestamp': 9764206}
+DEBUG 2026-04-05 18:36:06,548 mqtt_handler Updated device: ESP32-FARM-001-NATTAPHOL-PALM with status online
+DEBUG 2026-04-05 18:36:15,317 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:36:15,318 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 9774173, 'rssi': -46, 'sensors': {'water_temp': 30.4, 'air_temp': 32.7, 'air_humidity': 63, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:36:15,353 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:36:25,315 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:36:25,316 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 9784173, 'rssi': -47, 'sensors': {'water_temp': 30.4, 'air_temp': 32.7, 'air_humidity': 63.1, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:36:25,340 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:36:35,312 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:36:35,313 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 9794173, 'rssi': -47, 'sensors': {'water_temp': 30.4, 'air_temp': 32.7, 'air_humidity': 62.9, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:36:35,331 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:36:35,757 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status
+DEBUG 2026-04-05 18:36:35,757 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'status': 'online', 'ip': '192.168.1.7', 'firmware': '1.0.0', 'uptime': 9794, 'timestamp': 9794207}
+DEBUG 2026-04-05 18:36:35,775 mqtt_handler Updated device: ESP32-FARM-001-NATTAPHOL-PALM with status online
+DEBUG 2026-04-05 18:36:45,395 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:36:45,397 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 9804175, 'rssi': -45, 'sensors': {'water_temp': 30.4, 'air_temp': 32.7, 'air_humidity': 62.8, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:36:45,449 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:36:55,324 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:36:55,325 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 9814181, 'rssi': -48, 'sensors': {'water_temp': 30.4, 'air_temp': 32.6, 'air_humidity': 62.8, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:36:55,362 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:37:05,325 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:37:05,326 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 9824187, 'rssi': -48, 'sensors': {'water_temp': 30.4, 'air_temp': 32.6, 'air_humidity': 62.8, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:37:05,352 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:37:05,570 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status
+DEBUG 2026-04-05 18:37:05,570 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'status': 'online', 'ip': '192.168.1.7', 'firmware': '1.0.0', 'uptime': 9824, 'timestamp': 9824220}
+DEBUG 2026-04-05 18:37:05,582 mqtt_handler Updated device: ESP32-FARM-001-NATTAPHOL-PALM with status online
+DEBUG 2026-04-05 18:37:15,315 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:37:15,316 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 9834173, 'rssi': -47, 'sensors': {'water_temp': 30.4, 'air_temp': 32.6, 'air_humidity': 62.8, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:37:15,343 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:37:25,778 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:37:25,779 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 9844173, 'rssi': -45, 'sensors': {'water_temp': 30.4, 'air_temp': 32.6, 'air_humidity': 62.9, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:37:25,805 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:37:35,310 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:37:35,311 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 9854173, 'rssi': -48, 'sensors': {'water_temp': 30.4, 'air_temp': 32.6, 'air_humidity': 62.9, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:37:35,336 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:37:35,775 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status
+DEBUG 2026-04-05 18:37:35,776 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'status': 'online', 'ip': '192.168.1.7', 'firmware': '1.0.0', 'uptime': 9854, 'timestamp': 9854206}
+DEBUG 2026-04-05 18:37:35,799 mqtt_handler Updated device: ESP32-FARM-001-NATTAPHOL-PALM with status online
+DEBUG 2026-04-05 18:37:45,317 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:37:45,318 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 9864173, 'rssi': -47, 'sensors': {'water_temp': 30.4, 'air_temp': 32.6, 'air_humidity': 63, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:37:45,336 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:37:55,320 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:37:55,322 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 9874173, 'rssi': -47, 'sensors': {'water_temp': 30.4, 'air_temp': 32.6, 'air_humidity': 63.1, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:37:55,356 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:38:19,393 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:38:19,395 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 9884173, 'rssi': -51, 'sensors': {'water_temp': 30.4, 'air_temp': 32.6, 'air_humidity': 63.1, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:38:19,421 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:38:19,896 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status
+DEBUG 2026-04-05 18:38:19,897 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'status': 'online', 'ip': '192.168.1.7', 'firmware': '1.0.0', 'uptime': 9884, 'timestamp': 9884206}
+DEBUG 2026-04-05 18:38:19,909 mqtt_handler Updated device: ESP32-FARM-001-NATTAPHOL-PALM with status online
+DEBUG 2026-04-05 18:38:19,910 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:38:19,910 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 9894173, 'rssi': -51, 'sensors': {'water_temp': 30.4, 'air_temp': 32.6, 'air_humidity': 63.1, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:38:19,928 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:38:25,313 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:38:25,314 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 9904173, 'rssi': -45, 'sensors': {'water_temp': 30.4, 'air_temp': 32.6, 'air_humidity': 63.1, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:38:25,346 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:38:35,314 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:38:35,314 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 9914173, 'rssi': -46, 'sensors': {'water_temp': 30.4, 'air_temp': 32.6, 'air_humidity': 63.1, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:38:35,353 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:38:35,884 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status
+DEBUG 2026-04-05 18:38:35,885 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'status': 'online', 'ip': '192.168.1.7', 'firmware': '1.0.0', 'uptime': 9914, 'timestamp': 9914206}
+DEBUG 2026-04-05 18:38:35,915 mqtt_handler Updated device: ESP32-FARM-001-NATTAPHOL-PALM with status online
+DEBUG 2026-04-05 18:38:45,311 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:38:45,313 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 9924173, 'rssi': -46, 'sensors': {'water_temp': 30.4, 'air_temp': 32.6, 'air_humidity': 63, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:38:45,348 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:38:55,328 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:38:55,330 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 9934173, 'rssi': -45, 'sensors': {'water_temp': 30.4, 'air_temp': 32.6, 'air_humidity': 63, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:38:55,366 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:39:05,309 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:39:05,310 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 9944173, 'rssi': -46, 'sensors': {'water_temp': 30.4, 'air_temp': 32.6, 'air_humidity': 63.1, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:39:05,327 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:39:05,695 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status
+DEBUG 2026-04-05 18:39:05,695 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'status': 'online', 'ip': '192.168.1.7', 'firmware': '1.0.0', 'uptime': 9944, 'timestamp': 9944207}
+DEBUG 2026-04-05 18:39:05,713 mqtt_handler Updated device: ESP32-FARM-001-NATTAPHOL-PALM with status online
+INFO 2026-04-05 18:39:19,443 apps [MQTT] Starting MQTT Worker automatically...
+INFO 2026-04-05 18:39:19,443 apps [MQTT] Worker thread started successfully
+INFO 2026-04-05 18:39:19,451 mqtt_handler Connecting to MQTT broker at broker.hivemq.com:1883
+INFO 2026-04-05 18:39:19,699 mqtt_handler Starting MQTT client loop
+INFO 2026-04-05 18:39:26,951 mqtt_handler Connected to MQTT broker successfully (Client ID: django_smartfarm_545f4751)
+INFO 2026-04-05 18:39:26,955 mqtt_handler Subscribed to topics: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry, smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status (QoS 0)
+DEBUG 2026-04-05 18:39:27,357 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status
+DEBUG 2026-04-05 18:39:27,357 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'status': 'online', 'ip': '192.168.1.7', 'firmware': '1.0.0', 'uptime': 9944, 'timestamp': 9944207}
+DEBUG 2026-04-05 18:39:27,368 mqtt_handler Updated device: ESP32-FARM-001-NATTAPHOL-PALM with status online
+DEBUG 2026-04-05 18:39:35,319 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:39:35,319 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 9974173, 'rssi': -46, 'sensors': {'water_temp': 30.3, 'air_temp': 32.6, 'air_humidity': 63.1, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:39:35,342 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:39:35,907 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status
+DEBUG 2026-04-05 18:39:35,908 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'status': 'online', 'ip': '192.168.1.7', 'firmware': '1.0.0', 'uptime': 9974, 'timestamp': 9974207}
+DEBUG 2026-04-05 18:39:35,922 mqtt_handler Updated device: ESP32-FARM-001-NATTAPHOL-PALM with status online
+INFO 2026-04-05 18:39:44,139 apps [MQTT] Starting MQTT Worker automatically...
+INFO 2026-04-05 18:39:44,140 apps [MQTT] Worker thread started successfully
+INFO 2026-04-05 18:39:44,148 mqtt_handler Connecting to MQTT broker at broker.hivemq.com:1883
+INFO 2026-04-05 18:39:44,395 mqtt_handler Starting MQTT client loop
+INFO 2026-04-05 18:39:51,496 mqtt_handler Connected to MQTT broker successfully (Client ID: django_smartfarm_031525e2)
+INFO 2026-04-05 18:39:51,499 mqtt_handler Subscribed to topics: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry, smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status (QoS 0)
+DEBUG 2026-04-05 18:39:51,901 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status
+DEBUG 2026-04-05 18:39:51,902 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'status': 'online', 'ip': '192.168.1.7', 'firmware': '1.0.0', 'uptime': 9974, 'timestamp': 9974207}
+DEBUG 2026-04-05 18:39:51,913 mqtt_handler Updated device: ESP32-FARM-001-NATTAPHOL-PALM with status online
+DEBUG 2026-04-05 18:39:55,324 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:39:55,344 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 9994173, 'rssi': -48, 'sensors': {'water_temp': 30.3, 'air_temp': 32.6, 'air_humidity': 63.4, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:39:55,863 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:40:05,804 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:40:05,804 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 10004173, 'rssi': -48, 'sensors': {'water_temp': 30.4, 'air_temp': 32.6, 'air_humidity': 63.8, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:40:05,826 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:40:06,573 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status
+DEBUG 2026-04-05 18:40:06,573 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'status': 'online', 'ip': '192.168.1.7', 'firmware': '1.0.0', 'uptime': 10004, 'timestamp': 10004207}
+DEBUG 2026-04-05 18:40:06,606 mqtt_handler Updated device: ESP32-FARM-001-NATTAPHOL-PALM with status online
+DEBUG 2026-04-05 18:40:15,313 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:40:15,313 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 10014173, 'rssi': -48, 'sensors': {'water_temp': 30.4, 'air_temp': 32.6, 'air_humidity': 64.1, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:40:15,330 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:40:25,327 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:40:25,336 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 10024173, 'rssi': -47, 'sensors': {'water_temp': 30.3, 'air_temp': 32.5, 'air_humidity': 64.1, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:40:25,371 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:40:35,315 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:40:35,316 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 10034173, 'rssi': -49, 'sensors': {'water_temp': 30.4, 'air_temp': 32.6, 'air_humidity': 64.1, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:40:35,348 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:40:36,600 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status
+DEBUG 2026-04-05 18:40:36,602 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'status': 'online', 'ip': '192.168.1.7', 'firmware': '1.0.0', 'uptime': 10034, 'timestamp': 10034207}
+DEBUG 2026-04-05 18:40:36,631 mqtt_handler Updated device: ESP32-FARM-001-NATTAPHOL-PALM with status online
+DEBUG 2026-04-05 18:40:45,382 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:40:45,385 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 10044173, 'rssi': -49, 'sensors': {'water_temp': 30.4, 'air_temp': 32.6, 'air_humidity': 64.1, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:40:45,429 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:41:03,063 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:41:03,063 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 10054173, 'rssi': -50, 'sensors': {'water_temp': 30.4, 'air_temp': 32.6, 'air_humidity': 64.2, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:41:03,080 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+INFO 2026-04-05 18:41:08,919 apps [MQTT] Starting MQTT Worker automatically...
+INFO 2026-04-05 18:41:08,919 apps [MQTT] Worker thread started successfully
+INFO 2026-04-05 18:41:08,926 mqtt_handler Connecting to MQTT broker at broker.hivemq.com:1883
+INFO 2026-04-05 18:41:09,192 mqtt_handler Starting MQTT client loop
+INFO 2026-04-05 18:41:09,397 mqtt_handler Connected to MQTT broker successfully (Client ID: django_smartfarm_5da6ec74)
+INFO 2026-04-05 18:41:09,456 mqtt_handler Subscribed to topics: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry, smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status (QoS 0)
+DEBUG 2026-04-05 18:41:09,881 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status
+DEBUG 2026-04-05 18:41:09,890 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'status': 'online', 'ip': '192.168.1.7', 'firmware': '1.0.0', 'uptime': 10064, 'timestamp': 10064206}
+DEBUG 2026-04-05 18:41:10,024 mqtt_handler Updated device: ESP32-FARM-001-NATTAPHOL-PALM with status online
+DEBUG 2026-04-05 18:41:15,318 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:41:15,319 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 10074173, 'rssi': -49, 'sensors': {'water_temp': 30.3, 'air_temp': 32.6, 'air_humidity': 64, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:41:15,337 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+INFO 2026-04-05 18:41:40,530 apps [MQTT] Starting MQTT Worker automatically...
+INFO 2026-04-05 18:41:40,530 apps [MQTT] Worker thread started successfully
+INFO 2026-04-05 18:41:40,543 mqtt_handler Connecting to MQTT broker at broker.hivemq.com:1883
+INFO 2026-04-05 18:41:40,776 mqtt_handler Starting MQTT client loop
+INFO 2026-04-05 18:41:45,472 mqtt_handler Connected to MQTT broker successfully (Client ID: django_smartfarm_85be07bc)
+INFO 2026-04-05 18:41:45,478 mqtt_handler Subscribed to topics: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry, smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status (QoS 0)
+DEBUG 2026-04-05 18:41:45,876 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status
+DEBUG 2026-04-05 18:41:45,877 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'status': 'online', 'ip': '192.168.1.7', 'firmware': '1.0.0', 'uptime': 10064, 'timestamp': 10064206}
+DEBUG 2026-04-05 18:41:45,909 mqtt_handler Updated device: ESP32-FARM-001-NATTAPHOL-PALM with status online
+DEBUG 2026-04-05 18:41:55,079 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:41:55,081 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 10084173, 'rssi': -49, 'sensors': {'water_temp': 30.3, 'air_temp': 32.6, 'air_humidity': 63.9, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:41:55,114 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:41:58,481 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:41:58,481 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 10094173, 'rssi': -49, 'sensors': {'water_temp': 30.3, 'air_temp': 32.5, 'air_humidity': 63.9, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:41:58,505 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:41:58,506 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status
+DEBUG 2026-04-05 18:41:58,506 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'status': 'online', 'ip': '192.168.1.7', 'firmware': '1.0.0', 'uptime': 10094, 'timestamp': 10094204}
+DEBUG 2026-04-05 18:41:58,519 mqtt_handler Updated device: ESP32-FARM-001-NATTAPHOL-PALM with status online
+DEBUG 2026-04-05 18:41:58,520 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:41:58,521 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 10104173, 'rssi': -50, 'sensors': {'water_temp': 30.3, 'air_temp': 32.5, 'air_humidity': 64.2, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:41:58,539 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:41:58,540 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:41:58,540 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 10114173, 'rssi': -49, 'sensors': {'water_temp': 30.4, 'air_temp': 32.5, 'air_humidity': 64, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:41:58,560 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:42:13,049 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:42:13,051 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 10124173, 'rssi': -48, 'sensors': {'water_temp': 30.3, 'air_temp': 32.5, 'air_humidity': 63.7, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:42:13,085 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:42:13,632 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status
+DEBUG 2026-04-05 18:42:13,633 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'status': 'online', 'ip': '192.168.1.7', 'firmware': '1.0.0', 'uptime': 10124, 'timestamp': 10124207}
+DEBUG 2026-04-05 18:42:13,647 mqtt_handler Updated device: ESP32-FARM-001-NATTAPHOL-PALM with status online
+DEBUG 2026-04-05 18:42:15,319 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:42:15,319 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 10134173, 'rssi': -47, 'sensors': {'water_temp': 30.3, 'air_temp': 32.5, 'air_humidity': 63.9, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:42:15,338 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:42:25,319 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:42:25,320 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 10144173, 'rssi': -46, 'sensors': {'water_temp': 30.3, 'air_temp': 32.5, 'air_humidity': 64.1, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:42:25,353 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:42:35,318 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:42:35,319 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 10154173, 'rssi': -46, 'sensors': {'water_temp': 30.3, 'air_temp': 32.5, 'air_humidity': 64.1, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:42:35,359 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:42:35,724 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status
+DEBUG 2026-04-05 18:42:35,725 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'status': 'online', 'ip': '192.168.1.7', 'firmware': '1.0.0', 'uptime': 10154, 'timestamp': 10154207}
+DEBUG 2026-04-05 18:42:35,746 mqtt_handler Updated device: ESP32-FARM-001-NATTAPHOL-PALM with status online
+DEBUG 2026-04-05 18:42:45,816 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:42:45,820 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 10164173, 'rssi': -47, 'sensors': {'water_temp': 30.3, 'air_temp': 32.5, 'air_humidity': 64.5, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:42:45,837 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:42:55,315 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:42:55,316 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 10174174, 'rssi': -47, 'sensors': {'water_temp': 30.3, 'air_temp': 32.5, 'air_humidity': 64.4, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:42:55,333 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:43:05,320 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:43:05,321 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 10184180, 'rssi': -47, 'sensors': {'water_temp': 30.3, 'air_temp': 32.5, 'air_humidity': 64.3, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:43:05,376 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:43:05,615 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status
+DEBUG 2026-04-05 18:43:05,616 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'status': 'online', 'ip': '192.168.1.7', 'firmware': '1.0.0', 'uptime': 10184, 'timestamp': 10184214}
+DEBUG 2026-04-05 18:43:05,662 mqtt_handler Updated device: ESP32-FARM-001-NATTAPHOL-PALM with status online
+DEBUG 2026-04-05 18:43:15,322 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:43:15,324 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 10194186, 'rssi': -47, 'sensors': {'water_temp': 30.3, 'air_temp': 32.5, 'air_humidity': 64.4, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:43:15,360 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:43:25,300 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:43:25,301 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 10204173, 'rssi': -45, 'sensors': {'water_temp': 30.3, 'air_temp': 32.5, 'air_humidity': 64.3, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:43:25,328 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:43:35,314 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:43:35,315 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 10214173, 'rssi': -49, 'sensors': {'water_temp': 30.3, 'air_temp': 32.5, 'air_humidity': 64.2, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:43:35,345 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:43:35,899 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status
+DEBUG 2026-04-05 18:43:35,900 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'status': 'online', 'ip': '192.168.1.7', 'firmware': '1.0.0', 'uptime': 10214, 'timestamp': 10214207}
+DEBUG 2026-04-05 18:43:35,915 mqtt_handler Updated device: ESP32-FARM-001-NATTAPHOL-PALM with status online
+DEBUG 2026-04-05 18:43:45,473 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:43:45,473 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 10224173, 'rssi': -49, 'sensors': {'water_temp': 30.3, 'air_temp': 32.5, 'air_humidity': 64.6, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:43:45,491 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:43:55,309 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:43:55,310 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 10234173, 'rssi': -49, 'sensors': {'water_temp': 30.3, 'air_temp': 32.5, 'air_humidity': 64.6, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:43:55,336 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:44:07,561 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:44:07,564 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 10244173, 'rssi': -46, 'sensors': {'water_temp': 30.3, 'air_temp': 32.5, 'air_humidity': 64.5, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:44:07,586 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:44:07,945 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status
+DEBUG 2026-04-05 18:44:07,948 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'status': 'online', 'ip': '192.168.1.7', 'firmware': '1.0.0', 'uptime': 10244, 'timestamp': 10244207}
+DEBUG 2026-04-05 18:44:07,986 mqtt_handler Updated device: ESP32-FARM-001-NATTAPHOL-PALM with status online
+DEBUG 2026-04-05 18:44:15,317 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:44:15,318 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 10254173, 'rssi': -44, 'sensors': {'water_temp': 30.3, 'air_temp': 32.5, 'air_humidity': 64.4, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:44:15,347 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:44:25,301 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:44:25,303 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 10264173, 'rssi': -45, 'sensors': {'water_temp': 30.3, 'air_temp': 32.5, 'air_humidity': 64.6, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:44:25,342 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:44:35,306 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:44:35,308 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 10274173, 'rssi': -48, 'sensors': {'water_temp': 30.3, 'air_temp': 32.5, 'air_humidity': 64.6, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:44:35,348 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:44:35,979 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status
+DEBUG 2026-04-05 18:44:35,980 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'status': 'online', 'ip': '192.168.1.7', 'firmware': '1.0.0', 'uptime': 10274, 'timestamp': 10274207}
+DEBUG 2026-04-05 18:44:35,993 mqtt_handler Updated device: ESP32-FARM-001-NATTAPHOL-PALM with status online
+DEBUG 2026-04-05 18:44:45,305 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:44:45,307 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 10284173, 'rssi': -47, 'sensors': {'water_temp': 30.3, 'air_temp': 32.5, 'air_humidity': 64.4, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:44:45,339 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:44:55,389 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:44:55,398 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 10294173, 'rssi': -47, 'sensors': {'water_temp': 30.3, 'air_temp': 32.5, 'air_humidity': 64.2, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:44:55,439 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:45:05,309 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:45:05,310 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 10304173, 'rssi': -47, 'sensors': {'water_temp': 30.3, 'air_temp': 32.5, 'air_humidity': 64.4, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:45:05,334 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:45:06,376 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status
+DEBUG 2026-04-05 18:45:06,377 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'status': 'online', 'ip': '192.168.1.7', 'firmware': '1.0.0', 'uptime': 10304, 'timestamp': 10304207}
+DEBUG 2026-04-05 18:45:06,390 mqtt_handler Updated device: ESP32-FARM-001-NATTAPHOL-PALM with status online
+INFO 2026-04-05 18:45:13,717 apps [MQTT] Starting MQTT Worker automatically...
+INFO 2026-04-05 18:45:13,717 apps [MQTT] Worker thread started successfully
+INFO 2026-04-05 18:45:13,725 mqtt_handler Connecting to MQTT broker at broker.hivemq.com:1883
+INFO 2026-04-05 18:45:13,973 mqtt_handler Starting MQTT client loop
+INFO 2026-04-05 18:45:14,174 mqtt_handler Connected to MQTT broker successfully (Client ID: django_smartfarm_53488c9d)
+INFO 2026-04-05 18:45:14,178 mqtt_handler Subscribed to topics: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry, smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status (QoS 0)
+DEBUG 2026-04-05 18:45:14,581 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status
+DEBUG 2026-04-05 18:45:14,582 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'status': 'online', 'ip': '192.168.1.7', 'firmware': '1.0.0', 'uptime': 10304, 'timestamp': 10304207}
+DEBUG 2026-04-05 18:45:14,622 mqtt_handler Updated device: ESP32-FARM-001-NATTAPHOL-PALM with status online
+DEBUG 2026-04-05 18:45:15,302 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:45:15,303 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 10314173, 'rssi': -47, 'sensors': {'water_temp': 30.3, 'air_temp': 32.5, 'air_humidity': 64.3, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:45:15,320 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:45:25,301 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:45:25,302 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 10324173, 'rssi': -47, 'sensors': {'water_temp': 30.3, 'air_temp': 32.5, 'air_humidity': 64.5, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:45:25,328 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+INFO 2026-04-05 18:45:30,061 mqtt_handler Publishing to smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/control: {'command': 'relay_control', 'relays': {'relay1_pump': True, 'relay2_fan': True, 'relay3_heater': True}}
+DEBUG 2026-04-05 18:45:30,754 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:45:30,760 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 10329574, 'rssi': -46, 'sensors': {'water_temp': 30.3, 'air_temp': 32.5, 'air_humidity': 64.5, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': True, 'relay2_fan': True, 'relay3_heater': True}}
+DEBUG 2026-04-05 18:45:30,791 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:45:35,303 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:45:35,308 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 10334173, 'rssi': -47, 'sensors': {'water_temp': 30.1, 'air_temp': 32.5, 'air_humidity': 64.6, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': True, 'relay2_fan': True, 'relay3_heater': True}}
+DEBUG 2026-04-05 18:45:35,341 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:45:36,036 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status
+DEBUG 2026-04-05 18:45:36,047 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'status': 'online', 'ip': '192.168.1.7', 'firmware': '1.0.0', 'uptime': 10334, 'timestamp': 10334207}
+DEBUG 2026-04-05 18:45:36,075 mqtt_handler Updated device: ESP32-FARM-001-NATTAPHOL-PALM with status online
+INFO 2026-04-05 18:45:37,212 mqtt_handler Publishing to smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/control: {'command': 'relay_control', 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:45:38,073 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:45:38,074 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 10336743, 'rssi': -45, 'sensors': {'water_temp': 30.1, 'air_temp': 32.5, 'air_humidity': 64.6, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:45:38,122 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:45:45,309 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:45:45,310 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 10344173, 'rssi': -50, 'sensors': {'water_temp': 30.1, 'air_temp': 32.4, 'air_humidity': 64.6, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:45:45,335 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:45:55,316 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:45:55,318 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 10354173, 'rssi': -50, 'sensors': {'water_temp': 30.1, 'air_temp': 32.5, 'air_humidity': 64.7, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:45:55,350 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:46:05,314 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:46:05,316 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 10364173, 'rssi': -50, 'sensors': {'water_temp': 30.3, 'air_temp': 32.4, 'air_humidity': 64.6, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:46:05,354 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:46:07,861 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status
+DEBUG 2026-04-05 18:46:07,869 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'status': 'online', 'ip': '192.168.1.7', 'firmware': '1.0.0', 'uptime': 10364, 'timestamp': 10364207}
+DEBUG 2026-04-05 18:46:07,881 mqtt_handler Updated device: ESP32-FARM-001-NATTAPHOL-PALM with status online
+DEBUG 2026-04-05 18:46:15,309 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:46:15,310 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 10374173, 'rssi': -49, 'sensors': {'water_temp': 30.3, 'air_temp': 32.5, 'air_humidity': 64.5, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:46:15,354 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:46:25,317 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:46:25,318 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 10384173, 'rssi': -49, 'sensors': {'water_temp': 30.1, 'air_temp': 32.4, 'air_humidity': 64.3, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:46:25,355 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:46:35,305 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:46:35,306 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 10394173, 'rssi': -47, 'sensors': {'water_temp': 30.1, 'air_temp': 32.4, 'air_humidity': 64.2, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:46:35,341 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:46:35,712 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status
+DEBUG 2026-04-05 18:46:35,713 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'status': 'online', 'ip': '192.168.1.7', 'firmware': '1.0.0', 'uptime': 10394, 'timestamp': 10394208}
+DEBUG 2026-04-05 18:46:35,725 mqtt_handler Updated device: ESP32-FARM-001-NATTAPHOL-PALM with status online
+DEBUG 2026-04-05 18:46:45,299 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:46:45,299 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 10404173, 'rssi': -47, 'sensors': {'water_temp': 30.1, 'air_temp': 32.4, 'air_humidity': 64.1, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:46:45,316 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:46:55,302 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:46:55,303 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 10414173, 'rssi': -48, 'sensors': {'water_temp': 30.1, 'air_temp': 32.4, 'air_humidity': 64.1, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:46:55,348 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:47:05,302 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:47:05,303 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 10424173, 'rssi': -48, 'sensors': {'water_temp': 30.1, 'air_temp': 32.4, 'air_humidity': 64.2, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:47:05,338 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:47:08,135 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status
+DEBUG 2026-04-05 18:47:08,137 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'status': 'online', 'ip': '192.168.1.7', 'firmware': '1.0.0', 'uptime': 10424, 'timestamp': 10424207}
+DEBUG 2026-04-05 18:47:08,180 mqtt_handler Updated device: ESP32-FARM-001-NATTAPHOL-PALM with status online
+DEBUG 2026-04-05 18:47:15,299 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:47:15,301 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 10434173, 'rssi': -48, 'sensors': {'water_temp': 30.1, 'air_temp': 32.4, 'air_humidity': 64.2, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:47:15,322 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:47:25,341 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:47:25,342 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 10444173, 'rssi': -48, 'sensors': {'water_temp': 30.1, 'air_temp': 32.4, 'air_humidity': 64.2, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:47:25,368 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:47:49,061 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:47:49,061 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 10454173, 'rssi': -48, 'sensors': {'water_temp': 30.1, 'air_temp': 32.4, 'air_humidity': 64.2, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:47:49,078 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:47:50,340 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status
+DEBUG 2026-04-05 18:47:50,341 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'status': 'online', 'ip': '192.168.1.7', 'firmware': '1.0.0', 'uptime': 10454, 'timestamp': 10454207}
+DEBUG 2026-04-05 18:47:50,359 mqtt_handler Updated device: ESP32-FARM-001-NATTAPHOL-PALM with status online
+DEBUG 2026-04-05 18:47:50,361 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:47:50,364 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 10464173, 'rssi': -46, 'sensors': {'water_temp': 30.1, 'air_temp': 32.4, 'air_humidity': 64.3, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:47:50,382 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:47:55,298 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:47:55,299 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 10474173, 'rssi': -47, 'sensors': {'water_temp': 30.1, 'air_temp': 32.4, 'air_humidity': 64.3, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:47:55,345 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:48:05,310 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:48:05,310 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 10484173, 'rssi': -47, 'sensors': {'water_temp': 30.1, 'air_temp': 32.4, 'air_humidity': 64.3, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:48:05,334 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:48:05,865 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status
+DEBUG 2026-04-05 18:48:05,866 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'status': 'online', 'ip': '192.168.1.7', 'firmware': '1.0.0', 'uptime': 10484, 'timestamp': 10484206}
+DEBUG 2026-04-05 18:48:05,890 mqtt_handler Updated device: ESP32-FARM-001-NATTAPHOL-PALM with status online
+DEBUG 2026-04-05 18:48:15,304 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:48:15,306 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 10494173, 'rssi': -49, 'sensors': {'water_temp': 30.1, 'air_temp': 32.4, 'air_humidity': 64.3, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:48:15,348 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:48:25,317 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:48:25,318 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 10504173, 'rssi': -48, 'sensors': {'water_temp': 30, 'air_temp': 32.4, 'air_humidity': 64.4, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:48:25,357 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:48:35,298 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:48:35,298 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 10514173, 'rssi': -46, 'sensors': {'water_temp': 30, 'air_temp': 32.4, 'air_humidity': 64.4, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:48:35,323 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:48:35,591 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status
+DEBUG 2026-04-05 18:48:35,593 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'status': 'online', 'ip': '192.168.1.7', 'firmware': '1.0.0', 'uptime': 10514, 'timestamp': 10514206}
+DEBUG 2026-04-05 18:48:35,610 mqtt_handler Updated device: ESP32-FARM-001-NATTAPHOL-PALM with status online
+DEBUG 2026-04-05 18:48:45,297 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:48:45,298 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 10524173, 'rssi': -46, 'sensors': {'water_temp': 30, 'air_temp': 32.4, 'air_humidity': 64.4, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:48:45,330 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:48:55,298 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:48:55,300 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 10534173, 'rssi': -45, 'sensors': {'water_temp': 30.1, 'air_temp': 32.3, 'air_humidity': 64.4, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:48:55,333 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+INFO 2026-04-05 18:49:04,857 apps [MQTT] Starting MQTT Worker automatically...
+INFO 2026-04-05 18:49:04,857 apps [MQTT] Worker thread started successfully
+INFO 2026-04-05 18:49:04,864 mqtt_handler Connecting to MQTT broker at broker.hivemq.com:1883
+INFO 2026-04-05 18:49:05,112 mqtt_handler Starting MQTT client loop
+INFO 2026-04-05 18:49:09,375 mqtt_handler Connected to MQTT broker successfully (Client ID: django_smartfarm_43c6166b)
+INFO 2026-04-05 18:49:09,378 mqtt_handler Subscribed to topics: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry, smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status (QoS 0)
+DEBUG 2026-04-05 18:49:09,774 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status
+DEBUG 2026-04-05 18:49:09,774 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'status': 'online', 'ip': '192.168.1.7', 'firmware': '1.0.0', 'uptime': 10544, 'timestamp': 10544206}
+DEBUG 2026-04-05 18:49:09,794 mqtt_handler Updated device: ESP32-FARM-001-NATTAPHOL-PALM with status online
+DEBUG 2026-04-05 18:49:15,299 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:49:15,299 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 10554176, 'rssi': -44, 'sensors': {'water_temp': 30, 'air_temp': 32.3, 'air_humidity': 64.4, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:49:15,347 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:49:25,315 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:49:25,317 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 10564181, 'rssi': -47, 'sensors': {'water_temp': 30, 'air_temp': 32.3, 'air_humidity': 64.5, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:49:25,359 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:49:35,318 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:49:35,318 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 10574186, 'rssi': -44, 'sensors': {'water_temp': 30, 'air_temp': 32.3, 'air_humidity': 64.5, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:49:35,343 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:49:35,709 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status
+DEBUG 2026-04-05 18:49:35,710 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'status': 'online', 'ip': '192.168.1.7', 'firmware': '1.0.0', 'uptime': 10574, 'timestamp': 10574220}
+DEBUG 2026-04-05 18:49:35,739 mqtt_handler Updated device: ESP32-FARM-001-NATTAPHOL-PALM with status online
+DEBUG 2026-04-05 18:49:45,298 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:49:45,299 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 10584173, 'rssi': -46, 'sensors': {'water_temp': 30, 'air_temp': 32.3, 'air_humidity': 64.4, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:49:45,326 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:49:55,295 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:49:55,296 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 10594173, 'rssi': -46, 'sensors': {'water_temp': 30, 'air_temp': 32.3, 'air_humidity': 64.4, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:49:55,322 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:50:05,304 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:50:05,304 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 10604173, 'rssi': -46, 'sensors': {'water_temp': 30, 'air_temp': 32.3, 'air_humidity': 64.4, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:50:05,328 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:50:05,764 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status
+DEBUG 2026-04-05 18:50:05,766 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'status': 'online', 'ip': '192.168.1.7', 'firmware': '1.0.0', 'uptime': 10604, 'timestamp': 10604207}
+DEBUG 2026-04-05 18:50:05,787 mqtt_handler Updated device: ESP32-FARM-001-NATTAPHOL-PALM with status online
+DEBUG 2026-04-05 18:50:15,296 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:50:15,298 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 10614173, 'rssi': -46, 'sensors': {'water_temp': 30.1, 'air_temp': 32.3, 'air_humidity': 64.4, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:50:15,329 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:50:25,296 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:50:25,298 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 10624173, 'rssi': -46, 'sensors': {'water_temp': 30, 'air_temp': 32.3, 'air_humidity': 64.4, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:50:25,365 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:50:35,827 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:50:35,829 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 10634173, 'rssi': -45, 'sensors': {'water_temp': 30.1, 'air_temp': 32.3, 'air_humidity': 64.4, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:50:35,872 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:50:35,882 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status
+DEBUG 2026-04-05 18:50:35,882 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'status': 'online', 'ip': '192.168.1.7', 'firmware': '1.0.0', 'uptime': 10634, 'timestamp': 10634207}
+DEBUG 2026-04-05 18:50:35,893 mqtt_handler Updated device: ESP32-FARM-001-NATTAPHOL-PALM with status online
+DEBUG 2026-04-05 18:50:45,295 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:50:45,296 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 10644173, 'rssi': -45, 'sensors': {'water_temp': 30, 'air_temp': 32.3, 'air_humidity': 64.4, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:50:45,315 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+INFO 2026-04-05 18:50:56,203 apps [MQTT] Starting MQTT Worker automatically...
+INFO 2026-04-05 18:50:56,204 apps [MQTT] Worker thread started successfully
+INFO 2026-04-05 18:50:56,223 mqtt_handler Connecting to MQTT broker at broker.hivemq.com:1883
+INFO 2026-04-05 18:50:56,457 mqtt_handler Starting MQTT client loop
+INFO 2026-04-05 18:50:56,658 mqtt_handler Connected to MQTT broker successfully (Client ID: django_smartfarm_b7e1fbdc)
+INFO 2026-04-05 18:50:56,662 mqtt_handler Subscribed to topics: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry, smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status (QoS 0)
+DEBUG 2026-04-05 18:50:57,108 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status
+DEBUG 2026-04-05 18:50:57,108 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'status': 'online', 'ip': '192.168.1.7', 'firmware': '1.0.0', 'uptime': 10634, 'timestamp': 10634207}
+DEBUG 2026-04-05 18:50:57,122 mqtt_handler Updated device: ESP32-FARM-001-NATTAPHOL-PALM with status online
+DEBUG 2026-04-05 18:51:05,301 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:51:05,302 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 10664173, 'rssi': -48, 'sensors': {'water_temp': 30.1, 'air_temp': 32.3, 'air_humidity': 65.1, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:51:05,324 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:51:08,301 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status
+DEBUG 2026-04-05 18:51:08,302 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'status': 'online', 'ip': '192.168.1.7', 'firmware': '1.0.0', 'uptime': 10664, 'timestamp': 10664206}
+DEBUG 2026-04-05 18:51:08,319 mqtt_handler Updated device: ESP32-FARM-001-NATTAPHOL-PALM with status online
+DEBUG 2026-04-05 18:51:15,297 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:51:15,297 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 10674173, 'rssi': -47, 'sensors': {'water_temp': 30.1, 'air_temp': 32.3, 'air_humidity': 65.1, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:51:15,324 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:51:25,299 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:51:25,299 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 10684173, 'rssi': -49, 'sensors': {'water_temp': 30.1, 'air_temp': 32.3, 'air_humidity': 64.9, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:51:25,334 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+INFO 2026-04-05 18:51:32,792 apps [MQTT] Starting MQTT Worker automatically...
+INFO 2026-04-05 18:51:32,793 apps [MQTT] Worker thread started successfully
+INFO 2026-04-05 18:51:32,802 mqtt_handler Connecting to MQTT broker at broker.hivemq.com:1883
+INFO 2026-04-05 18:51:33,058 mqtt_handler Starting MQTT client loop
+INFO 2026-04-05 18:51:37,764 mqtt_handler Connected to MQTT broker successfully (Client ID: django_smartfarm_24124b4a)
+INFO 2026-04-05 18:51:37,770 mqtt_handler Subscribed to topics: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry, smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status (QoS 0)
+DEBUG 2026-04-05 18:51:38,283 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status
+DEBUG 2026-04-05 18:51:38,284 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'status': 'online', 'ip': '192.168.1.7', 'firmware': '1.0.0', 'uptime': 10694, 'timestamp': 10694206}
+DEBUG 2026-04-05 18:51:38,314 mqtt_handler Updated device: ESP32-FARM-001-NATTAPHOL-PALM with status online
+DEBUG 2026-04-05 18:51:45,298 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:51:45,299 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 10704173, 'rssi': -49, 'sensors': {'water_temp': 30.1, 'air_temp': 32.3, 'air_humidity': 64.5, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:51:45,324 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:51:55,311 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:51:55,416 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 10714173, 'rssi': -48, 'sensors': {'water_temp': 30.1, 'air_temp': 32.3, 'air_humidity': 65.2, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:51:56,044 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:52:05,312 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:52:05,313 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 10724173, 'rssi': -50, 'sensors': {'water_temp': 30.1, 'air_temp': 32.3, 'air_humidity': 65.2, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:52:05,333 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+INFO 2026-04-05 18:52:27,245 mqtt_handler Publishing to smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/control: {'command': 'relay_control', 'relays': {'relay1_pump': True}}
+INFO 2026-04-05 18:52:29,408 mqtt_handler Publishing to smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/control: {'command': 'relay_control', 'relays': {'relay3_heater': True}}
+INFO 2026-04-05 18:52:35,953 mqtt_handler Publishing to smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/control: {'command': 'relay_control', 'relays': {'relay3_heater': True}}
+INFO 2026-04-05 18:52:37,606 mqtt_handler Publishing to smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/control: {'command': 'relay_control', 'relays': {'relay2_fan': True}}
+INFO 2026-04-05 18:52:38,844 mqtt_handler Publishing to smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/control: {'command': 'relay_control', 'relays': {'relay1_pump': True, 'relay2_fan': True, 'relay3_heater': True}}
+INFO 2026-04-05 18:52:39,636 mqtt_handler Publishing to smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/control: {'command': 'relay_control', 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:53:35,328 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status
+DEBUG 2026-04-05 18:53:35,330 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'status': 'offline', 'timestamp': 8555241}
+DEBUG 2026-04-05 18:53:35,362 mqtt_handler Updated device: ESP32-FARM-001-NATTAPHOL-PALM with status offline
+DEBUG 2026-04-05 18:53:46,765 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status
+DEBUG 2026-04-05 18:53:46,767 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'status': 'online', 'ip': '192.168.1.7', 'firmware': '1.0.0', 'uptime': 10825, 'timestamp': 10825314}
+DEBUG 2026-04-05 18:53:46,793 mqtt_handler Updated device: ESP32-FARM-001-NATTAPHOL-PALM with status online
+DEBUG 2026-04-05 18:53:51,736 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status
+DEBUG 2026-04-05 18:53:51,736 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'status': 'offline', 'timestamp': 10824705}
+DEBUG 2026-04-05 18:53:51,747 mqtt_handler Updated device: ESP32-FARM-001-NATTAPHOL-PALM with status offline
+DEBUG 2026-04-05 18:53:52,662 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status
+DEBUG 2026-04-05 18:53:52,663 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'status': 'online', 'ip': '192.168.1.7', 'firmware': '1.0.0', 'uptime': 3, 'timestamp': 3398}
+DEBUG 2026-04-05 18:53:52,677 mqtt_handler Updated device: ESP32-FARM-001-NATTAPHOL-PALM with status online
+DEBUG 2026-04-05 18:53:59,112 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:53:59,113 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 10451, 'rssi': -49, 'sensors': {'water_temp': 30.1, 'air_temp': 32.1, 'air_humidity': 65.4, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:53:59,154 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+INFO 2026-04-05 18:54:08,639 mqtt_handler Publishing to smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/control: {'command': 'relay_control', 'relays': {'relay1_pump': True, 'relay2_fan': True, 'relay3_heater': True}}
+DEBUG 2026-04-05 18:54:09,104 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:54:09,105 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 20451, 'rssi': -50, 'sensors': {'water_temp': 30.1, 'air_temp': 32.1, 'air_humidity': 65.3, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:54:09,142 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:54:14,010 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:54:14,012 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 25211, 'rssi': -49, 'sensors': {'water_temp': 30.1, 'air_temp': 32.1, 'air_humidity': 65.3, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': True, 'relay2_fan': True, 'relay3_heater': True}}
+DEBUG 2026-04-05 18:54:14,077 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:54:19,101 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:54:19,101 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 30451, 'rssi': -50, 'sensors': {'water_temp': 30.1, 'air_temp': 32.1, 'air_humidity': 65.4, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': True, 'relay2_fan': True, 'relay3_heater': True}}
+DEBUG 2026-04-05 18:54:19,123 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:54:19,493 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status
+DEBUG 2026-04-05 18:54:19,493 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'status': 'online', 'ip': '192.168.1.7', 'firmware': '1.0.0', 'uptime': 30, 'timestamp': 30485}
+DEBUG 2026-04-05 18:54:19,513 mqtt_handler Updated device: ESP32-FARM-001-NATTAPHOL-PALM with status online
+INFO 2026-04-05 18:54:22,011 mqtt_handler Publishing to smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/control: {'command': 'relay_control', 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:54:22,818 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:54:22,819 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 34031, 'rssi': -49, 'sensors': {'water_temp': 30.1, 'air_temp': 32.1, 'air_humidity': 65.4, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:54:22,849 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:54:29,110 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:54:29,111 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 40451, 'rssi': -48, 'sensors': {'water_temp': 30.1, 'air_temp': 32.1, 'air_humidity': 65.9, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:54:29,148 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:54:39,103 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:54:39,104 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 50451, 'rssi': -48, 'sensors': {'water_temp': 30.1, 'air_temp': 32.1, 'air_humidity': 66.1, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': False, 'relay2_fan': False, 'relay3_heater': False}}
+DEBUG 2026-04-05 18:54:39,123 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+INFO 2026-04-05 18:54:42,155 mqtt_handler Publishing to smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/control: {'command': 'relay_control', 'relays': {'relay1_pump': True, 'relay2_fan': True, 'relay3_heater': True}}
+DEBUG 2026-04-05 18:54:42,847 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:54:42,848 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 54199, 'rssi': -50, 'sensors': {'water_temp': 30.1, 'air_temp': 32.1, 'air_humidity': 66.1, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': True, 'relay2_fan': True, 'relay3_heater': True}}
+DEBUG 2026-04-05 18:54:42,878 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:54:49,109 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:54:49,113 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 60451, 'rssi': -48, 'sensors': {'water_temp': 30.1, 'air_temp': 32.1, 'air_humidity': 65.7, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': True, 'relay2_fan': True, 'relay3_heater': True}}
+DEBUG 2026-04-05 18:54:49,166 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:54:49,415 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status
+DEBUG 2026-04-05 18:54:49,420 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'status': 'online', 'ip': '192.168.1.7', 'firmware': '1.0.0', 'uptime': 60, 'timestamp': 60485}
+DEBUG 2026-04-05 18:54:49,458 mqtt_handler Updated device: ESP32-FARM-001-NATTAPHOL-PALM with status online
+DEBUG 2026-04-05 18:54:59,104 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:54:59,105 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 70451, 'rssi': -48, 'sensors': {'water_temp': 30.1, 'air_temp': 32.2, 'air_humidity': 65.5, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': True, 'relay2_fan': True, 'relay3_heater': True}}
+DEBUG 2026-04-05 18:54:59,146 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:55:09,102 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:55:09,103 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 80451, 'rssi': -48, 'sensors': {'water_temp': 30.1, 'air_temp': 32.2, 'air_humidity': 65.3, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': True, 'relay2_fan': True, 'relay3_heater': True}}
+DEBUG 2026-04-05 18:55:09,140 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:55:19,104 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:55:19,107 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 90451, 'rssi': -48, 'sensors': {'water_temp': 30.1, 'air_temp': 32.1, 'air_humidity': 65.3, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': True, 'relay2_fan': True, 'relay3_heater': True}}
+DEBUG 2026-04-05 18:55:19,132 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:55:19,542 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status
+DEBUG 2026-04-05 18:55:19,542 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'status': 'online', 'ip': '192.168.1.7', 'firmware': '1.0.0', 'uptime': 90, 'timestamp': 90485}
+DEBUG 2026-04-05 18:55:19,579 mqtt_handler Updated device: ESP32-FARM-001-NATTAPHOL-PALM with status online
+DEBUG 2026-04-05 18:55:29,108 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:55:29,110 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 100451, 'rssi': -44, 'sensors': {'water_temp': 30.1, 'air_temp': 32.1, 'air_humidity': 65.4, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': True, 'relay2_fan': True, 'relay3_heater': True}}
+DEBUG 2026-04-05 18:55:29,146 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:55:39,107 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:55:39,109 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 110451, 'rssi': -47, 'sensors': {'water_temp': 30.1, 'air_temp': 32.1, 'air_humidity': 65.4, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': True, 'relay2_fan': True, 'relay3_heater': True}}
+DEBUG 2026-04-05 18:55:39,142 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:55:49,106 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:55:49,108 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 120451, 'rssi': -49, 'sensors': {'water_temp': 30.1, 'air_temp': 32.1, 'air_humidity': 65.4, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': True, 'relay2_fan': True, 'relay3_heater': True}}
+DEBUG 2026-04-05 18:55:49,148 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:55:49,402 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/status
+DEBUG 2026-04-05 18:55:49,403 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'status': 'online', 'ip': '192.168.1.7', 'firmware': '1.0.0', 'uptime': 120, 'timestamp': 120484}
+DEBUG 2026-04-05 18:55:49,434 mqtt_handler Updated device: ESP32-FARM-001-NATTAPHOL-PALM with status online
+DEBUG 2026-04-05 18:55:59,102 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:55:59,102 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 130451, 'rssi': -51, 'sensors': {'water_temp': 30.1, 'air_temp': 32.1, 'air_humidity': 65.3, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': True, 'relay2_fan': True, 'relay3_heater': True}}
+DEBUG 2026-04-05 18:55:59,136 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM

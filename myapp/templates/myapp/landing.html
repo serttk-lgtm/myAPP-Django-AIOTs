@@ -1,20 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit V2  Smart Farm Full Stack Dashboard</title>
+    <title>AIOTs Smart Farm Dashboard</title>
     <style>
         :root {
-            --bg-start: #f2fff3;
-            --bg-end: #d9f7de;
-            --primary: #1f9d55;
-            --primary-dark: #147a40;
-            --accent: #66c96d;
-            --ink: #143120;
-            --muted: #4d6b57;
+            --bg-1: #f3fff5;
+            --bg-2: #dcf8e4;
+            --ink: #1f3d2a;
+            --muted: #5f7f69;
+            --brand: #2ca85f;
+            --brand-2: #1e8f4f;
             --card: #ffffff;
-            --shadow: 0 20px 40px rgba(20, 60, 32, 0.14);
+            --line: #d6efde;
+            --ok: #1e9f55;
+            --warn: #c78f00;
+            --err: #d63a3a;
+            --shadow: 0 16px 34px rgba(34, 104, 58, 0.12);
         }
 
         * {
@@ -23,385 +26,503 @@
 
         body {
             margin: 0;
-            font-family: "Segoe UI", "Trebuchet MS", sans-serif;
+            font-family: "Segoe UI", Tahoma, sans-serif;
             color: var(--ink);
-            background: radial-gradient(circle at 10% 10%, #ffffff 0%, #effff2 25%, transparent 60%),
-                        linear-gradient(135deg, var(--bg-start), var(--bg-end));
+            background:
+                radial-gradient(circle at 10% 15%, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0) 45%),
+                linear-gradient(140deg, var(--bg-1), var(--bg-2));
             min-height: 100vh;
-            overflow-x: hidden;
         }
 
-        .page {
-            width: min(1200px, 92%);
+        .container {
+            width: min(1180px, 94%);
             margin: 0 auto;
-            padding: 32px 0 48px;
+            padding: 24px 0 36px;
         }
 
-        .topbar {
+        .top {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 16px;
-            margin-bottom: 26px;
+            gap: 12px;
+            margin-bottom: 18px;
             flex-wrap: wrap;
         }
 
-        .brand {
+        .title {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
 
-        .leaf {
-            width: 44px;
-            height: 44px;
-            border-radius: 14px;
-            background: linear-gradient(145deg, #25b85f, #178145);
-            box-shadow: 0 10px 18px rgba(26, 122, 66, 0.35);
-            position: relative;
-        }
-
-        .leaf::before,
-        .leaf::after {
-            content: "";
-            position: absolute;
-            background: rgba(255, 255, 255, 0.92);
-            border-radius: 12px 12px 0 12px;
-            transform: rotate(45deg);
-        }
-
-        .leaf::before {
-            width: 16px;
-            height: 16px;
-            top: 9px;
-            left: 10px;
-        }
-
-        .leaf::after {
-            width: 10px;
-            height: 10px;
-            top: 21px;
-            left: 22px;
-        }
-
-        .brand h1 {
-            margin: 0;
-            font-size: 1.18rem;
-            letter-spacing: 0.3px;
-        }
-
-        .tag {
-            margin-top: 3px;
-            font-size: 0.83rem;
-            color: var(--muted);
-        }
-
-        .status {
-            background: rgba(31, 157, 85, 0.12);
-            border: 1px solid rgba(31, 157, 85, 0.22);
-            color: var(--primary-dark);
-            padding: 10px 14px;
-            border-radius: 999px;
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
-
-        .hero {
-            display: grid;
-            grid-template-columns: 1.25fr 1fr;
-            gap: 24px;
-            margin-bottom: 24px;
-        }
-
-        .hero-card {
-            background: var(--card);
-            border-radius: 24px;
-            padding: 28px;
-            box-shadow: var(--shadow);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-card::after {
-            content: "";
-            position: absolute;
-            right: -70px;
-            top: -70px;
-            width: 220px;
-            height: 220px;
+        .dot {
+            width: 14px;
+            height: 14px;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(80, 210, 123, 0.33), rgba(80, 210, 123, 0));
+            background: var(--ok);
+            box-shadow: 0 0 0 7px rgba(30, 159, 85, 0.15);
+            animation: pulse 1.9s infinite;
         }
 
-        .hero h2 {
-            margin: 0 0 10px;
-            font-size: clamp(1.4rem, 2.6vw, 2.1rem);
-            line-height: 1.2;
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.65; }
+            100% { transform: scale(1); opacity: 1; }
         }
 
-        .hero p {
+        h1 {
             margin: 0;
-            color: var(--muted);
-            font-size: 0.98rem;
-            max-width: 620px;
+            font-size: clamp(1.2rem, 2.2vw, 1.8rem);
         }
 
-        .cta-group {
-            margin-top: 18px;
+        .meta {
+            color: var(--muted);
+            font-size: 0.86rem;
+            margin-top: 3px;
+        }
+
+        .top-actions {
             display: flex;
             gap: 10px;
-            flex-wrap: wrap;
+            align-items: center;
         }
 
         .btn {
-            border: none;
-            padding: 11px 16px;
-            border-radius: 12px;
+            border: 0;
+            border-radius: 10px;
+            padding: 10px 14px;
             font-weight: 600;
             cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.18s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
         }
 
         .btn-main {
-            background: linear-gradient(135deg, var(--primary), #2cb562);
+            background: linear-gradient(130deg, var(--brand), var(--brand-2));
             color: #fff;
         }
 
-        .btn-sub {
-            background: #eef9f0;
-            color: var(--primary-dark);
-            border: 1px solid #cbeed1;
+        .btn-soft {
+            background: #eefbf2;
+            color: #236f44;
+            border: 1px solid #c9ebd6;
         }
 
-        .hero-stats {
+        .summary {
             display: grid;
-            gap: 14px;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+            margin-bottom: 14px;
         }
 
         .stat {
             background: var(--card);
-            border-radius: 18px;
-            padding: 18px;
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            padding: 14px;
             box-shadow: var(--shadow);
         }
 
-        .label {
+        .stat .k {
+            font-size: 0.84rem;
             color: var(--muted);
-            font-size: 0.86rem;
         }
 
-        .value {
-            margin-top: 8px;
-            font-size: 1.7rem;
+        .stat .v {
+            margin-top: 6px;
+            font-size: 1.65rem;
             font-weight: 700;
-            color: var(--primary-dark);
         }
 
-        .delta {
-            margin-top: 7px;
-            color: #267f43;
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
-
-        .grid {
+        .layout {
             display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            gap: 16px;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 14px;
         }
 
-        .card {
+        .panel {
             background: var(--card);
-            border-radius: 18px;
+            border: 1px solid var(--line);
+            border-radius: 14px;
             box-shadow: var(--shadow);
-            padding: 18px;
+            padding: 14px;
         }
 
-        .card h3 {
-            margin: 0 0 14px;
+        .panel h2 {
+            margin: 0 0 10px;
             font-size: 1rem;
         }
 
-        .col-8 { grid-column: span 8; }
-        .col-4 { grid-column: span 4; }
-
-        .sensor-list {
+        .row {
             display: grid;
+            grid-template-columns: 1fr 1fr;
             gap: 10px;
         }
 
-        .sensor-row {
-            display: flex;
-            justify-content: space-between;
+        .kv {
+            border: 1px solid #e5f3ea;
+            border-radius: 10px;
+            padding: 10px;
+            background: #fbfffc;
+        }
+
+        .kv .k {
+            color: var(--muted);
+            font-size: 0.8rem;
+            margin-bottom: 4px;
+        }
+
+        .kv .v {
+            font-size: 0.96rem;
+            font-weight: 600;
+        }
+
+        .status-pill {
+            display: inline-flex;
             align-items: center;
-            background: #f5fdf7;
-            border: 1px solid #ddf4e3;
-            border-radius: 12px;
-            padding: 10px 12px;
-        }
-
-        .sensor-row b {
-            color: var(--ink);
-        }
-
-        .badge {
-            background: #e9f9ec;
-            border: 1px solid #cdeed3;
-            color: #1f7a40;
-            padding: 4px 8px;
+            gap: 6px;
             border-radius: 999px;
-            font-size: 0.75rem;
+            padding: 4px 10px;
+            font-size: 0.79rem;
             font-weight: 700;
         }
 
-        .progress-wrap {
-            display: grid;
-            gap: 12px;
+        .online {
+            background: #e5f9ed;
+            color: #1a7f42;
+            border: 1px solid #bce8cf;
         }
 
-        .progress-item {
+        .offline {
+            background: #ffecec;
+            color: #b53636;
+            border: 1px solid #f8c9c9;
+        }
+
+        .controls {
             display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px;
+        }
+
+        .control-card {
+            border: 1px solid #daefe2;
+            border-radius: 12px;
+            padding: 10px;
+            background: #f9fffb;
+        }
+
+        .control-title {
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .btn-group {
+            display: flex;
             gap: 8px;
         }
 
-        .bar {
-            height: 9px;
-            border-radius: 999px;
-            background: #e5f5e8;
-            overflow: hidden;
+        .btn-on {
+            background: #1f9f58;
+            color: #fff;
         }
 
-        .fill {
-            height: 100%;
-            border-radius: inherit;
-            background: linear-gradient(135deg, #3ec070, #1f9d55);
+        .btn-off {
+            background: #74877a;
+            color: #fff;
         }
 
-        .footnote {
-            margin-top: 18px;
+        select {
+            width: 100%;
+            padding: 10px 12px;
+            border-radius: 10px;
+            border: 1px solid #cfe8d8;
+            background: #fff;
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+        }
+
+        .msg {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            display: none;
+        }
+
+        .msg.ok {
+            display: block;
+            background: #e8faee;
+            border: 1px solid #bfead0;
+            color: #1f7f45;
+        }
+
+        .msg.err {
+            display: block;
+            background: #ffeded;
+            border: 1px solid #f6c9c9;
+            color: #a63434;
+        }
+
+        .footer {
+            margin-top: 14px;
             text-align: center;
             color: var(--muted);
-            font-size: 0.83rem;
+            font-size: 0.82rem;
         }
 
-        .appear {
-            animation: rise 0.7s ease both;
-        }
-
-        .delay-1 { animation-delay: 0.08s; }
-        .delay-2 { animation-delay: 0.16s; }
-        .delay-3 { animation-delay: 0.24s; }
-
-        @keyframes rise {
-            from {
-                opacity: 0;
-                transform: translateY(16px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @media (max-width: 980px) {
-            .hero {
+        @media (max-width: 900px) {
+            .summary {
                 grid-template-columns: 1fr;
             }
-            .col-8,
-            .col-4 {
-                grid-column: span 12;
+
+            .layout {
+                grid-template-columns: 1fr;
+            }
+
+            .controls {
+                grid-template-columns: 1fr;
+            }
+
+            .row {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <main class="page">
-        <header class="topbar appear">
-            <div class="brand">
-                <div class="leaf"></div>
-                <div>
-                    <h1>Full Stack Dev UI Dashboard</h1>
-                    <div class="tag">Smart Farm Command Center</div>
+    <div class="container">
+        <div class="top">
+            <div>
+                <div class="title">
+                    <span class="dot"></span>
+                    <h1>AIOTs Smart Farm Dashboard</h1>
                 </div>
+                <div class="meta" id="serverTime">กำลังโหลดข้อมูล...</div>
             </div>
-            <div class="status">System Online • Greenhouse Node Sync: 99.9%</div>
-        </header>
-
-        <section class="hero">
-            <article class="hero-card appear delay-1">
-                <h2>ติดตามฟาร์มอัจฉริยะได้แบบ Real-time ในหน้าเดียว</h2>
-                <p>
-                    Dashboard สำหรับนักพัฒนา Full Stack ที่ต้องการภาพรวมเซนเซอร์ น้ำ ปุ๋ย สภาพอากาศ
-                    และพลังงาน พร้อม UI ที่อ่านง่าย ตอบสนองไว และสวยงามในโทนสีเขียวธรรมชาติ
-                </p>
-                <div class="cta-group">
-                    <button class="btn btn-main">Open Monitoring</button>
-                    <button class="btn btn-sub">Export Report</button>
-                </div>
-            </article>
-
-            <aside class="hero-stats">
-                <div class="stat appear delay-2">
-                    <div class="label">Yield Prediction</div>
-                    <div class="value">92.4%</div>
-                    <div class="delta">+4.1% from last week</div>
-                </div>
-                <div class="stat appear delay-3">
-                    <div class="label">Active Devices</div>
-                    <div class="value">48</div>
-                    <div class="delta">All sensors connected</div>
-                </div>
-            </aside>
-        </section>
-
-        <section class="grid">
-            <div class="card col-8 appear delay-1">
-                <h3>Sensor Live Feed</h3>
-                <div class="sensor-list">
-                    <div class="sensor-row">
-                        <span><b>Soil Moisture</b> • Plot A</span>
-                        <span>61% <span class="badge">Stable</span></span>
-                    </div>
-                    <div class="sensor-row">
-                        <span><b>Temperature</b> • Greenhouse 2</span>
-                        <span>27.8°C <span class="badge">Optimal</span></span>
-                    </div>
-                    <div class="sensor-row">
-                        <span><b>Humidity</b> • Hydroponic Zone</span>
-                        <span>73% <span class="badge">Good</span></span>
-                    </div>
-                    <div class="sensor-row">
-                        <span><b>Water Tank</b> • Main Supply</span>
-                        <span>84% <span class="badge">Healthy</span></span>
-                    </div>
-                </div>
+            <div class="top-actions">
+                <a href="/admin/" class="btn btn-soft">เปิดหน้า Admin</a>
+                <button type="button" class="btn btn-main" id="refreshBtn">Refresh</button>
             </div>
-
-            <div class="card col-4 appear delay-2">
-                <h3>Resource Usage</h3>
-                <div class="progress-wrap">
-                    <div class="progress-item">
-                        <div class="label">Water Consumption</div>
-                        <div class="bar"><div class="fill" style="width: 68%;"></div></div>
-                    </div>
-                    <div class="progress-item">
-                        <div class="label">Solar Capacity</div>
-                        <div class="bar"><div class="fill" style="width: 81%;"></div></div>
-                    </div>
-                    <div class="progress-item">
-                        <div class="label">Fertilizer Stock</div>
-                        <div class="bar"><div class="fill" style="width: 56%;"></div></div>
-                    </div>
-                    <div class="progress-item">
-                        <div class="label">Irrigation Efficiency</div>
-                        <div class="bar"><div class="fill" style="width: 89%;"></div></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <div class="footnote">
-            Built with Django • Smart Farm UI Theme • April 2026
         </div>
-    </main>
+
+        <div class="summary">
+            <div class="stat">
+                <div class="k">อุปกรณ์ทั้งหมด</div>
+                <div class="v" id="totalDevices">0</div>
+            </div>
+            <div class="stat">
+                <div class="k">ออนไลน์</div>
+                <div class="v" id="onlineDevices">0</div>
+            </div>
+            <div class="stat">
+                <div class="k">ออฟไลน์</div>
+                <div class="v" id="offlineDevices">0</div>
+            </div>
+        </div>
+
+        <div class="layout">
+            <div class="panel">
+                <h2>สถานะอุปกรณ์และเซ็นเซอร์</h2>
+                <select id="deviceSelect"></select>
+
+                <div class="row">
+                    <div class="kv"><div class="k">สถานะ</div><div class="v" id="deviceStatus">-</div></div>
+                    <div class="kv"><div class="k">IP Address</div><div class="v" id="deviceIp">-</div></div>
+                    <div class="kv"><div class="k">Firmware</div><div class="v" id="deviceFw">-</div></div>
+                    <div class="kv"><div class="k">RSSI</div><div class="v" id="deviceRssi">-</div></div>
+                    <div class="kv"><div class="k">อุณหภูมิน้ำ</div><div class="v" id="waterTemp">-</div></div>
+                    <div class="kv"><div class="k">อุณหภูมิอากาศ</div><div class="v" id="airTemp">-</div></div>
+                    <div class="kv"><div class="k">ความชื้นอากาศ</div><div class="v" id="airHumidity">-</div></div>
+                    <div class="kv"><div class="k">เวลาล่าสุด</div><div class="v" id="lastSeen">-</div></div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <h2>ควบคุม Relay</h2>
+                <div class="controls">
+                    <div class="control-card">
+                        <div class="control-title">Relay 1: Pump</div>
+                        <div class="btn-group">
+                            <button class="btn btn-on" data-action="pump_on">ON</button>
+                            <button class="btn btn-off" data-action="pump_off">OFF</button>
+                        </div>
+                    </div>
+                    <div class="control-card">
+                        <div class="control-title">Relay 2: Fan</div>
+                        <div class="btn-group">
+                            <button class="btn btn-on" data-action="fan_on">ON</button>
+                            <button class="btn btn-off" data-action="fan_off">OFF</button>
+                        </div>
+                    </div>
+                    <div class="control-card">
+                        <div class="control-title">Relay 3: Heater</div>
+                        <div class="btn-group">
+                            <button class="btn btn-on" data-action="heater_on">ON</button>
+                            <button class="btn btn-off" data-action="heater_off">OFF</button>
+                        </div>
+                    </div>
+                    <div class="control-card">
+                        <div class="control-title">All Relays</div>
+                        <div class="btn-group">
+                            <button class="btn btn-on" data-action="all_on">ALL ON</button>
+                            <button class="btn btn-off" data-action="all_off">ALL OFF</button>
+                        </div>
+                    </div>
+                </div>
+                <div id="controlMsg" class="msg"></div>
+            </div>
+        </div>
+
+        <div class="footer">AIOTs Smart Farm Dashboard • Real-time Monitor and Control</div>
+    </div>
+
+    <script>
+        const actionMap = {
+            all_on: { relay1_pump: true, relay2_fan: true, relay3_heater: true },
+            all_off: { relay1_pump: false, relay2_fan: false, relay3_heater: false },
+            pump_on: { relay1_pump: true },
+            pump_off: { relay1_pump: false },
+            fan_on: { relay2_fan: true },
+            fan_off: { relay2_fan: false },
+            heater_on: { relay3_heater: true },
+            heater_off: { relay3_heater: false }
+        };
+
+        let devices = [];
+
+        function formatDateTime(value) {
+            if (!value) return '-';
+            const d = new Date(value);
+            return Number.isNaN(d.getTime()) ? '-' : d.toLocaleString();
+        }
+
+        function statusPill(status) {
+            if (status === 'online') {
+                return '<span class="status-pill online">Online</span>';
+            }
+            return '<span class="status-pill offline">Offline</span>';
+        }
+
+        function setMessage(text, type) {
+            const box = document.getElementById('controlMsg');
+            box.className = 'msg ' + type;
+            box.textContent = text;
+        }
+
+        function fillDeviceDetails(device) {
+            const telemetry = (device && device.latest_telemetry) || {};
+            const sensors = telemetry.sensor_data || {};
+
+            document.getElementById('deviceStatus').innerHTML = device ? statusPill(device.status) : '-';
+            document.getElementById('deviceIp').textContent = (device && device.ip_address) || '-';
+            document.getElementById('deviceFw').textContent = (device && device.firmware_version) || '-';
+            document.getElementById('deviceRssi').textContent = telemetry.rssi !== null && telemetry.rssi !== undefined ? telemetry.rssi + ' dBm' : '-';
+            document.getElementById('waterTemp').textContent = sensors.water_temp !== undefined ? sensors.water_temp + ' C' : '-';
+            document.getElementById('airTemp').textContent = sensors.air_temp !== undefined ? sensors.air_temp + ' C' : '-';
+            document.getElementById('airHumidity').textContent = sensors.air_humidity !== undefined ? sensors.air_humidity + ' %' : '-';
+            document.getElementById('lastSeen').textContent = formatDateTime(device ? device.last_seen : null);
+        }
+
+        function updateDeviceSelect() {
+            const select = document.getElementById('deviceSelect');
+            const current = select.value;
+            select.innerHTML = '';
+
+            if (!devices.length) {
+                const opt = document.createElement('option');
+                opt.textContent = 'ไม่พบอุปกรณ์';
+                opt.value = '';
+                select.appendChild(opt);
+                fillDeviceDetails(null);
+                return;
+            }
+
+            for (const item of devices) {
+                const opt = document.createElement('option');
+                opt.value = item.board_id;
+                opt.textContent = `${item.board_id} (${item.status})`;
+                select.appendChild(opt);
+            }
+
+            if (current && devices.some(d => d.board_id === current)) {
+                select.value = current;
+            }
+
+            const selected = devices.find(d => d.board_id === select.value) || devices[0];
+            select.value = selected.board_id;
+            fillDeviceDetails(selected);
+        }
+
+        async function loadDashboard() {
+            try {
+                const res = await fetch('/api/dashboard/', { cache: 'no-store' });
+                const data = await res.json();
+
+                if (!data.success) {
+                    throw new Error('โหลดข้อมูลไม่สำเร็จ');
+                }
+
+                devices = data.devices || [];
+                document.getElementById('totalDevices').textContent = data.summary.device_count;
+                document.getElementById('onlineDevices').textContent = data.summary.online_count;
+                document.getElementById('offlineDevices').textContent = data.summary.offline_count;
+                document.getElementById('serverTime').textContent = `อัปเดตล่าสุด: ${formatDateTime(data.server_time)}`;
+
+                updateDeviceSelect();
+            } catch (err) {
+                setMessage('โหลดข้อมูล dashboard ไม่สำเร็จ: ' + err.message, 'err');
+            }
+        }
+
+        async function sendRelay(action) {
+            const select = document.getElementById('deviceSelect');
+            const boardId = select.value;
+            if (!boardId) {
+                setMessage('กรุณาเลือกอุปกรณ์ก่อน', 'err');
+                return;
+            }
+
+            const relays = actionMap[action];
+            try {
+                const res = await fetch('/api/control/', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ board_id: boardId, relays })
+                });
+                const data = await res.json();
+                if (!res.ok || !data.success) {
+                    throw new Error(data.error || 'ส่งคำสั่งไม่สำเร็จ');
+                }
+                setMessage(`ส่งคำสั่ง ${action.toUpperCase()} ไปที่ ${boardId} สำเร็จ`, 'ok');
+                await loadDashboard();
+            } catch (err) {
+                setMessage('ควบคุม relay ไม่สำเร็จ: ' + err.message, 'err');
+            }
+        }
+
+        document.getElementById('deviceSelect').addEventListener('change', () => {
+            const selected = devices.find(d => d.board_id === document.getElementById('deviceSelect').value);
+            fillDeviceDetails(selected || null);
+        });
+
+        document.querySelectorAll('[data-action]').forEach((btn) => {
+            btn.addEventListener('click', () => sendRelay(btn.dataset.action));
+        });
+
+        document.getElementById('refreshBtn').addEventListener('click', loadDashboard);
+
+        loadDashboard();
+        setInterval(loadDashboard, 10000);
+    </script>
+</body>
+</html>
 </body>
 </html>
