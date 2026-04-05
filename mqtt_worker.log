@@ -12899,3 +12899,6 @@ DEBUG 2026-04-05 18:55:49,434 mqtt_handler Updated device: ESP32-FARM-001-NATTAP
 DEBUG 2026-04-05 18:55:59,102 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
 DEBUG 2026-04-05 18:55:59,102 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 130451, 'rssi': -51, 'sensors': {'water_temp': 30.1, 'air_temp': 32.1, 'air_humidity': 65.3, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': True, 'relay2_fan': True, 'relay3_heater': True}}
 DEBUG 2026-04-05 18:55:59,136 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
+DEBUG 2026-04-05 18:56:09,105 mqtt_handler Received message on topic: smartfarm/ESP32-FARM-001-NATTAPHOL-PALM/telemetry
+DEBUG 2026-04-05 18:56:09,106 mqtt_handler Payload: {'board_id': 'ESP32-FARM-001-NATTAPHOL-PALM', 'timestamp': 140451, 'rssi': -50, 'sensors': {'water_temp': 30.1, 'air_temp': 32.1, 'air_humidity': 65.4, 'water_overflow': False, 'water_dry': False}, 'relays': {'relay1_pump': True, 'relay2_fan': True, 'relay3_heater': True}}
+DEBUG 2026-04-05 18:56:09,144 mqtt_handler Created telemetry log for ESP32-FARM-001-NATTAPHOL-PALM
