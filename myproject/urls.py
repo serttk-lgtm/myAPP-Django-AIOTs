@@ -27,4 +27,5 @@ urlpatterns = [
     path('api/dashboard/', views.dashboard_data, name='dashboard_data'),
     path('api/control/', views.send_control_command, name='send_control_command'),
     path('api/n8n/relay-control/', views.n8n_relay_control, name='n8n_relay_control'),
+    path('api/telemetry-history/', views.telemetry_history, name='telemetry_history'),
 ]

@@ -251,3 +251,41 @@ def n8n_relay_control(request):
     except Exception as exc:
         logger.error('Error in n8n_relay_control: %s', exc, exc_info=True)
         return JsonResponse({'success': False, 'error': str(exc)}, status=500)
+
+
+@require_http_methods(["GET"])
+def telemetry_history(request):
+    """Return last N telemetry records for a device (oldest first for charting)."""
+    board_id = request.GET.get('board_id', '').strip()
+    if not board_id:
+        return JsonResponse({'success': False, 'error': 'board_id is required'}, status=400)
+
+    try:
+        limit = min(int(request.GET.get('limit', 20)), 100)
+    except (ValueError, TypeError):
+        limit = 20
+
+    logs = list(
+        TelemetryLog.objects
+        .filter(device_id=board_id)
+        .order_by('-created_at')[:limit]
+    )
+    logs.reverse()  # oldest first so chart renders left-to-right
+
+    history = [
+        {
+            'created_at': log.created_at.isoformat(),
+            'rssi': log.rssi,
+            'water_temp': log.sensor_data.get('water_temp'),
+            'air_temp': log.sensor_data.get('air_temp'),
+            'air_humidity': log.sensor_data.get('air_humidity'),
+            'water_overflow': log.sensor_data.get('water_overflow'),
+            'water_dry': log.sensor_data.get('water_dry'),
+            'relay1_pump': log.relay_status.get('relay1_pump'),
+            'relay2_fan': log.relay_status.get('relay2_fan'),
+            'relay3_heater': log.relay_status.get('relay3_heater'),
+        }
+        for log in logs
+    ]
+
+    return JsonResponse({'success': True, 'history': history})

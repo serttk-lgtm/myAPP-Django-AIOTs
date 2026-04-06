@@ -276,6 +276,131 @@
             grid-template-columns: 1fr;
         }
     }
+
+    /* ── Chart ──────────────────────────────────────────── */
+    .chart-section {
+        margin-top: 14px;
+        padding: var(--space-5);
+    }
+
+    .chart-section h2 {
+        margin: 0 0 12px;
+        font-size: 1rem;
+        font-weight: 600;
+    }
+
+    .chart-wrap {
+        position: relative;
+        height: 280px;
+    }
+
+    /* ── History Table ─────────────────────────────────── */
+    .history-section {
+        margin-top: 14px;
+        padding: var(--space-5);
+    }
+
+    .history-section h2 {
+        margin: 0 0 12px;
+        font-size: 1rem;
+        font-weight: 600;
+    }
+
+    .table-wrap {
+        overflow-x: auto;
+    }
+
+    .history-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.855rem;
+        table-layout: fixed;
+        min-width: 980px;
+    }
+
+    .history-table th {
+        background: var(--surface-accent);
+        color: var(--text-muted);
+        font-weight: 600;
+        padding: 10px 12px;
+        text-align: left;
+        border-bottom: 2px solid var(--border-accent);
+        white-space: nowrap;
+        line-height: 1.35;
+        vertical-align: middle;
+    }
+
+    .history-table td {
+        padding: 9px 12px;
+        border-bottom: 1px solid var(--border-soft-3);
+        color: var(--text-main);
+        white-space: nowrap;
+        line-height: 1.35;
+        vertical-align: middle;
+    }
+
+    .history-table tbody tr:nth-child(odd) td {
+        background-color: rgba(145, 175, 158, 0.20) !important;
+    }
+
+    .history-table tbody tr:nth-child(even) td {
+        background-color: rgba(120, 150, 134, 0.12) !important;
+    }
+
+    .history-table th:nth-child(1),
+    .history-table td:nth-child(1) {
+        width: 124px;
+    }
+
+    .history-table th:nth-child(2),
+    .history-table td:nth-child(2) {
+        width: 96px;
+        text-align: center;
+    }
+
+    .history-table th:nth-child(3),
+    .history-table td:nth-child(3),
+    .history-table th:nth-child(4),
+    .history-table td:nth-child(4),
+    .history-table th:nth-child(5),
+    .history-table td:nth-child(5) {
+        width: 110px;
+        text-align: center;
+    }
+
+    .history-table th:nth-child(n + 6),
+    .history-table td:nth-child(n + 6) {
+        width: 74px;
+        text-align: center;
+        padding-left: 6px;
+        padding-right: 6px;
+    }
+
+    .history-table tr:last-child td {
+        border-bottom: none;
+    }
+
+    .history-table tbody tr:hover td {
+        background-color: rgba(186, 216, 198, 0.34) !important;
+    }
+
+    .ri {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        vertical-align: middle;
+    }
+
+    .ri-on  { background: #1a9f50; box-shadow: 0 0 0 3px rgba(26,159,80,0.18); }
+    .ri-off { background: #c8d4cc; }
+    .ri-unk { background: #dfc56a; }
+
+    .no-data {
+        text-align: center;
+        color: var(--text-muted);
+        padding: 24px;
+    }
 </style>
 {% endblock %}
 
@@ -373,11 +498,46 @@
         </div>
     </div>
 
+    <!-- ── Sensor Chart ─────────────────────────────────── -->
+    <div class="chart-section ui-panel">
+        <h2>📈 กราฟเซ็นเซอร์ Real-time (30 นาทีล่าสุด)</h2>
+        <div class="chart-wrap">
+            <canvas id="sensorChart"></canvas>
+        </div>
+    </div>
+
+    <!-- ── History Table ────────────────────────────────── -->
+    <div class="history-section ui-panel">
+        <h2>🕒 ประวัติข้อมูล 20 ค่าล่าสุด</h2>
+        <div class="table-wrap">
+            <table class="history-table">
+                <thead>
+                    <tr>
+                        <th>เวลา</th>
+                        <th>RSSI</th>
+                        <th>น้ำ (°C)</th>
+                        <th>อากาศ (°C)</th>
+                        <th>ความชื้น (%)</th>
+                        <th>Overflow</th>
+                        <th>Dry</th>
+                        <th>Pump</th>
+                        <th>Fan</th>
+                        <th>Heater</th>
+                    </tr>
+                </thead>
+                <tbody id="historyBody">
+                    <tr><td colspan="10" class="no-data">กรุณาเลือกอุปกรณ์</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
     <div class="footer">AIOTs Smart Farm Dashboard • Real-time Monitor and Control</div>
 </div>
 {% endblock %}
 
 {% block page_scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
 <script>
     const actionMap = {
         all_on: { relay1_pump: true, relay2_fan: true, relay3_heater: true },
@@ -391,6 +551,183 @@
     };
 
     let devices = [];
+    let sensorChart = null;
+
+    // — Chart gradient definitions —
+    const GRADIENT_DEFS = [
+        { key: 'water_temp', label: 'น้ำ (°C)',      borderColor: 'rgba(20,191,174,1)',  top: 'rgba(20,191,174,0.45)',  bot: 'rgba(20,191,174,0.0)',  yAxisID: 'yLeft'  },
+        { key: 'air_temp',   label: 'อากาศ (°C)',   borderColor: 'rgba(245,152,42,1)',   top: 'rgba(245,152,42,0.45)',   bot: 'rgba(245,152,42,0.0)',   yAxisID: 'yLeft'  },
+        { key: 'air_humidity', label: 'ความชื้น (%)', borderColor: 'rgba(88,130,240,1)', top: 'rgba(88,130,240,0.45)',  bot: 'rgba(88,130,240,0.0)',  yAxisID: 'yRight' },
+    ];
+
+    const gradientPlugin = {
+        id: 'gradientPlugin',
+        beforeDraw(chart) {
+            const { ctx, chartArea, data } = chart;
+            if (!chartArea) return;
+            data.datasets.forEach((ds, i) => {
+                const def = GRADIENT_DEFS[i];
+                if (!def) return;
+                const grad = ctx.createLinearGradient(0, chartArea.top, 0, chartArea.bottom);
+                grad.addColorStop(0, def.top);
+                grad.addColorStop(1, def.bot);
+                ds.backgroundColor = grad;
+            });
+        }
+    };
+
+    function initChart() {
+        const ctx = document.getElementById('sensorChart').getContext('2d');
+        const datasets = GRADIENT_DEFS.map(def => ({
+            label: def.label,
+            borderColor: def.borderColor,
+            backgroundColor: 'transparent',
+            data: [],
+            fill: true,
+            tension: 0.4,
+            pointRadius: 3,
+            pointHoverRadius: 6,
+            yAxisID: def.yAxisID,
+        }));
+        sensorChart = new Chart(ctx, {
+            type: 'line',
+            plugins: [gradientPlugin],
+            data: { datasets },
+            options: {
+                animation: false,
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: { mode: 'index', intersect: false },
+                plugins: {
+                    legend: {
+                        labels: { font: { family: 'Prompt', size: 12 }, color: '#c8d4cc' }
+                    },
+                    tooltip: {
+                        titleFont: { family: 'Prompt' },
+                        bodyFont:  { family: 'Prompt' },
+                        callbacks: {
+                            title(items) {
+                                if (!items || !items.length) return '';
+                                const ms = items[0].parsed && items[0].parsed.x;
+                                if (ms == null) return '';
+                                return new Date(ms).toLocaleTimeString('th-TH', {
+                                    hour: '2-digit',
+                                    minute: '2-digit',
+                                    second: '2-digit'
+                                });
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        type: 'linear',
+                        ticks: {
+                            color: '#c8d4cc',
+                            font: { family: 'Prompt', size: 11 },
+                            maxTicksLimit: 7,
+                            callback(ms) {
+                                return new Date(ms).toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' });
+                            }
+                        },
+                        grid: { color: 'rgba(200,212,204,0.1)' }
+                    },
+                    yLeft: {
+                        type: 'linear',
+                        position: 'left',
+                        title: {
+                            display: true,
+                            text: 'อุณหภูมิ (°C)',
+                            color: 'rgba(245,152,42,0.9)',
+                            font: { family: 'Prompt', size: 12 }
+                        },
+                        ticks: { color: '#c8d4cc', font: { family: 'Prompt', size: 11 } },
+                        grid:  { color: 'rgba(200,212,204,0.1)' }
+                    },
+                    yRight: {
+                        type: 'linear',
+                        position: 'right',
+                        min: 0,
+                        max: 100,
+                        title: {
+                            display: true,
+                            text: 'ความชื้น (%)',
+                            color: 'rgba(88,130,240,0.9)',
+                            font: { family: 'Prompt', size: 12 }
+                        },
+                        ticks: { color: '#c8d4cc', font: { family: 'Prompt', size: 11 } },
+                        grid:  { drawOnChartArea: false }
+                    }
+                }
+            }
+        });
+    }
+
+    function updateChart(history) {
+        if (!sensorChart) initChart();
+        const now = Date.now();
+        const cutoff = now - 30 * 60 * 1000;
+        const filtered = history
+            .filter(row => new Date(row.created_at).getTime() >= cutoff)
+            .sort((a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime());
+
+        const toXY = key => filtered.map(row => ({ x: new Date(row.created_at).getTime(), y: row[key] != null ? row[key] : null }));
+        sensorChart.data.datasets[0].data = toXY('water_temp');
+        sensorChart.data.datasets[1].data = toXY('air_temp');
+        sensorChart.data.datasets[2].data = toXY('air_humidity');
+
+        const firstPointMs = filtered.length ? new Date(filtered[0].created_at).getTime() : cutoff;
+        sensorChart.options.scales.x.min = firstPointMs;
+        sensorChart.options.scales.x.max = now;
+        sensorChart.update('none');
+    }
+
+    function relayIcon(state) {
+        if (state === true)  return '<span class="ri ri-on" title="ON"></span>';
+        if (state === false) return '<span class="ri ri-off" title="OFF"></span>';
+        return '<span class="ri ri-unk" title="?"></span>';
+    }
+
+    function updateHistoryTable(history) {
+        const tbody = document.getElementById('historyBody');
+        if (!history || !history.length) {
+            tbody.innerHTML = '<tr><td colspan="10" class="no-data">ไม่มีข้อมูล</td></tr>';
+            return;
+        }
+        tbody.innerHTML = [...history].reverse().map(row => {
+            const t = new Date(row.created_at).toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            return `<tr>
+                <td>${t}</td>
+                <td>${row.rssi != null ? row.rssi + ' dBm' : '-'}</td>
+                <td>${row.water_temp != null ? row.water_temp : '-'}</td>
+                <td>${row.air_temp != null ? row.air_temp : '-'}</td>
+                <td>${row.air_humidity != null ? row.air_humidity : '-'}</td>
+                <td>${relayIcon(row.water_overflow)}</td>
+                <td>${relayIcon(row.water_dry)}</td>
+                <td>${relayIcon(row.relay1_pump)}</td>
+                <td>${relayIcon(row.relay2_fan)}</td>
+                <td>${relayIcon(row.relay3_heater)}</td>
+            </tr>`;
+        }).join('');
+    }
+
+    async function loadDeviceHistory(boardId) {
+        if (!boardId) {
+            updateHistoryTable([]);
+            if (sensorChart) { sensorChart.data.datasets.forEach(ds => { ds.data = []; }); sensorChart.update('none'); }
+            return;
+        }
+        try {
+            const res  = await fetch(`/api/telemetry-history/?board_id=${encodeURIComponent(boardId)}&limit=20`, { cache: 'no-store' });
+            const data = await res.json();
+            if (data.success) {
+                updateChart(data.history);
+                updateHistoryTable(data.history);
+            }
+        } catch (err) {
+            console.warn('loadDeviceHistory error:', err);
+        }
+    }
 
     function formatDateTime(value) {
         if (!value) return '-';
@@ -589,6 +926,7 @@
             document.getElementById('serverTime').textContent = `อัปเดตล่าสุด: ${formatDateTime(data.server_time)}`;
 
             updateDeviceSelect();
+            await loadDeviceHistory(document.getElementById('deviceSelect').value);
         } catch (err) {
             setMessage('โหลดข้อมูล dashboard ไม่สำเร็จ: ' + err.message, 'err');
         }
@@ -623,6 +961,7 @@
     document.getElementById('deviceSelect').addEventListener('change', () => {
         const selected = devices.find((device) => device.board_id === document.getElementById('deviceSelect').value);
         fillDeviceDetails(selected || null);
+        loadDeviceHistory(document.getElementById('deviceSelect').value);
     });
 
     document.querySelectorAll('[data-action]').forEach((btn) => {
