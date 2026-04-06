@@ -1,15 +1,58 @@
 {% extends "myapp/base_dashboard.html" %}
+{% load static %}
 
 {% block page_styles %}
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Inter:wght@400;500;600&family=Prompt:wght@400;600;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
 <style>
     :root {
-        --bg-1: #f3fff5;
-        --bg-2: #dcf8e4;
-        --brand: #2ca85f;
-        --brand-2: #1e8f4f;
-        --ok: #1e9f55;
-        --warn: #c78f00;
-        --err: #d63a3a;
+        --primary-fixed-dim: #95d4b3;
+        --outline: #717973;
+        --primary-container: #00452e;
+        --on-primary-fixed: #002114;
+        --primary: #002d1c;
+        --on-primary: #ffffff;
+        --on-tertiary-fixed-variant: #623f18;
+        --surface-variant: #e1e3e2;
+        --surface-dim: #d9dad9;
+        --on-secondary-fixed-variant: #40493d;
+        --secondary: #586154;
+        --tertiary-fixed-dim: #f0bd8b;
+        --on-primary-container: #76b394;
+        --on-error: #ffffff;
+        --surface-container-high: #e7e8e7;
+        --secondary-fixed: #dce6d5;
+        --inverse-on-surface: #f0f1f0;
+        --on-background: #191c1c;
+        --secondary-container: #dce6d5;
+        --secondary-fixed-dim: #c0cab9;
+        --error-container: #ffdad6;
+        --on-secondary-container: #5e675a;
+        --inverse-surface: #2e3131;
+        --tertiary-container: #56340e;
+        --surface-tint: #2c694e;
+        --on-error-container: #93000a;
+        --tertiary: #3b1f00;
+        --on-tertiary-container: #cd9d6d;
+        --on-surface-variant: #414844;
+        --surface-bright: #f9f9f8;
+        --outline-variant: #c1c8c2;
+        --on-secondary-fixed: #151e13;
+        --primary-fixed: #b1f0ce;
+        --on-primary-fixed-variant: #0e5138;
+        --on-surface: #191c1c;
+        --inverse-primary: #95d4b3;
+        --surface-container-lowest: #ffffff;
+        --on-tertiary: #ffffff;
+        --tertiary-fixed: #ffdcbd;
+        --surface: #f9f9f8;
+        --surface-container-low: #f3f4f3;
+        --background: #f9f9f8;
+        --surface-container-highest: #e1e3e2;
+        --error: #ba1a1a;
+        --on-tertiary-fixed: #2c1600;
+        --on-secondary: #ffffff;
+        --surface-container: #edeeed;
     }
 
     * {
@@ -18,172 +61,550 @@
 
     body {
         margin: 0;
-        color: var(--text-main);
-        background:
-            radial-gradient(circle at 10% 15%, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0) 45%),
-            linear-gradient(140deg, var(--bg-1), var(--bg-2));
+        font-family: 'Manrope', sans-serif;
+        background-color: var(--background);
+        color: var(--on-surface);
+        selection: var(--primary-fixed);
+    }
+
+    body ::selection {
+        background: var(--primary-fixed);
+        color: var(--primary);
+    }
+
+    .font-headline {
+        font-family: 'Prompt', sans-serif;
+    }
+
+    .font-label {
+        font-family: 'Inter', sans-serif;
+    }
+
+    .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        line-height: 1;
+        vertical-align: middle;
+    }
+
+    .icon-sm {
+        font-size: 16px;
+    }
+
+    .layout-container {
         min-height: 100vh;
-    }
-
-    .container {
-        width: min(1180px, 94%);
-        margin: 0 auto;
-        padding: 24px 0 36px;
-    }
-
-    .top {
         display: flex;
+        flex-direction: column;
+    }
+
+    .glass-panel {
+        background: rgba(255, 255, 255, 0.62);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+    }
+
+    .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 60;
+        border-bottom: 1px solid rgba(193, 200, 194, 0.45);
+        padding: 16px 24px;
+        display: flex;
+        align-items: center;
         justify-content: space-between;
-        align-items: center;
-        gap: 12px;
-        margin-bottom: 18px;
-        flex-wrap: wrap;
+        gap: 16px;
+        box-shadow: 0 8px 22px rgba(25, 28, 28, 0.03);
     }
 
-    .title {
+    .brand {
         display: flex;
         align-items: center;
-        gap: 10px;
+        gap: 14px;
     }
 
-    .dot {
-        width: 14px;
-        height: 14px;
-        border-radius: 50%;
-        background: var(--ok);
-        box-shadow: 0 0 0 7px rgba(30, 159, 85, 0.15);
-        animation: pulse 1.9s infinite;
+    .brand-icon {
+        background: var(--primary);
+        color: var(--on-primary);
+        border-radius: 12px;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
-    @keyframes pulse {
-        0% { transform: scale(1); opacity: 1; }
-        50% { transform: scale(1.2); opacity: 0.65; }
-        100% { transform: scale(1); opacity: 1; }
-    }
-
-    h1 {
+    .brand-title {
         margin: 0;
-        font-size: clamp(1.2rem, 2.2vw, 1.8rem);
-        font-weight: 600;
+        font-size: 1.3rem;
+        letter-spacing: -0.01em;
+        color: var(--primary);
+        font-family: 'Prompt', sans-serif;
+        font-weight: 800;
     }
 
-    .meta {
-        color: var(--text-muted);
-        font-size: 0.86rem;
-        margin-top: 3px;
+    .brand-subtitle {
+        margin-top: 2px;
+        font-size: 0.7rem;
+        letter-spacing: 0.16em;
+        color: var(--on-surface-variant);
+        text-transform: uppercase;
+        font-family: 'Inter', sans-serif;
+        font-weight: 700;
     }
 
-    .top-actions {
+    .top-right {
         display: flex;
-        gap: 10px;
         align-items: center;
+        gap: 10px;
     }
 
-    .btn {
-        font-weight: 600;
+    .server-time {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        min-width: 170px;
     }
 
-    .btn-main {
-        background: linear-gradient(130deg, var(--brand), var(--brand-2));
-        color: #fff;
+    .server-time-label {
+        font-size: 0.67rem;
+        color: var(--on-surface-variant);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        font-family: 'Inter', sans-serif;
+        font-weight: 700;
     }
 
-    .btn-soft {
-        background: var(--surface-accent);
-        color: #236f44;
-        border: 1px solid var(--border-accent);
+    .server-time-value {
+        margin-top: 2px;
+        font-family: 'Prompt', sans-serif;
+        font-size: 0.88rem;
+        color: var(--primary);
+        font-weight: 800;
+    }
+
+    .icon-btn,
+    .main-btn,
+    .ghost-btn,
+    .control-btn {
+        border: 0;
+        cursor: pointer;
+        transition: all 170ms ease;
+    }
+
+    .icon-btn {
+        width: 44px;
+        height: 44px;
+        border-radius: 999px;
+        background: var(--surface-container-highest);
+        color: var(--on-surface-variant);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .icon-btn:hover {
+        background: var(--primary-fixed);
+    }
+
+    @keyframes spin-once {
+        from { transform: rotate(0deg); }
+        to   { transform: rotate(360deg); }
+    }
+
+    #refreshBtn.is-refreshing {
+        pointer-events: none;
+        opacity: 0.7;
+    }
+
+    #refreshBtn.is-refreshing .material-symbols-outlined {
+        animation: spin-once 0.6s linear;
+    }
+
+    .main-btn {
+        height: 44px;
+        border-radius: 999px;
+        padding: 0 20px;
+        display: inline-flex;
+        gap: 7px;
+        align-items: center;
+        font-family: 'Inter', sans-serif;
+        font-size: 0.82rem;
+        font-weight: 700;
+        letter-spacing: 0.03em;
+        background: var(--primary);
+        color: var(--on-primary);
+        box-shadow: 0 10px 22px rgba(0, 45, 28, 0.14);
+    }
+
+    .main-btn:hover {
+        box-shadow: 0 14px 26px rgba(0, 45, 28, 0.2);
+        transform: translateY(-1px);
+    }
+
+    .page {
+        width: min(1600px, 96%);
+        margin: 0 auto;
+        padding: 32px 0 36px;
+    }
+
+    .page,
+    .panel,
+    .history,
+    .summary-card,
+    .control-card {
+        min-width: 0;
     }
 
     .summary {
         display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 12px;
-        margin-bottom: 14px;
+        gap: 24px;
+        margin-bottom: 48px;
     }
 
-    .stat {
-        padding: var(--space-5);
+    .summary-card {
+        position: relative;
+        border-radius: 20px;
+        overflow: hidden;
+        padding: 32px;
+        min-height: 210px;
     }
 
-    .stat .k {
+    .summary-card .bg-icon {
+        position: absolute;
+        right: -16px;
+        top: -18px;
+        opacity: 0.06;
+        font-size: 140px;
+        pointer-events: none;
+        transition: opacity 150ms ease;
+    }
+
+    .summary-card:hover .bg-icon {
+        opacity: 0.1;
+    }
+
+    .summary-title {
+        font-size: 0.67rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        font-family: 'Inter', sans-serif;
+        font-weight: 800;
+    }
+
+    .summary-value {
+        margin-top: 8px;
+        font-size: clamp(2.45rem, 4.8vw, 3.28rem);
+        line-height: 1;
+        font-family: 'Prompt', sans-serif;
+        font-weight: 900;
+    }
+
+    .summary-meta {
+        margin-top: 16px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
         font-size: 0.84rem;
-        color: var(--text-muted);
-    }
-
-    .stat .v {
-        margin-top: 6px;
-        font-size: 1.65rem;
         font-weight: 700;
     }
 
-    .layout {
+    .summary-card.total {
+        background: var(--surface-container-low);
+        color: var(--primary);
+    }
+
+    .summary-card.total .summary-title {
+        color: var(--on-surface-variant);
+    }
+
+    .summary-card.total .summary-meta {
+        color: var(--primary-container);
+    }
+
+    .summary-card.online {
+        background: var(--secondary-container);
+        color: var(--primary);
+    }
+
+    .summary-card.online .summary-title,
+    .summary-card.online .summary-meta {
+        color: var(--on-secondary-container);
+    }
+
+    .summary-card.offline {
+        background: rgba(255, 218, 214, 0.42);
+        border: 1px solid rgba(186, 26, 26, 0.1);
+        color: var(--error);
+    }
+
+    .summary-card.offline .summary-title,
+    .summary-card.offline .summary-meta {
+        color: var(--error);
+    }
+
+    .workspace {
         display: grid;
-        grid-template-columns: 1.2fr 1fr;
-        gap: 14px;
+        grid-template-columns: minmax(0, 2fr) minmax(320px, 1fr);
+        gap: 32px;
+    }
+
+    .stack {
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
     }
 
     .panel {
-        padding: var(--space-5);
+        border-radius: 20px;
+        padding: 32px;
+        background: var(--surface-container-low);
+        box-shadow: inset 0 0 0 1px rgba(193, 200, 194, 0.22);
     }
 
-    .panel h2 {
-        margin: 0 0 10px;
-        font-size: 1rem;
-        font-weight: 600;
-    }
-
-    .row {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
+    .panel-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
         gap: 10px;
+        flex-wrap: wrap;
+        margin-bottom: 24px;
     }
 
-    .kv {
-        border: 1px solid var(--border-soft-3);
-        border-radius: var(--radius-md);
-        padding: var(--space-3);
-        background: var(--surface-soft-2);
+    .panel-header.tight {
+        margin-bottom: 14px;
     }
 
-    .kv .k {
-        color: var(--text-muted);
+    .panel-title {
+        margin: 0;
+        color: var(--primary);
+        font-family: 'Prompt', sans-serif;
+        font-size: 1.48rem;
+        font-weight: 700;
+        line-height: 1.15;
+    }
+
+    .panel-subtitle {
+        margin-top: 4px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: var(--on-surface-variant);
+    }
+
+    .live-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        border-radius: 999px;
+        padding: 7px 14px;
+        border: 1px solid rgba(193, 200, 194, 0.45);
+        background: var(--surface-container-lowest);
+        font-size: 0.64rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        font-family: 'Inter', sans-serif;
+        color: var(--on-surface-variant);
+        font-weight: 700;
+    }
+
+    .live-chip .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--primary-fixed-dim);
+        animation: pulse 1.8s infinite;
+    }
+
+    .select-wrap {
+        margin-bottom: 12px;
+    }
+
+    .select-wrap.last-seen {
+        margin-top: 14px;
+        margin-bottom: 0;
+    }
+
+    .select-wrap label {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 0.67rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--on-surface-variant);
+        font-family: 'Inter', sans-serif;
+        font-weight: 800;
+    }
+
+    .ui-select {
+        width: 100%;
+        max-width: 360px;
+        border-radius: 12px;
+        border: 1px solid var(--outline-variant);
+        padding: 10px 12px;
+        color: var(--on-surface);
+        background: #fff;
+        font-family: 'Inter', sans-serif;
+        font-weight: 500;
+    }
+
+    .identity-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 24px;
+    }
+
+    .identity-item .k {
+        font-size: 0.61rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--on-surface-variant);
+        font-family: 'Inter', sans-serif;
+        font-weight: 800;
+        margin-bottom: 5px;
+    }
+
+    .identity-item .v {
+        font-family: 'Prompt', sans-serif;
+        font-size: 1.04rem;
+        font-weight: 700;
+        color: var(--primary);
+    }
+
+    .sensor-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 24px;
+        margin-top: 40px;
+    }
+
+    .sensor-card {
+        border-radius: 14px;
+        padding: 24px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        background: var(--surface-container-lowest);
+        transition: transform 150ms ease;
+        box-shadow: inset 0 0 0 1px rgba(193, 200, 194, 0.18);
+    }
+
+    .sensor-card:hover {
+        transform: scale(1.02);
+    }
+
+    .sensor-icon {
+        width: 58px;
+        height: 58px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 32px;
+    }
+
+    .sensor-icon.water {
+        background: var(--tertiary-fixed);
+        color: var(--tertiary);
+    }
+
+    .sensor-icon.air {
+        background: var(--primary-fixed);
+        color: var(--primary);
+    }
+
+    .sensor-icon.humidity {
+        background: var(--secondary-fixed);
+        color: var(--secondary);
+    }
+
+    .sensor-k {
+        font-size: 0.68rem;
+        letter-spacing: 0.11em;
+        text-transform: uppercase;
+        color: var(--on-surface-variant);
+        font-family: 'Inter', sans-serif;
+        font-weight: 800;
+    }
+
+    .sensor-v {
+        margin-top: 2px;
+        display: flex;
+        align-items: baseline;
+        gap: 3px;
+        color: var(--primary);
+    }
+
+    .sensor-v span:first-child {
+        font-family: 'Prompt', sans-serif;
+        font-size: 2.05rem;
+        font-weight: 900;
+        line-height: 1;
+    }
+
+    .sensor-v .unit {
+        font-family: 'Prompt', sans-serif;
+        font-size: 1.16rem;
+        color: var(--on-surface-variant);
+        font-weight: 700;
+    }
+
+    .chart-shell {
+        width: 100%;
+        aspect-ratio: 21 / 9;
+        border-radius: 14px;
+        border: 1px solid rgba(193, 200, 194, 0.45);
+        background: var(--surface-container-lowest);
+        padding: 14px;
+    }
+
+    .chart-wrap {
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+
+    .controls-panel {
+        position: sticky;
+        top: 112px;
+        align-self: start;
+    }
+
+    .settings-chip {
+        width: 38px;
+        height: 38px;
+        border-radius: 10px;
+        background: var(--tertiary-fixed);
+        color: var(--tertiary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .warning-box {
+        display: none;
+        margin-bottom: 10px;
+        border-radius: 10px;
         font-size: 0.8rem;
-        margin-bottom: 4px;
+        font-family: 'Prompt', sans-serif;
+        padding: 8px 10px;
+        border: 1px solid #f2c787;
+        background: #fff6e4;
+        color: #7a5a12;
     }
 
-    .kv .v {
-        font-size: 0.96rem;
-        font-weight: 600;
+    .warning-box.visible {
+        display: block;
     }
 
-    .status-pill {
-        font-size: 0.79rem;
-        font-weight: 600;
-    }
-
-    .online {
-        background: var(--success-bg);
-        color: var(--success-text);
-        border: 1px solid var(--success-border);
-    }
-
-    .offline {
-        background: var(--danger-bg);
-        color: var(--danger-text);
-        border: 1px solid var(--danger-border);
-    }
-
-    .controls {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 10px;
+    .control-list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
     }
 
     .control-card {
-        border: 1px solid var(--border-soft-2);
-        border-radius: var(--radius-xl);
-        padding: var(--space-3);
-        background: var(--surface-soft);
+        border-radius: 14px;
+        border: 1px solid rgba(193, 200, 194, 0.38);
+        background: var(--surface-container-lowest);
+        padding: 16px;
     }
 
     .control-head {
@@ -191,118 +612,193 @@
         justify-content: space-between;
         align-items: center;
         gap: 8px;
-        margin-bottom: 8px;
-        flex-wrap: wrap;
+        margin-bottom: 12px;
+    }
+
+    .control-left {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .control-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 999px;
+        background: rgba(0, 45, 28, 0.06);
+        color: var(--primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
     }
 
     .control-title {
+        color: var(--primary);
+        font-size: 0.88rem;
+        font-weight: 800;
+        margin: 0;
+    }
+
+    .control-subtitle {
+        margin-top: 2px;
+        color: var(--on-surface-variant);
+        font-size: 0.76rem;
         font-weight: 600;
     }
 
     .relay-pill {
-        padding: 4px 9px;
-        font-size: 0.74rem;
-        font-weight: 600;
-        letter-spacing: 0.01em;
-        border: 1px solid var(--border-soft);
-        background: #f4f8f6;
-        color: var(--text-muted);
+        border-radius: 999px;
+        font-size: 0.68rem;
+        padding: 4px 8px;
+        border: 1px solid #d2d9d4;
+        background: #f5f8f6;
+        color: var(--on-surface-variant);
+        font-family: 'Prompt', sans-serif;
+        font-weight: 700;
+        white-space: nowrap;
     }
 
     .relay-pill.is-on {
-        background: var(--success-bg);
-        color: var(--success-text);
-        border-color: var(--success-border);
+        background: #d8f3e4;
+        border-color: #86ccaa;
+        color: #125838;
     }
 
     .relay-pill.is-off {
-        background: #f2f4f3;
-        color: #4f6357;
-        border-color: #d4ded8;
+        background: #f0f3f1;
+        border-color: #d0d8d3;
+        color: #4f6258;
     }
 
     .relay-pill.is-unknown {
         background: #fff8e6;
-        color: #8d6a00;
         border-color: #efdca8;
+        color: #8d6a00;
     }
 
     .relay-pill.is-offline {
-        background: var(--danger-bg);
-        color: var(--danger-text);
-        border-color: var(--danger-border);
+        background: #ffe5e2;
+        border-color: #ffb8b1;
+        color: #a6362f;
     }
 
-    .btn-group {
+    .control-actions {
         display: flex;
         gap: 8px;
     }
 
-    .btn-on {
-        background: #1f9f58;
+    .control-btn {
+        flex: 1;
+        border-radius: 10px;
+        padding: 10px 10px;
+        font-family: 'Inter', sans-serif;
+        font-size: 0.74rem;
+        letter-spacing: 0.06em;
+        font-weight: 800;
+    }
+
+    .control-btn.on {
+        background: var(--primary);
         color: #fff;
     }
 
-    .btn-off {
-        background: #74877a;
-        color: #fff;
+    .control-btn.off {
+        background: var(--surface-container-highest);
+        color: var(--primary);
     }
 
-    .ui-select {
-        margin-bottom: 12px;
+    .control-btn:hover {
+        opacity: 0.92;
     }
 
-    .footer {
-        margin-top: 14px;
-        text-align: center;
-        color: var(--text-muted);
+    .control-btn:disabled,
+    .icon-btn:disabled,
+    .main-btn:disabled,
+    .ghost-btn:disabled {
+        opacity: 0.58;
+        cursor: not-allowed;
+    }
+
+    .master-actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin-top: 16px;
+    }
+
+    .master-btn {
+        justify-content: center;
+        border-radius: 12px;
+        height: 50px;
+    }
+
+    .ghost-btn {
+        border-radius: 12px;
+        padding: 14px 12px;
+        font-family: 'Inter', sans-serif;
+        letter-spacing: 0.06em;
+        font-size: 0.78rem;
+        font-weight: 800;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        background: var(--surface-container-highest);
+        color: var(--primary);
+    }
+
+    .status-msg {
+        margin-top: 10px;
+        border-radius: 10px;
+        padding: 8px 10px;
         font-size: 0.82rem;
+        font-family: 'Prompt', sans-serif;
+        display: none;
     }
 
-    @media (max-width: 900px) {
-        .summary {
-            grid-template-columns: 1fr;
-        }
-
-        .layout {
-            grid-template-columns: 1fr;
-        }
-
-        .controls {
-            grid-template-columns: 1fr;
-        }
-
-        .row {
-            grid-template-columns: 1fr;
-        }
+    .status-msg.ok {
+        display: block;
+        background: #e4f7eb;
+        border: 1px solid #95d4b3;
+        color: #145638;
     }
 
-    /* ── Chart ──────────────────────────────────────────── */
-    .chart-section {
-        margin-top: 14px;
-        padding: var(--space-5);
+    .status-msg.err {
+        display: block;
+        background: #ffe9e9;
+        border: 1px solid #f0b8b8;
+        color: #8f2222;
     }
 
-    .chart-section h2 {
-        margin: 0 0 12px;
-        font-size: 1rem;
-        font-weight: 600;
+    .history {
+        margin-top: 48px;
+        border-radius: 20px;
+        background: var(--surface-container-low);
+        padding: 32px;
     }
 
-    .chart-wrap {
-        position: relative;
-        height: 280px;
+    .history-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 24px;
     }
 
-    /* ── History Table ─────────────────────────────────── */
-    .history-section {
-        margin-top: 14px;
-        padding: var(--space-5);
+    .history-head h2 {
+        margin: 0;
+        color: var(--primary);
+        font-size: 1.64rem;
+        font-family: 'Prompt', sans-serif;
+        font-weight: 700;
     }
 
-    .history-section h2 {
-        margin: 0 0 12px;
-        font-size: 1rem;
+    .history-subtitle {
+        margin-top: 4px;
+        color: var(--on-surface-variant);
+        font-size: 0.96rem;
+        font-family: 'Prompt', sans-serif;
         font-weight: 600;
     }
 
@@ -312,76 +808,56 @@
 
     .history-table {
         width: 100%;
-        border-collapse: collapse;
-        font-size: 0.855rem;
-        table-layout: fixed;
-        min-width: 980px;
+        border-collapse: separate;
+        border-spacing: 0 10px;
+        min-width: 960px;
+        font-size: 0.85rem;
     }
 
     .history-table th {
-        background: var(--surface-accent);
-        color: var(--text-muted);
-        font-weight: 600;
-        padding: 10px 12px;
         text-align: left;
-        border-bottom: 2px solid var(--border-accent);
+        font-size: 0.74rem;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: var(--on-surface-variant);
+        padding: 0 14px 10px;
+        font-family: 'Prompt', sans-serif;
+        font-weight: 700;
         white-space: nowrap;
-        line-height: 1.35;
-        vertical-align: middle;
     }
 
     .history-table td {
-        padding: 9px 12px;
-        border-bottom: 1px solid var(--border-soft-3);
-        color: var(--text-main);
+        background: var(--surface-container-lowest);
+        padding: 12px 14px;
+        font-family: 'Prompt', sans-serif;
+        font-size: 0.9rem;
+        font-weight: 600;
         white-space: nowrap;
-        line-height: 1.35;
-        vertical-align: middle;
+        color: var(--on-surface);
     }
 
-    .history-table tbody tr:nth-child(odd) td {
-        background-color: rgba(145, 175, 158, 0.20) !important;
+    .history-table tbody tr td:first-child {
+        border-radius: 10px 0 0 10px;
     }
 
-    .history-table tbody tr:nth-child(even) td {
-        background-color: rgba(120, 150, 134, 0.12) !important;
-    }
-
-    .history-table th:nth-child(1),
-    .history-table td:nth-child(1) {
-        width: 124px;
-    }
-
-    .history-table th:nth-child(2),
-    .history-table td:nth-child(2) {
-        width: 96px;
-        text-align: center;
-    }
-
-    .history-table th:nth-child(3),
-    .history-table td:nth-child(3),
-    .history-table th:nth-child(4),
-    .history-table td:nth-child(4),
-    .history-table th:nth-child(5),
-    .history-table td:nth-child(5) {
-        width: 110px;
-        text-align: center;
-    }
-
-    .history-table th:nth-child(n + 6),
-    .history-table td:nth-child(n + 6) {
-        width: 74px;
-        text-align: center;
-        padding-left: 6px;
-        padding-right: 6px;
-    }
-
-    .history-table tr:last-child td {
-        border-bottom: none;
+    .history-table tbody tr td:last-child {
+        border-radius: 0 10px 10px 0;
     }
 
     .history-table tbody tr:hover td {
-        background-color: rgba(186, 216, 198, 0.34) !important;
+        background: rgba(149, 212, 179, 0.12);
+    }
+
+    .history-table td:nth-child(2),
+    .history-table td:nth-child(3),
+    .history-table td:nth-child(4),
+    .history-table td:nth-child(5),
+    .history-table td:nth-child(6),
+    .history-table td:nth-child(7),
+    .history-table td:nth-child(8),
+    .history-table td:nth-child(9),
+    .history-table td:nth-child(10) {
+        text-align: center;
     }
 
     .ri {
@@ -392,147 +868,650 @@
         vertical-align: middle;
     }
 
-    .ri-on  { background: #1a9f50; box-shadow: 0 0 0 3px rgba(26,159,80,0.18); }
-    .ri-off { background: #c8d4cc; }
-    .ri-unk { background: #dfc56a; }
+    .ri-on {
+        background: #1a9f50;
+        box-shadow: 0 0 0 3px rgba(26, 159, 80, 0.18);
+    }
+
+    .ri-off {
+        background: #c8d4cc;
+    }
+
+    .ri-unk {
+        background: #dfc56a;
+    }
+
+    .status-pill {
+        display: inline-block;
+        border-radius: 999px;
+        padding: 3px 8px;
+        font-size: 0.66rem;
+        font-family: 'Inter', sans-serif;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+    }
+
+    .status-pill.online {
+        background: var(--secondary-container);
+        color: var(--on-secondary-container);
+    }
+
+    .status-pill.offline {
+        background: var(--error-container);
+        color: var(--on-error-container);
+    }
 
     .no-data {
         text-align: center;
-        color: var(--text-muted);
+        color: var(--on-surface-variant);
         padding: 24px;
+        font-weight: 700;
+    }
+
+    .footer {
+        text-align: center;
+        padding: 28px 20px;
+        border-top: 1px solid rgba(193, 200, 194, 0.45);
+        margin-top: auto;
+    }
+
+    .footer-main {
+        font-size: 0.62rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--on-surface-variant);
+        font-family: 'Inter', sans-serif;
+        font-weight: 800;
+    }
+
+    .footer-sub {
+        margin-top: 6px;
+        font-size: 0.62rem;
+        color: rgba(65, 72, 68, 0.68);
+    }
+
+    @media (max-width: 1280px) {
+        .page {
+            width: min(100%, 97%);
+            padding-top: 26px;
+        }
+
+        .summary {
+            gap: 18px;
+        }
+
+        .summary-card {
+            padding: 28px;
+            min-height: 194px;
+        }
+
+        .workspace,
+        .stack {
+            gap: 24px;
+        }
+
+        .panel,
+        .history {
+            padding: 26px;
+        }
+    }
+
+    @media (max-width: 1200px) {
+        .summary {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+            margin-bottom: 30px;
+        }
+
+        .workspace {
+            grid-template-columns: 1fr;
+        }
+
+        .controls-panel {
+            position: static;
+        }
+
+        .sensor-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+    }
+
+    @media (max-width: 992px) {
+        .summary {
+            grid-template-columns: 1fr;
+            margin-bottom: 28px;
+        }
+
+        .identity-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .sensor-grid {
+            grid-template-columns: 1fr;
+            margin-top: 16px;
+            gap: 12px;
+        }
+
+        .topbar {
+            flex-wrap: wrap;
+            padding: 14px;
+        }
+
+        .top-right {
+            width: 100%;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+            row-gap: 10px;
+        }
+
+        .server-time {
+            min-width: auto;
+            align-items: flex-start;
+            width: 100%;
+        }
+
+        .main-btn {
+            min-width: 168px;
+        }
+
+        .panel-title,
+        .history-head h2 {
+            font-size: 1.32rem;
+        }
+
+        .control-actions {
+            flex-wrap: wrap;
+        }
+
+        .control-actions .control-btn {
+            min-height: 42px;
+        }
+
+        .history-table {
+            min-width: 760px;
+        }
+    }
+
+    @media (max-width: 700px) {
+        .page {
+            width: min(100%, 95%);
+            padding: 18px 0 22px;
+        }
+
+        .panel,
+        .history {
+            padding: 18px;
+            border-radius: 16px;
+        }
+
+        .panel-title,
+        .history-head h2 {
+            font-size: 1.25rem;
+        }
+
+        .master-actions {
+            grid-template-columns: 1fr;
+        }
+
+        .brand-title {
+            font-size: 1.12rem;
+        }
+
+        .brand-subtitle {
+            font-size: 0.64rem;
+            letter-spacing: 0.1em;
+        }
+
+        .history-table {
+            min-width: 700px;
+            font-size: 0.8rem;
+        }
+
+        .history-table th {
+            font-size: 0.66rem;
+            letter-spacing: 0.10em;
+        }
+
+        .history-table td {
+            padding: 10px 10px;
+            font-size: 0.84rem;
+        }
+
+        .control-actions {
+            gap: 6px;
+        }
+
+        .control-actions .control-btn {
+            flex: 1 1 calc(50% - 6px);
+            font-size: 0.7rem;
+            padding: 9px 8px;
+        }
+    }
+
+    @media (max-width: 520px) {
+        .topbar {
+            padding: 12px;
+            gap: 12px;
+        }
+
+        .brand {
+            gap: 10px;
+        }
+
+        .brand-icon {
+            padding: 8px;
+        }
+
+        .brand-title {
+            font-size: 1.02rem;
+        }
+
+        .top-right {
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .server-time {
+            order: 1;
+            width: 100%;
+        }
+
+        .icon-btn {
+            order: 2;
+            width: 40px;
+            min-width: 40px;
+        }
+
+        .main-btn {
+            order: 3;
+            flex: 1;
+            min-width: 0;
+            justify-content: center;
+        }
+
+        .icon-btn,
+        .main-btn {
+            height: 40px;
+        }
+
+        .main-btn {
+            padding: 0 14px;
+            font-size: 0.74rem;
+        }
+
+        .server-time-label {
+            font-size: 0.58rem;
+        }
+
+        .server-time-value {
+            font-size: 0.78rem;
+        }
+
+        .summary-card {
+            padding: 22px;
+            min-height: 176px;
+        }
+
+        .summary-value {
+            font-size: 2.2rem;
+        }
+
+        .panel,
+        .history {
+            padding: 16px;
+        }
+
+        .identity-grid {
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
+
+        .control-card {
+            padding: 12px;
+        }
+
+        .control-left {
+            gap: 9px;
+        }
+
+        .control-icon {
+            width: 42px;
+            height: 42px;
+            font-size: 21px;
+        }
+
+        .control-title {
+            font-size: 0.8rem;
+        }
+
+        .control-subtitle {
+            font-size: 0.7rem;
+        }
+
+        .relay-pill {
+            font-size: 0.62rem;
+            padding: 4px 7px;
+        }
+
+        .history-table {
+            min-width: 640px;
+        }
+
+        .history-table th {
+            font-size: 0.62rem;
+            padding: 0 8px 8px;
+        }
+
+        .history-table td {
+            padding: 9px 8px;
+            font-size: 0.8rem;
+        }
+    }
+
+    @media (max-width: 390px) {
+        .brand-subtitle {
+            display: none;
+        }
+
+        .panel,
+        .history {
+            padding: 14px;
+        }
+
+        .summary-card {
+            padding: 18px;
+            min-height: 156px;
+        }
+
+        .summary-value {
+            font-size: 1.95rem;
+        }
+
+        .server-time-label {
+            font-size: 0.54rem;
+        }
+
+        .server-time-value {
+            font-size: 0.72rem;
+        }
+
+        .master-actions {
+            gap: 8px;
+        }
+
+        .main-btn.master-btn,
+        .ghost-btn {
+            height: 44px;
+            font-size: 0.7rem;
+        }
     }
 </style>
 {% endblock %}
 
 {% block content %}
-<div class="container">
-    <div class="top">
-        <div>
-            <div class="title">
-                <span class="dot"></span>
-                <h1>AIOTs Smart Farm Dashboard</h1>
-            </div>
-            <div class="meta" id="serverTime">กำลังโหลดข้อมูล...</div>
-        </div>
-        <div class="top-actions">
-            <a href="/admin/" class="btn ui-btn btn-soft">เปิดหน้า Admin</a>
-            <button type="button" class="btn ui-btn btn-main" id="refreshBtn">Refresh</button>
-        </div>
-    </div>
-
-    <div class="summary">
-        <div class="stat ui-panel">
-            <div class="k">อุปกรณ์ทั้งหมด</div>
-            <div class="v" id="totalDevices">0</div>
-        </div>
-        <div class="stat ui-panel">
-            <div class="k">ออนไลน์</div>
-            <div class="v" id="onlineDevices">0</div>
-        </div>
-        <div class="stat ui-panel">
-            <div class="k">ออฟไลน์</div>
-            <div class="v" id="offlineDevices">0</div>
-        </div>
-    </div>
-
-    <div class="layout">
-        <div class="panel ui-panel">
-            <h2>สถานะอุปกรณ์และเซ็นเซอร์</h2>
-            <select id="deviceSelect" class="ui-select"></select>
-
-            <div class="row">
-                <div class="kv"><div class="k">สถานะ</div><div class="v" id="deviceStatus">-</div></div>
-                <div class="kv"><div class="k">IP Address</div><div class="v" id="deviceIp">-</div></div>
-                <div class="kv"><div class="k">Firmware</div><div class="v" id="deviceFw">-</div></div>
-                <div class="kv"><div class="k">RSSI</div><div class="v" id="deviceRssi">-</div></div>
-                <div class="kv"><div class="k">อุณหภูมิน้ำ</div><div class="v" id="waterTemp">-</div></div>
-                <div class="kv"><div class="k">อุณหภูมิอากาศ</div><div class="v" id="airTemp">-</div></div>
-                <div class="kv"><div class="k">ความชื้นอากาศ</div><div class="v" id="airHumidity">-</div></div>
-                <div class="kv"><div class="k">เวลาล่าสุด</div><div class="v" id="lastSeen">-</div></div>
+<div class="layout-container">
+    <header class="topbar glass-panel">
+        <div class="brand">
+            <div class="brand-icon"><span class="material-symbols-outlined">potted_plant</span></div>
+            <div>
+                <h1 class="brand-title">AIOTs Smart Farm Dashboard</h1>
+                <div class="brand-subtitle">Digital Greenhouse Ecosystem</div>
             </div>
         </div>
+        <div class="top-right">
+            <div class="server-time">
+                <span class="server-time-label">Server Time</span>
+                <span class="server-time-value" id="serverTime">กำลังโหลดข้อมูล...</span>
+            </div>
+            <button class="icon-btn" type="button" id="refreshBtn" title="Refresh">
+                <span class="material-symbols-outlined">refresh</span>
+            </button>
+            <a class="main-btn" href="/admin/">
+                <span class="material-symbols-outlined icon-sm">admin_panel_settings</span>
+                Admin Portal
+            </a>
+        </div>
+    </header>
 
-        <div class="panel ui-panel">
-            <h2>ควบคุม Relay</h2>
-            <div id="staleWarning" class="stale-warn ui-alert is-warning">⚠️ ข้อมูล Relay เก่า — ยังไม่ได้รับ Telemetry ล่าสุดจากอุปกรณ์ (สถานะที่แสดงอาจไม่ตรงกับความเป็นจริง)</div>
-            <div class="controls">
-                <div class="control-card">
-                    <div class="control-head">
-                        <div class="control-title">Relay 1: Pump</div>
-                        <span class="relay-pill ui-pill is-unknown" id="relay1State">ไม่มีข้อมูล</span>
-                    </div>
-                    <div class="btn-group">
-                        <button class="btn ui-btn btn-on" data-action="pump_on">ON</button>
-                        <button class="btn ui-btn btn-off" data-action="pump_off">OFF</button>
-                    </div>
-                </div>
-                <div class="control-card">
-                    <div class="control-head">
-                        <div class="control-title">Relay 2: Fan</div>
-                        <span class="relay-pill ui-pill is-unknown" id="relay2State">ไม่มีข้อมูล</span>
-                    </div>
-                    <div class="btn-group">
-                        <button class="btn ui-btn btn-on" data-action="fan_on">ON</button>
-                        <button class="btn ui-btn btn-off" data-action="fan_off">OFF</button>
-                    </div>
-                </div>
-                <div class="control-card">
-                    <div class="control-head">
-                        <div class="control-title">Relay 3: Heater</div>
-                        <span class="relay-pill ui-pill is-unknown" id="relay3State">ไม่มีข้อมูล</span>
-                    </div>
-                    <div class="btn-group">
-                        <button class="btn ui-btn btn-on" data-action="heater_on">ON</button>
-                        <button class="btn ui-btn btn-off" data-action="heater_off">OFF</button>
-                    </div>
-                </div>
-                <div class="control-card">
-                    <div class="control-title">All Relays</div>
-                    <div class="btn-group">
-                        <button class="btn ui-btn btn-on" data-action="all_on">ALL ON</button>
-                        <button class="btn ui-btn btn-off" data-action="all_off">ALL OFF</button>
-                    </div>
+    <main class="page">
+        <section class="summary">
+            <div class="summary-card total">
+                <span class="material-symbols-outlined bg-icon">devices</span>
+                <div class="summary-title">Total Registered Devices</div>
+                <div class="summary-value" id="totalDevices">0</div>
+                <div class="summary-meta">
+                    <span class="material-symbols-outlined icon-sm">trending_up</span>
+                    Stable Network
                 </div>
             </div>
-            <div id="controlMsg" class="msg ui-msg"></div>
-        </div>
-    </div>
 
-    <!-- ── Sensor Chart ─────────────────────────────────── -->
-    <div class="chart-section ui-panel">
-        <h2>📈 กราฟเซ็นเซอร์ Real-time (30 นาทีล่าสุด)</h2>
-        <div class="chart-wrap">
-            <canvas id="sensorChart"></canvas>
-        </div>
-    </div>
+            <div class="summary-card online">
+                <span class="material-symbols-outlined bg-icon">check_circle</span>
+                <div class="summary-title">Online Nodes</div>
+                <div class="summary-value" id="onlineDevices">0</div>
+                <div class="summary-meta">
+                    <span class="material-symbols-outlined icon-sm">bolt</span>
+                    Active Monitoring
+                </div>
+            </div>
 
-    <!-- ── History Table ────────────────────────────────── -->
-    <div class="history-section ui-panel">
-        <h2>🕒 ประวัติข้อมูล 20 ค่าล่าสุด</h2>
-        <div class="table-wrap">
-            <table class="history-table">
-                <thead>
-                    <tr>
-                        <th>เวลา</th>
-                        <th>RSSI</th>
-                        <th>น้ำ (°C)</th>
-                        <th>อากาศ (°C)</th>
-                        <th>ความชื้น (%)</th>
-                        <th>Overflow</th>
-                        <th>Dry</th>
-                        <th>Pump</th>
-                        <th>Fan</th>
-                        <th>Heater</th>
-                    </tr>
-                </thead>
-                <tbody id="historyBody">
-                    <tr><td colspan="10" class="no-data">กรุณาเลือกอุปกรณ์</td></tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+            <div class="summary-card offline">
+                <span class="material-symbols-outlined bg-icon">error</span>
+                <div class="summary-title">Offline Nodes</div>
+                <div class="summary-value" id="offlineDevices">0</div>
+                <div class="summary-meta">
+                    <span class="material-symbols-outlined icon-sm">warning</span>
+                    Maintenance Required
+                </div>
+            </div>
+        </section>
 
-    <div class="footer">AIOTs Smart Farm Dashboard • Real-time Monitor and Control</div>
+        <div class="workspace">
+            <div class="stack">
+                <section class="panel">
+                    <div class="panel-header">
+                        <div>
+                            <h2 class="panel-title">Environment Intelligence</h2>
+                        </div>
+                        <div class="live-chip">
+                            <span class="dot"></span>
+                            Live Feed
+                        </div>
+                    </div>
+
+                    <div class="select-wrap">
+                        <label for="deviceSelect">Select Device</label>
+                        <select id="deviceSelect" class="ui-select"></select>
+                    </div>
+
+                    <div class="identity-grid">
+                        <div class="identity-item">
+                            <div class="k">Status</div>
+                            <div class="v" id="deviceStatus">-</div>
+                        </div>
+                        <div class="identity-item">
+                            <div class="k">Local IP</div>
+                            <div class="v" id="deviceIp">-</div>
+                        </div>
+                        <div class="identity-item">
+                            <div class="k">Firmware</div>
+                            <div class="v" id="deviceFw">-</div>
+                        </div>
+                        <div class="identity-item">
+                            <div class="k">RSSI</div>
+                            <div class="v" id="deviceRssi">-</div>
+                        </div>
+                    </div>
+
+                    <div class="sensor-grid">
+                        <div class="sensor-card">
+                            <div class="sensor-icon water">
+                                <span class="material-symbols-outlined">water_drop</span>
+                            </div>
+                            <div>
+                                <div class="sensor-k">Water Temp</div>
+                                <div class="sensor-v"><span id="waterTemp">-</span><span class="unit">C</span></div>
+                            </div>
+                        </div>
+                        <div class="sensor-card">
+                            <div class="sensor-icon air">
+                                <span class="material-symbols-outlined">thermostat</span>
+                            </div>
+                            <div>
+                                <div class="sensor-k">Air Temp</div>
+                                <div class="sensor-v"><span id="airTemp">-</span><span class="unit">C</span></div>
+                            </div>
+                        </div>
+                        <div class="sensor-card">
+                            <div class="sensor-icon humidity">
+                                <span class="material-symbols-outlined">humidity_mid</span>
+                            </div>
+                            <div>
+                                <div class="sensor-k">Air Humidity</div>
+                                <div class="sensor-v"><span id="airHumidity">-</span><span class="unit">%</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="select-wrap last-seen">
+                        <label>Last Seen</label>
+                        <div class="identity-item"><div class="v" id="lastSeen">-</div></div>
+                    </div>
+                </section>
+
+                <section class="panel">
+                    <div class="panel-header tight">
+                        <div>
+                            <h2 class="panel-title">Sensor History</h2>
+                            <div class="panel-subtitle">Rolling 30-minute telemetric window</div>
+                        </div>
+                    </div>
+                    <div class="chart-shell">
+                        <div class="chart-wrap">
+                            <canvas id="sensorChart"></canvas>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <aside class="panel controls-panel">
+                <div class="panel-header tight">
+                    <div>
+                        <h2 class="panel-title">System Controls</h2>
+                    </div>
+                    <div class="settings-chip">
+                        <span class="material-symbols-outlined">settings_input_component</span>
+                    </div>
+                </div>
+
+                <div id="staleWarning" class="warning-box">⚠️ ข้อมูล Relay เก่า — ยังไม่ได้รับ Telemetry ล่าสุด</div>
+
+                <div class="control-list">
+                    <div class="control-card">
+                        <div class="control-head">
+                            <div class="control-left">
+                                <div class="control-icon"><span class="material-symbols-outlined">water_pump</span></div>
+                                <div>
+                                    <p class="control-title">Main Pump</p>
+                                    <div class="control-subtitle">Automatic Mode</div>
+                                </div>
+                            </div>
+                            <span class="relay-pill is-unknown" id="relay1State">ไม่มีข้อมูล</span>
+                        </div>
+                        <div class="control-actions">
+                            <button class="control-btn on" data-action="pump_on">ON</button>
+                            <button class="control-btn off" data-action="pump_off">OFF</button>
+                        </div>
+                    </div>
+
+                    <div class="control-card">
+                        <div class="control-head">
+                            <div class="control-left">
+                                <div class="control-icon"><span class="material-symbols-outlined">toys_fan</span></div>
+                                <div>
+                                    <p class="control-title">Ventilation Fan</p>
+                                    <div class="control-subtitle">Air Flow Control</div>
+                                </div>
+                            </div>
+                            <span class="relay-pill is-unknown" id="relay2State">ไม่มีข้อมูล</span>
+                        </div>
+                        <div class="control-actions">
+                            <button class="control-btn on" data-action="fan_on">ON</button>
+                            <button class="control-btn off" data-action="fan_off">OFF</button>
+                        </div>
+                    </div>
+
+                    <div class="control-card">
+                        <div class="control-head">
+                            <div class="control-left">
+                                <div class="control-icon"><span class="material-symbols-outlined">heat</span></div>
+                                <div>
+                                    <p class="control-title">Thermal Unit</p>
+                                    <div class="control-subtitle">Heater Core</div>
+                                </div>
+                            </div>
+                            <span class="relay-pill is-unknown" id="relay3State">ไม่มีข้อมูล</span>
+                        </div>
+                        <div class="control-actions">
+                            <button class="control-btn on" data-action="heater_on">ON</button>
+                            <button class="control-btn off" data-action="heater_off">OFF</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="master-actions">
+                    <button class="main-btn master-btn" data-action="all_on">
+                        <span class="material-symbols-outlined">bolt</span>
+                        ALL ON
+                    </button>
+                    <button class="ghost-btn" data-action="all_off">
+                        <span class="material-symbols-outlined">power_settings_new</span>
+                        ALL OFF
+                    </button>
+                </div>
+
+                <div id="controlMsg" class="status-msg"></div>
+            </aside>
+        </div>
+
+        <section class="history">
+            <div class="history-head">
+                <div>
+                    <h2>Recent Logs</h2>
+                    <div class="history-subtitle">Last 20 operational telemetry values</div>
+                </div>
+            </div>
+
+            <div class="table-wrap">
+                <table class="history-table">
+                    <thead>
+                        <tr>
+                            <th>เวลา</th>
+                            <th>RSSI</th>
+                            <th>น้ำ (°C)</th>
+                            <th>อากาศ (°C)</th>
+                            <th>ความชื้น (%)</th>
+                            <th>Overflow</th>
+                            <th>Dry</th>
+                            <th>Pump</th>
+                            <th>Fan</th>
+                            <th>Heater</th>
+                        </tr>
+                    </thead>
+                    <tbody id="historyBody">
+                        <tr><td colspan="10" class="no-data">กรุณาเลือกอุปกรณ์</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-main">Powered by AIOTs Intelligence Ecosystem</div>
+        <div class="footer-sub">2026 Smart Farm Dynamics. All biological systems monitored and secured.</div>
+    </footer>
 </div>
 {% endblock %}
 
@@ -553,11 +1532,10 @@
     let devices = [];
     let sensorChart = null;
 
-    // — Chart gradient definitions —
     const GRADIENT_DEFS = [
-        { key: 'water_temp', label: 'น้ำ (°C)',      borderColor: 'rgba(20,191,174,1)',  top: 'rgba(20,191,174,0.45)',  bot: 'rgba(20,191,174,0.0)',  yAxisID: 'yLeft'  },
-        { key: 'air_temp',   label: 'อากาศ (°C)',   borderColor: 'rgba(245,152,42,1)',   top: 'rgba(245,152,42,0.45)',   bot: 'rgba(245,152,42,0.0)',   yAxisID: 'yLeft'  },
-        { key: 'air_humidity', label: 'ความชื้น (%)', borderColor: 'rgba(88,130,240,1)', top: 'rgba(88,130,240,0.45)',  bot: 'rgba(88,130,240,0.0)',  yAxisID: 'yRight' },
+        { key: 'water_temp', label: 'น้ำ (°C)', borderColor: 'rgba(20,191,174,1)', top: 'rgba(20,191,174,0.45)', bot: 'rgba(20,191,174,0.0)', yAxisID: 'yLeft' },
+        { key: 'air_temp', label: 'อากาศ (°C)', borderColor: 'rgba(245,152,42,1)', top: 'rgba(245,152,42,0.45)', bot: 'rgba(245,152,42,0.0)', yAxisID: 'yLeft' },
+        { key: 'air_humidity', label: 'ความชื้น (%)', borderColor: 'rgba(88,130,240,1)', top: 'rgba(88,130,240,0.45)', bot: 'rgba(88,130,240,0.0)', yAxisID: 'yRight' }
     ];
 
     const gradientPlugin = {
@@ -600,11 +1578,11 @@
                 interaction: { mode: 'index', intersect: false },
                 plugins: {
                     legend: {
-                        labels: { font: { family: 'Prompt', size: 12 }, color: '#c8d4cc' }
+                        labels: { font: { family: 'Prompt', size: 12 }, color: '#414844' }
                     },
                     tooltip: {
                         titleFont: { family: 'Prompt' },
-                        bodyFont:  { family: 'Prompt' },
+                        bodyFont: { family: 'Manrope' },
                         callbacks: {
                             title(items) {
                                 if (!items || !items.length) return '';
@@ -623,14 +1601,14 @@
                     x: {
                         type: 'linear',
                         ticks: {
-                            color: '#c8d4cc',
-                            font: { family: 'Prompt', size: 11 },
+                            color: '#586154',
+                            font: { family: 'Inter', size: 11 },
                             maxTicksLimit: 7,
                             callback(ms) {
                                 return new Date(ms).toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' });
                             }
                         },
-                        grid: { color: 'rgba(200,212,204,0.1)' }
+                        grid: { color: 'rgba(65,72,68,0.12)' }
                     },
                     yLeft: {
                         type: 'linear',
@@ -641,8 +1619,8 @@
                             color: 'rgba(245,152,42,0.9)',
                             font: { family: 'Prompt', size: 12 }
                         },
-                        ticks: { color: '#c8d4cc', font: { family: 'Prompt', size: 11 } },
-                        grid:  { color: 'rgba(200,212,204,0.1)' }
+                        ticks: { color: '#586154', font: { family: 'Inter', size: 11 } },
+                        grid: { color: 'rgba(65,72,68,0.12)' }
                     },
                     yRight: {
                         type: 'linear',
@@ -655,8 +1633,8 @@
                             color: 'rgba(88,130,240,0.9)',
                             font: { family: 'Prompt', size: 12 }
                         },
-                        ticks: { color: '#c8d4cc', font: { family: 'Prompt', size: 11 } },
-                        grid:  { drawOnChartArea: false }
+                        ticks: { color: '#586154', font: { family: 'Inter', size: 11 } },
+                        grid: { drawOnChartArea: false }
                     }
                 }
             }
@@ -683,7 +1661,7 @@
     }
 
     function relayIcon(state) {
-        if (state === true)  return '<span class="ri ri-on" title="ON"></span>';
+        if (state === true) return '<span class="ri ri-on" title="ON"></span>';
         if (state === false) return '<span class="ri ri-off" title="OFF"></span>';
         return '<span class="ri ri-unk" title="?"></span>';
     }
@@ -714,11 +1692,14 @@
     async function loadDeviceHistory(boardId) {
         if (!boardId) {
             updateHistoryTable([]);
-            if (sensorChart) { sensorChart.data.datasets.forEach(ds => { ds.data = []; }); sensorChart.update('none'); }
+            if (sensorChart) {
+                sensorChart.data.datasets.forEach(ds => { ds.data = []; });
+                sensorChart.update('none');
+            }
             return;
         }
         try {
-            const res  = await fetch(`/api/telemetry-history/?board_id=${encodeURIComponent(boardId)}&limit=20`, { cache: 'no-store' });
+            const res = await fetch(`/api/telemetry-history/?board_id=${encodeURIComponent(boardId)}&limit=20`, { cache: 'no-store' });
             const data = await res.json();
             if (data.success) {
                 updateChart(data.history);
@@ -737,21 +1718,21 @@
 
     function statusPill(status) {
         if (status === 'online') {
-            return '<span class="status-pill ui-pill online">Online</span>';
+            return '<span class="status-pill online">Online</span>';
         }
-        return '<span class="status-pill ui-pill offline">Offline</span>';
+        return '<span class="status-pill offline">Offline</span>';
     }
 
     function setMessage(text, type) {
         const box = document.getElementById('controlMsg');
-        box.className = 'msg ui-msg ' + type;
+        box.className = 'status-msg ' + type;
         box.textContent = text;
     }
 
     function setRelayPill(elementId, mode, text) {
         const el = document.getElementById(elementId);
         if (!el) return;
-        el.className = `relay-pill ui-pill ${mode}`;
+        el.className = `relay-pill ${mode}`;
         el.textContent = text;
     }
 
@@ -872,10 +1853,11 @@
         document.getElementById('deviceIp').textContent = (device && device.ip_address) || '-';
         document.getElementById('deviceFw').textContent = (device && device.firmware_version) || '-';
         document.getElementById('deviceRssi').textContent = telemetry.rssi !== null && telemetry.rssi !== undefined ? telemetry.rssi + ' dBm' : '-';
-        document.getElementById('waterTemp').textContent = sensors.water_temp !== undefined ? sensors.water_temp + ' C' : '-';
-        document.getElementById('airTemp').textContent = sensors.air_temp !== undefined ? sensors.air_temp + ' C' : '-';
-        document.getElementById('airHumidity').textContent = sensors.air_humidity !== undefined ? sensors.air_humidity + ' %' : '-';
+        document.getElementById('waterTemp').textContent = sensors.water_temp !== undefined ? sensors.water_temp : '-';
+        document.getElementById('airTemp').textContent = sensors.air_temp !== undefined ? sensors.air_temp : '-';
+        document.getElementById('airHumidity').textContent = sensors.air_humidity !== undefined ? sensors.air_humidity : '-';
         document.getElementById('lastSeen').textContent = formatDateTime(device ? device.last_seen : null);
+
         renderRelayStatus(device);
         updateControlButtons(device);
     }
@@ -911,6 +1893,8 @@
     }
 
     async function loadDashboard() {
+        const btn = document.getElementById('refreshBtn');
+        if (btn) btn.classList.add('is-refreshing');
         try {
             const res = await fetch('/api/dashboard/', { cache: 'no-store' });
             const data = await res.json();
@@ -929,6 +1913,8 @@
             await loadDeviceHistory(document.getElementById('deviceSelect').value);
         } catch (err) {
             setMessage('โหลดข้อมูล dashboard ไม่สำเร็จ: ' + err.message, 'err');
+        } finally {
+            if (btn) btn.classList.remove('is-refreshing');
         }
     }
 
