@@ -1,0 +1,59 @@
+{% extends "admin/base.html" %}
+{% load i18n %}
+
+{% block title %}{% if subtitle %}{{ subtitle }} | {% endif %}{{ title }} | {{ site_title|default:_("Django site admin") }}{% endblock %}
+
+{% block extrastyle %}
+{{ block.super }}
+{% include "includes/prompt_font.html" %}
+<style>
+    html[data-theme],
+    body,
+    #header,
+    #content,
+    .module,
+    .breadcrumbs,
+    .submit-row,
+    .button,
+    input,
+    textarea,
+    select,
+    button,
+    table,
+    .selector,
+    .selector select,
+    .form-row,
+    .aligned label,
+    .messagelist li,
+    .object-tools a,
+    .button.default,
+    .paginator,
+    .actions,
+    .login #container,
+    .login .form-row,
+    .dashboard .module table th,
+    .dashboard .module table td {
+        font-family: var(--font-ui);
+    }
+
+    #site-name,
+    #site-name a,
+    .module h2,
+    .module caption,
+    .inline-group h2,
+    .breadcrumbs,
+    .object-tools a,
+    .submit-row input,
+    .submit-row a.deletelink,
+    .button,
+    .button.default {
+        font-weight: 600;
+    }
+</style>
+{% endblock %}
+
+{% block branding %}
+<h1 id="site-name"><a href="{% url 'admin:index' %}">{{ site_header|default:_("Django administration") }}</a></h1>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}AIOTs Smart Farm Dashboard{% endblock %}</title>
+    {% include "includes/design_tokens.html" %}
+    {% include "includes/prompt_font.html" %}
+    {% include "includes/ui_components.html" %}
+    {% block page_styles %}{% endblock %}
+</head>
+<body class="{% block body_class %}{% endblock %}">
+    {% block content %}{% endblock %}
+    {% block page_scripts %}{% endblock %}
+</body>
+</html>

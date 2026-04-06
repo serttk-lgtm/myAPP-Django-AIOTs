@@ -1,0 +1,96 @@
+<style>
+    .ui-panel {
+        background: var(--surface-base);
+        border: 1px solid var(--border-soft);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-card);
+    }
+
+    .ui-card {
+        background: var(--surface-base);
+        border-radius: var(--radius-md);
+        box-shadow: var(--shadow-soft);
+    }
+
+    .ui-btn {
+        border: 0;
+        border-radius: var(--radius-md);
+        padding: var(--space-3) var(--space-5);
+        font-weight: 600;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .ui-btn:hover {
+        transform: translateY(-1px);
+    }
+
+    .ui-btn:disabled {
+        opacity: 0.45;
+        cursor: not-allowed;
+        transform: none;
+    }
+
+    .ui-select {
+        width: 100%;
+        padding: 10px 12px;
+        border-radius: var(--radius-md);
+        border: 1px solid var(--border-accent);
+        background: var(--surface-base);
+        font-size: 0.95rem;
+    }
+
+    .ui-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        border-radius: var(--radius-pill);
+        padding: 4px 10px;
+        font-size: 0.79rem;
+        font-weight: 600;
+    }
+
+    .ui-msg {
+        margin-top: var(--space-3);
+        padding: var(--space-3);
+        border-radius: var(--radius-md);
+        font-size: 0.9rem;
+        display: none;
+    }
+
+    .ui-msg.ok {
+        display: block;
+        background: #e8faee;
+        border: 1px solid #bfead0;
+        color: #1f7f45;
+    }
+
+    .ui-msg.err {
+        display: block;
+        background: #ffeded;
+        border: 1px solid #f6c9c9;
+        color: #a63434;
+    }
+
+    .ui-alert {
+        display: none;
+        border-radius: 6px;
+        padding: 6px 10px;
+        font-size: 12px;
+        margin-bottom: 10px;
+    }
+
+    .ui-alert.visible {
+        display: block;
+    }
+
+    .ui-alert.is-warning {
+        background: #fff3cd;
+        color: #7a5800;
+        border: 1px solid #ffc107;
+    }
+</style>
