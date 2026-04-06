@@ -219,9 +219,54 @@
             background: #f9fffb;
         }
 
+        .control-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+            flex-wrap: wrap;
+        }
+
         .control-title {
             font-weight: 700;
-            margin-bottom: 8px;
+        }
+
+        .relay-pill {
+            display: inline-flex;
+            align-items: center;
+            border-radius: 999px;
+            padding: 4px 9px;
+            font-size: 0.74rem;
+            font-weight: 700;
+            letter-spacing: 0.01em;
+            border: 1px solid #d8e9df;
+            background: #f4f8f6;
+            color: #5f7f69;
+        }
+
+        .relay-pill.is-on {
+            background: #e5f9ed;
+            color: #1a7f42;
+            border-color: #bce8cf;
+        }
+
+        .relay-pill.is-off {
+            background: #f2f4f3;
+            color: #4f6357;
+            border-color: #d4ded8;
+        }
+
+        .relay-pill.is-unknown {
+            background: #fff8e6;
+            color: #8d6a00;
+            border-color: #efdca8;
+        }
+
+        .relay-pill.is-offline {
+            background: #ffecec;
+            color: #b53636;
+            border-color: #f8c9c9;
         }
 
         .btn-group {
@@ -349,21 +394,30 @@
                 <h2>ควบคุม Relay</h2>
                 <div class="controls">
                     <div class="control-card">
-                        <div class="control-title">Relay 1: Pump</div>
+                        <div class="control-head">
+                            <div class="control-title">Relay 1: Pump</div>
+                            <span class="relay-pill is-unknown" id="relay1State">ไม่มีข้อมูล</span>
+                        </div>
                         <div class="btn-group">
                             <button class="btn btn-on" data-action="pump_on">ON</button>
                             <button class="btn btn-off" data-action="pump_off">OFF</button>
                         </div>
                     </div>
                     <div class="control-card">
-                        <div class="control-title">Relay 2: Fan</div>
+                        <div class="control-head">
+                            <div class="control-title">Relay 2: Fan</div>
+                            <span class="relay-pill is-unknown" id="relay2State">ไม่มีข้อมูล</span>
+                        </div>
                         <div class="btn-group">
                             <button class="btn btn-on" data-action="fan_on">ON</button>
                             <button class="btn btn-off" data-action="fan_off">OFF</button>
                         </div>
                     </div>
                     <div class="control-card">
-                        <div class="control-title">Relay 3: Heater</div>
+                        <div class="control-head">
+                            <div class="control-title">Relay 3: Heater</div>
+                            <span class="relay-pill is-unknown" id="relay3State">ไม่มีข้อมูล</span>
+                        </div>
                         <div class="btn-group">
                             <button class="btn btn-on" data-action="heater_on">ON</button>
                             <button class="btn btn-off" data-action="heater_off">OFF</button>
@@ -417,6 +471,50 @@
             box.textContent = text;
         }
 
+        function setRelayPill(elementId, mode, text) {
+            const el = document.getElementById(elementId);
+            if (!el) return;
+            el.className = `relay-pill ${mode}`;
+            el.textContent = text;
+        }
+
+        function renderRelayStatus(device) {
+            const telemetry = (device && device.latest_telemetry) || {};
+            const relay = telemetry.relay_status || {};
+            const isOnline = !!device && device.status === 'online';
+
+            if (!device) {
+                setRelayPill('relay1State', 'is-unknown', 'ไม่มีข้อมูล');
+                setRelayPill('relay2State', 'is-unknown', 'ไม่มีข้อมูล');
+                setRelayPill('relay3State', 'is-unknown', 'ไม่มีข้อมูล');
+                return;
+            }
+
+            if (!isOnline) {
+                setRelayPill('relay1State', 'is-offline', 'อุปกรณ์ออฟไลน์');
+                setRelayPill('relay2State', 'is-offline', 'อุปกรณ์ออฟไลน์');
+                setRelayPill('relay3State', 'is-offline', 'อุปกรณ์ออฟไลน์');
+                return;
+            }
+
+            const relayConfig = [
+                { key: 'relay1_pump', elementId: 'relay1State' },
+                { key: 'relay2_fan', elementId: 'relay2State' },
+                { key: 'relay3_heater', elementId: 'relay3State' }
+            ];
+
+            for (const item of relayConfig) {
+                const state = relay[item.key];
+                if (state === true) {
+                    setRelayPill(item.elementId, 'is-on', 'ON • กำลังทำงาน');
+                } else if (state === false) {
+                    setRelayPill(item.elementId, 'is-off', 'OFF • หยุดทำงาน');
+                } else {
+                    setRelayPill(item.elementId, 'is-unknown', 'ไม่มีข้อมูลล่าสุด');
+                }
+            }
+        }
+
         function fillDeviceDetails(device) {
             const telemetry = (device && device.latest_telemetry) || {};
             const sensors = telemetry.sensor_data || {};
@@ -429,6 +527,7 @@
             document.getElementById('airTemp').textContent = sensors.air_temp !== undefined ? sensors.air_temp + ' C' : '-';
             document.getElementById('airHumidity').textContent = sensors.air_humidity !== undefined ? sensors.air_humidity + ' %' : '-';
             document.getElementById('lastSeen').textContent = formatDateTime(device ? device.last_seen : null);
+            renderRelayStatus(device);
         }
 
         function updateDeviceSelect() {
@@ -522,7 +621,5 @@
         loadDashboard();
         setInterval(loadDashboard, 10000);
     </script>
-</body>
-</html>
 </body>
 </html>
